@@ -13,22 +13,23 @@ import NotFound from './routes/NotFound';
 import { ApolloProvider, gql } from "@apollo/client";
 import { client } from "./apollo-client/cache"
 
-const GET_CATEGORIES = gql`
-    query GetCategories {
-        categories {
-            name
-            products{
-                id
-                name
-            }
-        }
-    }
-`;
+// const GET_CATEGORIES = gql`
+//     query GetCategories {
+//         categories {
+//             name
+//             products{
+//                 id
+//                 name
+//             }
+//         }
+//     }
+// `;
 
-client.query({
-  query: GET_CATEGORIES
-})
-.then(res=>{console.log(res);})
+// client.query({
+//   query: GET_CATEGORIES
+// })
+// .then(res=>{console.log(res);})
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -41,10 +42,11 @@ root.render(
             <App />
           </ApolloProvider>
           }>
-          <Route path='category1' element={<Category1/>} />
-          <Route path='category2' element={<Category2/>} />
+            
+          <Route path='categories/category1' element={<Category1/>} />
+          <Route path='categories/category2' element={<Category2/>} />
 
-          <Route path='' element={<Navigate to='/category1' />} />
+          {/* <Route path='' element={<Navigate to='/categories/category1' />} /> */}
           <Route path='*' element={<NotFound/>} />
         </Route>
       </Routes>      

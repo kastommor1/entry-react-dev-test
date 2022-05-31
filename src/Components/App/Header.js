@@ -7,8 +7,8 @@ class Header extends React.Component{
         return (
             <header>
                 <nav>
-                    <NavLink to='/category1'>Category 1</NavLink>                                        
-                    <NavLink to='/category2'>Category 2</NavLink>                                        
+                    <NavLink to='/categories/category1'>Category 1</NavLink>                                        
+                    <NavLink to='/categories/category2'>Category 2</NavLink>                                        
                 </nav>                
             </header>
         )
