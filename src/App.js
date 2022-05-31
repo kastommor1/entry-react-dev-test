@@ -1,9 +1,10 @@
 import React from "react";
 
+import { widthQuery } from "./HOCs/apolloHOCs"
+
 import { Outlet } from "react-router-dom";
 
 import Header from "./components/App/Header";
-
 
 class App extends React.Component{
   constructor(props){
@@ -11,6 +12,7 @@ class App extends React.Component{
   }
 
   render(){
+    
     return(
       <div>
         <Header/>
@@ -22,4 +24,6 @@ class App extends React.Component{
   }
 }
 
-export default App;
+const AppHOC = widthQuery(App);
+
+export default AppHOC;

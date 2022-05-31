@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
+import AppHOC from './App';
 
 //routes
 import {BrowserRouter, Routes, Route, Navigate} from "react-router-dom";
@@ -39,7 +39,7 @@ root.render(
         <Route path='/' 
           element={
           <ApolloProvider client={client}>
-            <App />
+            <AppHOC />
           </ApolloProvider>
           }>
             
