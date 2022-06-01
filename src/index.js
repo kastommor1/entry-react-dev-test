@@ -10,9 +10,10 @@ import { client } from "./apollo-client/cache"
 
 //routes
 import {BrowserRouter, Routes, Route} from "react-router-dom";
-import NotFound from './routes/NotFound';
 import CategoryHOC from './routes/Category';
 
+//components
+import WarningMessage from './components/Warning-message';
 
 
 
@@ -29,7 +30,12 @@ root.render(
           }>
 
           <Route path='categories/:categoryName' element={<CategoryHOC/>} />     
-          <Route path='*' element={<NotFound/>} />          
+          <Route path='*' element={
+            <WarningMessage>
+              <h2>404</h2>
+              <p>Page not found</p>
+            </WarningMessage>
+          } />          
         </Route>
       </Routes>      
     </BrowserRouter>

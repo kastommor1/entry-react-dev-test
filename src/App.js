@@ -2,9 +2,10 @@ import React from "react";
 import { widthQuery } from "./HOCs/HOCs"
 import { Outlet, Routes, Route, Navigate } from "react-router-dom";
 import Header from "./components/App/Header";
-import PropTypes from "prop-types"
+import PropTypes from "prop-types";
 import { GET_CATEGORIES_NAME } from "./apollo-client/queries";
-import {setCategoriesName} from './data'
+import {setCategoriesName} from './data';
+import WarningMessage from "./components/Warning-message";
 
 class App extends React.Component{
   
@@ -20,7 +21,7 @@ class App extends React.Component{
 
     if(data && data.categories) {
       setCategoriesName(data.categories);
-      if (data.categories.length === 0) return <p>No categories</p>; 
+      if (data.categories.length === 0) return  <WarningMessage><p>No categories</p></WarningMessage>; 
       
       return(
         <div>

@@ -2,10 +2,18 @@ import React from "react";
 import { widthQueryByParams  } from "../HOCs/HOCs"
 import { GET_CATEGORY } from "../apollo-client/queries";
 import { getCategoriesName } from "../data";
+import WarningMessage from "../components/Warning-message";
+import { element } from "prop-types";
 
 class Category extends React.Component{
 
-    render(){        
+    render(){
+        if(getCategoriesName().filter(category=>category.name == this.props.categoryName ).length === 0) {
+            return (
+            <WarningMessage>              
+                <p>Sorry. There is no such category.</p>
+            </WarningMessage>)}      
+        
         const {loading, error , data} = this.props.query; 
 
         // if(loading) return <p>Loading...</p>
@@ -21,7 +29,7 @@ class Category extends React.Component{
 
                 {(data && data.category) ? 
                  data.category.products.map(product=>(<p key={product.id}>{product.name}</p>))
-                : <p>No categories</p> }
+                : <WarningMessage>No categories</WarningMessage> }
 
             </div>
         )
