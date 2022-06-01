@@ -9,10 +9,9 @@ import { ApolloProvider } from "@apollo/client";
 import { client } from "./apollo-client/cache"
 
 //routes
-import {BrowserRouter, Routes, Route, Navigate} from "react-router-dom";
+import {BrowserRouter, Routes, Route} from "react-router-dom";
 import NotFound from './routes/NotFound';
 import CategoryHOC from './routes/Category';
-import Categories from './routes/Categories';
 
 
 
@@ -27,13 +26,10 @@ root.render(
           <ApolloProvider client={client}>
             <AppHOC />
           </ApolloProvider>
-          }>            
-          <Route path='categories' element={<Categories/>}>          
-            <Route path=':categoryName' element={<CategoryHOC/>} />
-          </Route>          
+          }>
 
-          {/* <Route path='' element={<Navigate to='/categories' />} /> */}
-          <Route path='*' element={<NotFound/>} />
+          <Route path='categories/:categoryName' element={<CategoryHOC/>} />     
+          <Route path='*' element={<NotFound/>} />          
         </Route>
       </Routes>      
     </BrowserRouter>

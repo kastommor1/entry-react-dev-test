@@ -1,6 +1,7 @@
 import React from "react";
 import { widthQueryByParams  } from "../HOCs/HOCs"
 import { GET_CATEGORY } from "../apollo-client/queries";
+import { getCategoriesName } from "../data";
 
 class Category extends React.Component{
 

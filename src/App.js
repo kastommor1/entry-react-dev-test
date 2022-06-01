@@ -20,12 +20,14 @@ class App extends React.Component{
 
     if(data && data.categories) {
       setCategoriesName(data.categories);
+      if (data.categories.length === 0) return <p>No categories</p>; 
+      
       return(
         <div>
           <Header categories={data.categories}/>
           <main>
             <Routes>
-                <Route path='' element={<Navigate to='/categories/all' />} />                    
+                <Route path='' element={<Navigate to={'/categories/' + data.categories[0].name} />} />                    
             </Routes>             
             <Outlet/>
           </main>      
