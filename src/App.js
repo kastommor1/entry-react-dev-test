@@ -1,9 +1,10 @@
 import React from "react";
 import { widthQuery } from "./HOCs/HOCs"
-import { Outlet } from "react-router-dom";
+import { Outlet, Routes, Route, Navigate } from "react-router-dom";
 import Header from "./components/App/Header";
 import PropTypes from "prop-types"
 import { GET_CATEGORIES_NAME } from "./apollo-client/queries";
+import {setCategoriesName} from './data'
 
 class App extends React.Component{
   
@@ -17,11 +18,15 @@ class App extends React.Component{
     if(loading) return <p>Loading...</p>
     if(error) return <p>Error {error.message}</p>
 
-    if(data && data.categories) {      
+    if(data && data.categories) {
+      setCategoriesName(data.categories);
       return(
         <div>
           <Header categories={data.categories}/>
-          <main>            
+          <main>
+            <Routes>
+                <Route path='' element={<Navigate to='/categories/all' />} />                    
+            </Routes>             
             <Outlet/>
           </main>      
         </div>

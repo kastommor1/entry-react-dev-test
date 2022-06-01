@@ -12,6 +12,7 @@ import { client } from "./apollo-client/cache"
 import {BrowserRouter, Routes, Route, Navigate} from "react-router-dom";
 import NotFound from './routes/NotFound';
 import CategoryHOC from './routes/Category';
+import Categories from './routes/Categories';
 
 
 
@@ -21,15 +22,17 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
-        <Route path='/' 
+        <Route path='*' 
           element={
           <ApolloProvider client={client}>
             <AppHOC />
           </ApolloProvider>
           }>            
-          <Route path='categories/:categoryName' element={<CategoryHOC/>} />
+          <Route path='categories' element={<Categories/>}>          
+            <Route path=':categoryName' element={<CategoryHOC/>} />
+          </Route>          
 
-          {/* <Route path='' element={<Navigate to='/categories/category1' />} /> */}
+          {/* <Route path='' element={<Navigate to='/categories' />} /> */}
           <Route path='*' element={<NotFound/>} />
         </Route>
       </Routes>      
