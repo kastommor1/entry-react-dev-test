@@ -6,8 +6,8 @@ import { element } from "prop-types";
 import ProductCard from "../components/Category/Product-card";
 
 
-class Category extends React.Component{
-
+class Category extends React.Component{   
+   
     render(){
         if(this.props.categoriesName.filter(category=>category.name == this.props.categoryName ).length === 0) {
             return (
@@ -16,12 +16,8 @@ class Category extends React.Component{
             </WarningMessage>)}       
     
         
-        const {loading, error , data} = this.props.query; 
-
-        // if(loading) return <p>Loading...</p>
-        // if(error) return <p>Error {error.message}</p>    
-        // if(data && data.category) {}
-
+        const {loading, error , data} = this.props.query;
+  
         return (
             <div>
                 <h2>{this.props.categoryName.toLocaleUpperCase()}</h2>
@@ -34,7 +30,11 @@ class Category extends React.Component{
 
                 {(data && data.category && data.category.products.length > 0) ? 
                  data.category.products.map(product=>(
-                 <ProductCard key={product.id} product={product} />
+                 <ProductCard 
+                 key={product.id} 
+                 product={product} 
+                 onAddToCard = {this.props.onAddToCard}                 
+                 />
                  ))
                 : <WarningMessage>No categories</WarningMessage> }
 

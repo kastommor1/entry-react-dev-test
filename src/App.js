@@ -17,19 +17,28 @@ import WarningMessage from "./components/Warning-message";
 
 
 class App extends React.Component {
-  constructor(props){
-    super(props)
-    this.state = {
-      categoriesName: []
+    constructor(props){
+      super(props)
+      this.state = {
+        categoriesName: [],
+        selectedProducts: []
+      }
+      this.hendleAddToCard = this.hendleAddToCard.bind(this);
+
     }
-  }
+
+  hendleAddToCard(id){
+    console.log(id);
+    this.setState({selectedProducts: [...this.state.selectedProducts, id]});    
+  }  
   
   // static propTypes = {
   //   query: PropTypes.isRequired
   // }
 
-  render() {
-    
+
+  render() {    
+    console.log(this.state.selectedProducts);
     const { loading, error, data } = this.props.query;
 
     if (loading) return <p>Loading...</p>
@@ -49,7 +58,9 @@ class App extends React.Component {
           <main>
             <Routes>
               <Route path='*'>
-                <Route path='categories/:categoryName' element={<CategoryHOC categoriesName = {data.categories}/>} />
+                <Route path='categories/:categoryName' element={
+                  <CategoryHOC categoriesName = {data.categories} onAddToCard = {this.hendleAddToCard}/>} />
+
                 <Route path='' element={<Navigate to={'/categories/' + data.categories[0].name} />} />
 
                 <Route path='*' element={
