@@ -7,7 +7,7 @@ class Header extends React.Component{
         return (
             <header>
                 <nav>
-                    {this.props.categories.map(
+                    {this.props.categoriesName.map(
                         category=>(
                         <NavLink 
                             to={'/categories/'+category.name} 

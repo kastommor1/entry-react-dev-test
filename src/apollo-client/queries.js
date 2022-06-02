@@ -15,6 +15,16 @@ export const GET_CATEGORY = gql`
             products{
                 id
                 name
+                inStock
+                gallery
+                prices{
+                    currency{
+                        label
+                        symbol
+                    }
+                    amount
+                }
+                brand
             }
         }
     }

@@ -36,6 +36,7 @@ class App extends React.Component {
     if (error) return <p>Error {error.message}</p>
 
     if (data && data.categories) {
+      // this.setState({categoriesName: data.categories}); //state in state, endless cycle
       // if(this.state.categoriesName.length === 0) this.setState({categoriesName: data.categories}); //state in state     
 
       if (data.categories.length === 0) return <WarningMessage><p>No categories</p></WarningMessage>;
@@ -44,7 +45,7 @@ class App extends React.Component {
 
       return (
         <div>
-          <Header categories={data.categories} />
+          <Header categoriesName={data.categories} />
           <main>
             <Routes>
               <Route path='*'>

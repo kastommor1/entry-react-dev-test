@@ -3,6 +3,8 @@ import { widthQueryByParams  } from "../HOCs/HOCs"
 import { GET_CATEGORY } from "../apollo-client/queries";
 import WarningMessage from "../components/Warning-message";
 import { element } from "prop-types";
+import ProductCard from "../components/Category/Product-card";
+
 
 class Category extends React.Component{
 
@@ -25,10 +27,15 @@ class Category extends React.Component{
                 <h2>{this.props.categoryName.toLocaleUpperCase()}</h2>
                 
                 {loading && <p>Loading...</p>}
-                {error && <p>Error {error.message}</p>}
+                {error && 
+                <WarningMessage>
+                    <p>Error {error.message}</p>
+                </WarningMessage>}
 
-                {(data && data.category) ? 
-                 data.category.products.map(product=>(<p key={product.id}>{product.name}</p>))
+                {(data && data.category && data.category.products.length > 0) ? 
+                 data.category.products.map(product=>(
+                 <ProductCard key={product.id} product={product} />
+                 ))
                 : <WarningMessage>No categories</WarningMessage> }
 
             </div>
