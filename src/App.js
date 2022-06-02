@@ -9,7 +9,6 @@ import { GET_CATEGORIES_NAME } from "./apollo-client/queries";
 
 //data
 import { widthQuery } from "./HOCs/HOCs"
-import { setCategoriesName } from './data';
 import PropTypes from "prop-types";
 
 //components
@@ -18,20 +17,30 @@ import WarningMessage from "./components/Warning-message";
 
 
 class App extends React.Component {
-
+  constructor(props){
+    super(props)
+    this.state = {
+      categoriesName: []
+    }
+  }
+  
   // static propTypes = {
   //   query: PropTypes.isRequired
   // }
 
   render() {
+    
     const { loading, error, data } = this.props.query;
 
     if (loading) return <p>Loading...</p>
     if (error) return <p>Error {error.message}</p>
 
     if (data && data.categories) {
-      setCategoriesName(data.categories);
+      // if(this.state.categoriesName.length === 0) this.setState({categoriesName: data.categories}); //state in state     
+
       if (data.categories.length === 0) return <WarningMessage><p>No categories</p></WarningMessage>;
+
+      
 
       return (
         <div>
@@ -39,7 +48,7 @@ class App extends React.Component {
           <main>
             <Routes>
               <Route path='*'>
-                <Route path='categories/:categoryName' element={<CategoryHOC />} />
+                <Route path='categories/:categoryName' element={<CategoryHOC categoriesName = {data.categories}/>} />
                 <Route path='' element={<Navigate to={'/categories/' + data.categories[0].name} />} />
 
                 <Route path='*' element={

@@ -1,18 +1,18 @@
 import React from "react";
 import { widthQueryByParams  } from "../HOCs/HOCs"
 import { GET_CATEGORY } from "../apollo-client/queries";
-import { getCategoriesName } from "../data";
 import WarningMessage from "../components/Warning-message";
 import { element } from "prop-types";
 
 class Category extends React.Component{
 
     render(){
-        if(getCategoriesName().filter(category=>category.name == this.props.categoryName ).length === 0) {
+        if(this.props.categoriesName.filter(category=>category.name == this.props.categoryName ).length === 0) {
             return (
             <WarningMessage>              
                 <p>Sorry. There is no such category.</p>
-            </WarningMessage>)}      
+            </WarningMessage>)}       
+    
         
         const {loading, error , data} = this.props.query; 
 
