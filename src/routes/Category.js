@@ -33,7 +33,7 @@ class Category extends React.Component{
                  <ProductCard 
                  key={product.id} 
                  product={product} 
-                 onAddToCard = {this.props.onAddToCard}                 
+                 onAddToCart = {this.props.onAddToCart}                 
                  />
                  ))
                 : <WarningMessage>No categories</WarningMessage> }

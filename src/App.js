@@ -21,15 +21,45 @@ class App extends React.Component {
       super(props)
       this.state = {
         categoriesName: [],
-        selectedProducts: []
+        cart: [],  
       }
-      this.hendleAddToCard = this.hendleAddToCard.bind(this);
+      this.hendleAddToCart = this.hendleAddToCart.bind(this);
 
     }
 
-  hendleAddToCard(id){
-    console.log(id);
-    this.setState({selectedProducts: [...this.state.selectedProducts, id]});    
+  hendleAddToCart(product){
+    const {id, attributes} = product
+    // console.log(product);
+    console.log(attributes);
+    let selectedProduct = {
+      id: product.id,
+      attributes: []
+    };
+
+    for (let i = 0; i < attributes.length; i++) {    
+      // selectedProduct.attributes[i] = {
+      //   id: product.attributes[i].id,
+      //   name: product.attributes[i].name,
+      //   type: product.attributes[i].type,
+      //   items: [product.attributes[i].items[0]]
+      // };
+
+      //Deep copy 1  
+      // selectedProduct.attributes[i] = JSON.parse(JSON.stringify(product.attributes[i])) ;             
+      // selectedProduct.attributes[i].items = [JSON.parse(JSON.stringify(product.attributes[i].items[0]))];
+      // selectedProduct.attributes[i].items[0].selected = true;
+      
+      //Deep copy 2
+      selectedProduct.attributes[i] = structuredClone(product.attributes[i]);          
+      selectedProduct.attributes[i].items = [structuredClone(product.attributes[i].items[0])];
+      selectedProduct.attributes[i].items[0].selected = true;
+      // delete selectedProduct.attributes[i].items[0].selected;            
+      
+    }
+    
+
+    // this.setState({cart: [...this.state.cart, selectedProduct]});    
+    this.setState({cart: [selectedProduct]});    
   }  
   
   // static propTypes = {
@@ -38,7 +68,7 @@ class App extends React.Component {
 
 
   render() {    
-    console.log(this.state.selectedProducts);
+    console.log(this.state.cart[0] && this.state.cart[0].attributes);
     const { loading, error, data } = this.props.query;
 
     if (loading) return <p>Loading...</p>
@@ -54,12 +84,12 @@ class App extends React.Component {
 
       return (
         <div>
-          <Header categoriesName={data.categories} />
+          <Header categoriesName={data.categories} cart={this.state.cart} />
           <main>
             <Routes>
               <Route path='*'>
                 <Route path='categories/:categoryName' element={
-                  <CategoryHOC categoriesName = {data.categories} onAddToCard = {this.hendleAddToCard}/>} />
+                  <CategoryHOC categoriesName = {data.categories} onAddToCart = {this.hendleAddToCart}/>} />
 
                 <Route path='' element={<Navigate to={'/categories/' + data.categories[0].name} />} />
 

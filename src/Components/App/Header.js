@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom"
 import  "../../styles/App/Header.css"
 
 class Header extends React.Component{
-    render(){
+    render(){        
         return (
             <header>
                 <nav>
@@ -15,7 +15,8 @@ class Header extends React.Component{
                             {category.name.toUpperCase()}
                         </NavLink>
                         ))}                                        
-                </nav>                
+                </nav>
+                <p>In the cart: <b>{this.props.cart.length}</b></p>                
             </header>
         )
     }
