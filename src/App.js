@@ -44,12 +44,20 @@ class App extends React.Component {
       this.hendleDelliteFromCart(id)
     } else{
       this.setState({cart: [...this.state.cart, selectedProduct]});
-    }         
+    }
   }
 
   hendleDelliteFromCart(id){
     let filteredCard = this.state.cart.filter((product)=>product.id != id);
     this.setState({cart: filteredCard});    
+  }
+
+  componentDidMount(){
+    this.setState({cart: JSON.parse(localStorage.getItem('cart'))});
+  }
+
+  componentDidUpdate(){
+    localStorage.setItem('cart', JSON.stringify(this.state.cart));
   }
 
   
