@@ -52,9 +52,11 @@ class App extends React.Component {
     this.setState({cart: filteredCard});    
   }
 
+  
+
   render() {    
     // console.log(this.state.cart[0] && this.state.cart[0].attributes);
-    console.log(this.state.cart);
+    // console.log(this.state.cart);
     const { loading, error, data } = this.props.query;
 
     if (loading) return <p>Loading...</p>
@@ -73,7 +75,7 @@ class App extends React.Component {
             <Routes>
               <Route path='*'>
                 <Route path='categories/:categoryName' element={
-                  <CategoryHOC categoriesName = {data.categories} onAddToCart = {this.handleAddToCart}/>} />
+                  <CategoryHOC categoriesName = {data.categories} onAddToCart = {this.handleAddToCart} cart={this.state.cart}/>} />
 
                 <Route path='' element={<Navigate to={'/categories/' + data.categories[0].name} />} />
 

@@ -29,13 +29,23 @@ class Category extends React.Component{
                 </WarningMessage>}
 
                 {(data && data.category && data.category.products.length > 0) ? 
-                 data.category.products.map(product=>(
-                 <ProductCard 
-                 key={product.id} 
-                 product={product} 
-                 onAddToCart = {this.props.onAddToCart}                 
-                 />
-                 ))
+                 data.category.products.map(product=>{
+                     
+                    let filteredProduct = product;                    
+                     for (const selectProduct of this.props.cart) {
+                         if (selectProduct.id == product.id) {
+                             filteredProduct = selectProduct;                              
+                         }
+                     }                
+
+                     return  (
+                        <ProductCard 
+                        key={product.id} 
+                        product={filteredProduct} 
+                        onAddToCart = {this.props.onAddToCart}                 
+                        />
+                    )
+                 })
                 : <WarningMessage>No categories</WarningMessage> }
 
             </div>
