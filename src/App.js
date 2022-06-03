@@ -23,52 +23,38 @@ class App extends React.Component {
         categoriesName: [],
         cart: [],  
       }
-      this.hendleAddToCart = this.hendleAddToCart.bind(this);
+      this.handleAddToCart = this.handleAddToCart.bind(this);
+      this.hendleDelliteFromCart = this.hendleDelliteFromCart.bind(this);
 
     }
 
-  hendleAddToCart(product){
-    const {id, attributes} = product
-    // console.log(product);
-    console.log(attributes);
-    let selectedProduct = {
-      id: product.id,
-      attributes: []
-    };
-
-    for (let i = 0; i < attributes.length; i++) {    
-      // selectedProduct.attributes[i] = {
-      //   id: product.attributes[i].id,
-      //   name: product.attributes[i].name,
-      //   type: product.attributes[i].type,
-      //   items: [product.attributes[i].items[0]]
-      // };
-
-      //Deep copy 1  
-      // selectedProduct.attributes[i] = JSON.parse(JSON.stringify(product.attributes[i])) ;             
-      // selectedProduct.attributes[i].items = [JSON.parse(JSON.stringify(product.attributes[i].items[0]))];
-      // selectedProduct.attributes[i].items[0].selected = true;
-      
-      //Deep copy 2
-      selectedProduct.attributes[i] = structuredClone(product.attributes[i]);          
-      selectedProduct.attributes[i].items = [structuredClone(product.attributes[i].items[0])];
-      selectedProduct.attributes[i].items[0].selected = true;
-      // delete selectedProduct.attributes[i].items[0].selected;            
-      
-    }
+  handleAddToCart(product, withAttributes){
+    const {id, attributes} = product;
+    let selectedProduct = structuredClone(product);
+    selectedProduct.quantity = 1;
     
+    if(!withAttributes){  
+      //set default attributes
+      for (let i = 0; i < attributes.length; i++) {   
+        selectedProduct.attributes[i].items[0].selected = true;                 
+      }
+    }    
+    
+    if(this.state.cart.filter(product=>product.id == id ).length > 0){
+      this.hendleDelliteFromCart(id)
+    } else{
+      this.setState({cart: [...this.state.cart, selectedProduct]});
+    }         
+  }
 
-    // this.setState({cart: [...this.state.cart, selectedProduct]});    
-    this.setState({cart: [selectedProduct]});    
-  }  
-  
-  // static propTypes = {
-  //   query: PropTypes.isRequired
-  // }
-
+  hendleDelliteFromCart(id){
+    let filteredCard = this.state.cart.filter((product)=>product.id != id);
+    this.setState({cart: filteredCard});    
+  }
 
   render() {    
-    console.log(this.state.cart[0] && this.state.cart[0].attributes);
+    // console.log(this.state.cart[0] && this.state.cart[0].attributes);
+    console.log(this.state.cart);
     const { loading, error, data } = this.props.query;
 
     if (loading) return <p>Loading...</p>
@@ -78,9 +64,7 @@ class App extends React.Component {
       // this.setState({categoriesName: data.categories}); //state in state, endless cycle
       // if(this.state.categoriesName.length === 0) this.setState({categoriesName: data.categories}); //state in state     
 
-      if (data.categories.length === 0) return <WarningMessage><p>No categories</p></WarningMessage>;
-
-      
+      if (data.categories.length === 0) return <WarningMessage><p>No categories</p></WarningMessage>;      
 
       return (
         <div>
@@ -89,7 +73,7 @@ class App extends React.Component {
             <Routes>
               <Route path='*'>
                 <Route path='categories/:categoryName' element={
-                  <CategoryHOC categoriesName = {data.categories} onAddToCart = {this.hendleAddToCart}/>} />
+                  <CategoryHOC categoriesName = {data.categories} onAddToCart = {this.handleAddToCart}/>} />
 
                 <Route path='' element={<Navigate to={'/categories/' + data.categories[0].name} />} />
 
