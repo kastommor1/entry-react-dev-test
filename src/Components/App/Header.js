@@ -2,8 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom"
 import  "../../styles/App/Header.css"
 import Cart from "../Cart";
-// import "../../data/";
-
+import logo from "../../data/a-logo.svg";
 
 class Header extends React.Component{
     render(){        
@@ -23,7 +22,7 @@ class Header extends React.Component{
                     </ul>                                       
                 </nav>
                 
-                <img src={require("../../data/a-logo.png")} alt="logo"  className="logo"/>
+                <img src={logo} alt="logo"  className="logo"/>
                 
                 <button className="cta">$</button>                                   
                 <Cart className="cta" cart = {this.props.cart}/>               

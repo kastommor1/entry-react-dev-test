@@ -1,4 +1,6 @@
 import React from "react";
+import cart from "../data/Empty-Cart.svg";
+import "../styles/App/Cart.css"
 
 class Cart extends React.Component{
     constructor(props){
@@ -15,9 +17,12 @@ class Cart extends React.Component{
 
     render(){      
         return(
-            <div>
-                <button onClick={this.showCart}>In Cart <b>{this.props.cart.length}</b></button>                
-                
+            <div className="cart-mini">
+                <div className="cart-count">
+                    <button onClick={this.showCart}> <img src={cart} alt="fff" /></button>
+                    {this.props.cart.length > 0 && <b className="product-count">{this.props.cart.length}</b>}
+                </div>                  
+                                  
                 <div 
                 style={{position: 'absolute', 
                 right: 10, 
