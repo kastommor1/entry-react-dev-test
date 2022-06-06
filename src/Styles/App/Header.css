@@ -1,25 +1,42 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
 
+
+
 header{
-    padding: 0 100px;
-    font-family: 'Raleway', sans-serif;
+    display: flex; 
+    align-items: center;
     position: -webkit-sticky; 
     position: sticky;
-    top: 0;
+    top: 0;  
     background-color: #ffffff;
+    padding: 0 100px;
+    font-weight: 400;
+    font-size: 16px;
+    font-family: 'Raleway', sans-serif;  
 }
 
-header nav {
-    display: flex;
-    /* justify-content: space-between; */
-    align-items: center;
-}
-
-header a{   
+header li, a, button{   
     text-decoration: none;
+    color: #1D1F22;     
+}
+
+.nav-links{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links li{
+    display: inline-block;    
+}
+
+.nav-links li a {
+    padding: 32px;
     display: block;
-    padding: 32px; 
-    color: black;   
+}
+
+.nav-links li a:hover {
+    color: #5ECE7B;
 }
 
 header .active{
@@ -28,6 +45,21 @@ header .active{
     font-weight: 600;
 }
 
-header .logo{
+.logo{
     margin: 0 auto;
+}
+
+header button {
+    padding: 3px;
+    margin-left: 5px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+
+header button:hover {    
+    background-color: #e6e6e6;   
+    transition: all 0.3s ease 0s;
 }

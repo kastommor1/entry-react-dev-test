@@ -10,25 +10,28 @@ class Header extends React.Component{
         return (
             <header>
                 <nav>
-                    {this.props.categoriesName.map(
-                        category=>(
-                        <NavLink 
-                            to={'/categories/'+category.name} 
-                            key={category.name}>
-                            {category.name.toUpperCase()}
-                        </NavLink>
-                        ))}
-                        
-                    <img src={require("../../data/a-logo.png")} alt="logo"  className="logo"/>           
-
-                    <button>$</button>                                   
-                    <Cart cart = {this.props.cart}/>
-                                                              
-                </nav>               
+                    <ul className="nav-links">
+                        {this.props.categoriesName.map(
+                            category=>(
+                            <li key={category.name}>
+                                <NavLink 
+                                to={'/categories/'+category.name}> 
+                                    {category.name.toUpperCase()}
+                                </NavLink>
+                            </li>
+                            ))}                           
+                    </ul>                                       
+                </nav>
+                
+                <img src={require("../../data/a-logo.png")} alt="logo"  className="logo"/>
+                
+                <button className="cta">$</button>                                   
+                <Cart className="cta" cart = {this.props.cart}/>               
              
             </header>
         )
     }
 }
+
 
 export default Header;
