@@ -6,14 +6,17 @@ import { element } from "prop-types";
 import ProductCard from "../components/Category/Product-card";
 
 
-class Category extends React.Component{   
-   
+class Category extends React.Component{  
+    
     render(){
         if(this.props.categoriesName.filter(category=>category.name == this.props.categoryName ).length === 0) {
             return (
             <WarningMessage>              
                 <p>Sorry. There is no such category.</p>
-            </WarningMessage>)}       
+            </WarningMessage>)
+        }else {
+            document.title = this.props.categoryName.toLocaleUpperCase();
+        }       
     
         
         const {loading, error , data} = this.props.query;
@@ -34,9 +37,12 @@ class Category extends React.Component{
                     let filteredProduct = product;                    
                      for (const selectProduct of this.props.cart) {
                          if (selectProduct.id == product.id) {
-                             filteredProduct = selectProduct;                              
+                             filteredProduct = selectProduct;
+                             break                              
                          }
-                     }                
+                     }
+                     
+                    //  let filteredProduct1 = this.props.cart.find((selectProduct)=> selectProduct.id == product.id) || product;                    
 
                      return  (
                         <ProductCard 
