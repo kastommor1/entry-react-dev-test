@@ -15,7 +15,7 @@ class Category extends React.Component{
                 <p>Sorry. There is no such category.</p>
             </WarningMessage>)
         }else {
-            document.title = this.props.categoryName.toLocaleUpperCase();
+            document.title = this.props.categoryName.toLowerCase().replace(/\b(\w)/g, s => s.toUpperCase());
         }       
     
         

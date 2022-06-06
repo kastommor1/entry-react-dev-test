@@ -2,8 +2,7 @@ import React from "react";
 
 class Cart extends React.Component{
     constructor(props){
-        super(props);
-        console.log(this.props);
+        super(props);        
         this.state = {
             showCart: false
         };
@@ -16,14 +15,13 @@ class Cart extends React.Component{
 
     render(){      
         return(
-            <div style={{float: 'right'}}>
-                <button onClick={this.showCart}>In Cart <b>{this.props.cart.length}</b></button>
-                <p>{this.state.showCart}</p>
+            <div>
+                <button onClick={this.showCart}>In Cart <b>{this.props.cart.length}</b></button>                
                 
                 <div 
                 style={{position: 'absolute', 
                 right: 10, 
-                top: 40,
+                top: 85,
                 display: this.state.showCart ? 'block': 'none',
                 background: 'white',
                 border: '1px solid black',

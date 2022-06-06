@@ -77,7 +77,7 @@ class App extends React.Component {
       if (data.categories.length === 0) return <WarningMessage><p>No categories</p></WarningMessage>;      
 
       return (
-        <div>
+        <>
           <Header categoriesName={data.categories} cart={this.state.cart} />
           <main>
             <Routes>
@@ -96,7 +96,7 @@ class App extends React.Component {
               </Route>
             </Routes>
           </main>
-        </div>
+        </>
       )
     }
   }

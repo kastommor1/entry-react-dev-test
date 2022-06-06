@@ -2,6 +2,8 @@ import React from "react";
 import { NavLink } from "react-router-dom"
 import  "../../styles/App/Header.css"
 import Cart from "../Cart";
+// import "../../data/";
+
 
 class Header extends React.Component{
     render(){        
@@ -15,9 +17,15 @@ class Header extends React.Component{
                             key={category.name}>
                             {category.name.toUpperCase()}
                         </NavLink>
-                        ))}                                        
+                        ))}
+                        
+                    <img src={require("../../data/a-logo.png")} alt="logo"  className="logo"/>           
+
+                    <button>$</button>                                   
+                    <Cart cart = {this.props.cart}/>
+                                                              
                 </nav>               
-                <Cart cart = {this.props.cart}/>                
+             
             </header>
         )
     }

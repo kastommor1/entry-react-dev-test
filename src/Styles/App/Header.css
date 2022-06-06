@@ -1,7 +1,33 @@
-.active{
-    color: red;
+@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+
+header{
+    padding: 0 100px;
+    font-family: 'Raleway', sans-serif;
+    position: -webkit-sticky; 
+    position: sticky;
+    top: 0;
+    background-color: #ffffff;
 }
 
-a{    
-    margin: 0 10px;
+header nav {
+    display: flex;
+    /* justify-content: space-between; */
+    align-items: center;
+}
+
+header a{   
+    text-decoration: none;
+    display: block;
+    padding: 32px; 
+    color: black;   
+}
+
+header .active{
+    color: #5ECE7B;
+    border-bottom: 2px solid #5ECE7B;
+    font-weight: 600;
+}
+
+header .logo{
+    margin: 0 auto;
 }
