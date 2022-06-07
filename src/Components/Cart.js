@@ -18,8 +18,8 @@ class Cart extends React.Component{
     render(){      
         return(
             <div className="cart-mini">
-                <div className="cart-count">
-                    <button onClick={this.showCart}> <img src={cart} alt="fff" /></button>
+                <div onClick={this.showCart} className="cart-count">
+                    <button> <img src={cart} alt="fff" /></button>
                     {this.props.cart.length > 0 && <b className="product-count">{this.props.cart.length}</b>}
                 </div>                  
                                   

@@ -5,6 +5,9 @@ import WarningMessage from "../components/Warning-message";
 import { element } from "prop-types";
 import ProductCard from "../components/Category/Product-card";
 
+import '../styles/Category/Caregory.css'
+import ProductList from "../components/Category/Product-list";
+
 
 class Category extends React.Component{  
     
@@ -22,37 +25,35 @@ class Category extends React.Component{
         const {loading, error , data} = this.props.query;
   
         return (
-            <div>
+            <div className="category">
                 <h2>{this.props.categoryName.toLocaleUpperCase()}</h2>
                 
                 {loading && <p>Loading...</p>}
-                {error && 
-                <WarningMessage>
-                    <p>Error {error.message}</p>
-                </WarningMessage>}
+                {error && <WarningMessage><p>Error {error.message}</p></WarningMessage>}
 
-                {(data && data.category && data.category.products.length > 0) ? 
-                 data.category.products.map(product=>{
-                     
-                    let filteredProduct = product;                    
-                     for (const selectProduct of this.props.cart) {
-                         if (selectProduct.id == product.id) {
-                             filteredProduct = selectProduct;
-                             break                              
-                         }
-                     }
-                     
-                    //  let filteredProduct1 = this.props.cart.find((selectProduct)=> selectProduct.id == product.id) || product;                    
+                
+                {(data && data.category && data.category.products.length > 0) ?
 
-                     return  (
-                        <ProductCard 
-                        key={product.id} 
-                        product={filteredProduct} 
-                        onAddToCart = {this.props.onAddToCart}                 
-                        />
-                    )
-                 })
+                <ProductList products = {data.category.products} cart = {this.props.cart} onAddToCart={this.props.onAddToCart}/>
+                    
+                // <div className="product-list">
+                //     {data.category.products.map(product=>{             
+
+                //         let filteredProduct = this.props.cart.find((selectProduct)=> selectProduct.id == product.id) || product;                    
+                            
+                //         return  (
+                //             <ProductCard 
+                //             key={product.id} 
+                //             product={filteredProduct} 
+                //             onAddToCart = {this.props.onAddToCart}                 
+                //             />
+                //         )
+                //     })}
+                // </div>
+
                 : <WarningMessage>No categories</WarningMessage> }
+                
+                
 
             </div>
         )
