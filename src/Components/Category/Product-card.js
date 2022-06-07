@@ -7,30 +7,35 @@ class ProductCard extends React.Component {
     render() {
         const product = this.props.product;
         const { id, name, inStock, gallery, prices, brand, quantity } = product;
+        const imgClass = inStock ? '' : 'product-stock-img';
+        const hiddenClass = inStock ? '' : 'product-hidden';
 
         return (
             <div className="product-card">
 
                 <div className="product-gallery">
-                    <img src={gallery[0]} alt={name} />
+                    <img className={imgClass} src={gallery[0]} alt={name} />
+                    {!inStock && <p className="product-stock">OUT OF STOCK</p>}
                 </div>
-                <p>{brand} {name}</p>
+                <p className="product-name" >{brand} {name}</p>
                 <p><b>{prices[0].currency.symbol}{prices[0].amount}</b></p>
-                {/* {quantity && <p><b style={{color: 'red'}}>In cart</b></p>} */}
-                
-                {!quantity ?
-                    <button 
-                        className="add-product-btn"
-                        onClick={() => { this.props.onAddToCart(product) }}
+
+                {inStock && 
+                <div>
+                    {!quantity ?
+                        <button
+                            className="add-product-btn"
+                            onClick={() => { this.props.onAddToCart(product) }}
                         >
-                        <img src={cart} alt="" />
-                    </button> :
-                    <button 
-                        className="dell-product-btn"
-                        onClick={() => { this.props.onAddToCart(product) }}
+                            <img src={cart} alt="" />
+                        </button> :
+                        <button
+                            className="dell-product-btn"
+                            onClick={() => { this.props.onAddToCart(product) }}
                         >
-                        <img src={cart} alt="" />
-                    </button>}
+                            <img src={cart} alt="" />
+                        </button>}
+                </div>}
 
             </div>
         )

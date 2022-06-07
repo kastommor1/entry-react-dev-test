@@ -1,6 +1,5 @@
-.product-card{
-    /* border: 1px solid #dfd4d4; */
-    height: 440px;
+.product-card{  
+    /* height: 440px; */
     padding: 16px; 
     position: relative;   
 }
@@ -21,8 +20,8 @@
 .product-card button {
     display: none;
     position: absolute;
-    bottom: 40px;
-    right: 40px;
+    bottom: 78px;
+    right: 45px;
     border: none;
 
     background-color: #5ECE7B;    
@@ -44,5 +43,26 @@
 
 .product-card .dell-product-btn{
     background-color: #e6e6e6;
+}
+
+.product-card p{
+    font-size: 18px;
+    margin-bottom: 0;
+}
+
+.product-card .product-name{
+    margin-top: 24px;
+}
+
+.product-card .product-stock{
+    position: absolute;
+    top: 150px;
+    left: 115px;
+    color: #8D8F9A;
+    font-size: 24px;
+}
+
+.product-card .product-stock-img{
+    opacity: 0.2;
 }
 

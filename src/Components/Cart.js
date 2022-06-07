@@ -30,7 +30,9 @@ class Cart extends React.Component{
                 display: this.state.showCart ? 'block': 'none',
                 background: 'white',
                 border: '1px solid black',
-                padding: 15 }}>
+                padding: 15, 
+                height: '80vh',
+                overflow: 'scroll'}}>
                     <p><b>My Bag,</b> {this.props.cart.length} items</p>
 
                     {this.props.cart.map(product=>{

@@ -15,6 +15,9 @@ import PropTypes from "prop-types";
 import Header from "./components/App/Header";
 import WarningMessage from "./components/Warning-message";
 
+//css
+import './App.css'
+
 
 class App extends React.Component {
     constructor(props){
