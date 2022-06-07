@@ -9,10 +9,12 @@ header{
     position: sticky;
     top: 0;  
     background-color: #ffffff;
-    margin: 0 100px;
+    margin: 0 auto;
+    max-width: 1440px;
     font-weight: 400;
     font-size: 16px;
-    font-family: 'Raleway', sans-serif;  
+    font-family: 'Raleway', sans-serif;
+    z-index: 1;  
 }
 
 header li, a, button{   
