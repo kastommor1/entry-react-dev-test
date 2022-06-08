@@ -1,6 +1,7 @@
 import React from "react";
 import cart from "../../data/Empty-Cart.svg";
 import "../../styles/Cart/Cart.css"
+import ProductCardInCart from "./Product-card-in-cart";
 
 class Cart extends React.Component{
     constructor(props){
@@ -19,27 +20,16 @@ class Cart extends React.Component{
         return(
             <div className="cart-mini">
                 <div onClick={this.showCart} className="cart-icon">
-                    <button> <img src={cart} alt="fff" /></button>
+                    <button className="header-icon"> <img src={cart} alt="fff" /></button>
                     {this.props.cart.length > 0 && <b className="count-icon">{this.props.cart.length}</b>}
                 </div>                  
                                   
                 <div               
                 className= {"cart-list" + (this.state.showCart ? ' cart-show' : '')}               
                 >
-                    <p><b>My Bag,</b> {this.props.cart.length} items</p>
+                    <h2><b>My Bag,</b> {this.props.cart.length} items</h2>
 
-                    {this.props.cart.map(product=>{
-                        const {id, name, inStock, gallery, prices, brand, quantity} = product
-                        return (
-                            <div key={id}>
-                            <img src={gallery[0]} alt=""  style={{height: 150}}/>
-                            <p>{brand} {name}</p>
-                            <p><b>{prices[0].currency.symbol}{prices[0].amount}</b></p>
-                            <hr />
-                        </div>
-                        )
-                     
-                    })}
+                    {this.props.cart.map(product=><ProductCardInCart key={product.id} product={product}/>)}
 
                 </div>
                 

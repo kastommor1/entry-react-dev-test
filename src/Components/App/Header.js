@@ -24,8 +24,8 @@ class Header extends React.Component{
                 
                 <img src={logo} alt="logo"  className="logo"/>
                 
-                <button className="cta">$</button>                                   
-                <Cart className="cta" cart = {this.props.cart}/>               
+                <button className="header-icon">$</button>                                   
+                <Cart cart = {this.props.cart}/>               
              
             </header>
         )
