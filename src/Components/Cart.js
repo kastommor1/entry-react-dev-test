@@ -18,21 +18,14 @@ class Cart extends React.Component{
     render(){      
         return(
             <div className="cart-mini">
-                <div onClick={this.showCart} className="cart-count">
+                <div onClick={this.showCart} className="cart-icon">
                     <button> <img src={cart} alt="fff" /></button>
-                    {this.props.cart.length > 0 && <b className="product-count">{this.props.cart.length}</b>}
+                    {this.props.cart.length > 0 && <b className="count-icon">{this.props.cart.length}</b>}
                 </div>                  
                                   
-                <div 
-                style={{position: 'absolute', 
-                right: 10, 
-                top: 85,
-                display: this.state.showCart ? 'block': 'none',
-                background: 'white',
-                border: '1px solid black',
-                padding: 15, 
-                height: '80vh',
-                overflow: 'scroll'}}>
+                <div               
+                className= {"cart-list" + (this.state.showCart ? ' cart-show' : '')}               
+                >
                     <p><b>My Bag,</b> {this.props.cart.length} items</p>
 
                     {this.props.cart.map(product=>{

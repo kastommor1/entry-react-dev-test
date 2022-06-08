@@ -48,10 +48,7 @@
 .product-card p{
     font-size: 18px;
     margin-bottom: 0;
-}
-
-.product-card .product-name{
-    margin-top: 24px;
+    line-height: 28px;
 }
 
 .product-card .product-stock{
