@@ -1,3 +1,7 @@
+.cart-mini{
+    color: #1D1F22;
+}
+
 .cart-mini .cart-icon{
     position: relative;
 }
@@ -10,7 +14,8 @@
     background: white;
     border: 1px solid black;
     padding: 15px;
-    max-height: 80vh;
+    width: 325px;
+    max-height: 60vh;
     overflow: auto;
 }
 

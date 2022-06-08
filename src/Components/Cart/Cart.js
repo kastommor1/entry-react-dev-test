@@ -1,6 +1,6 @@
 import React from "react";
-import cart from "../data/Empty-Cart.svg";
-import "../styles/App/Cart.css"
+import cart from "../../data/Empty-Cart.svg";
+import "../../styles/Cart/Cart.css"
 
 class Cart extends React.Component{
     constructor(props){
