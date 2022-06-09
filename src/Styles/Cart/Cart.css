@@ -50,8 +50,3 @@ h2{
     cursor: pointer;    
 }
 
-.cart-mini 
-.count-icon:hover {    
-    background-color: #636363;   
-    transition: all 0.3s ease 0s;
-}

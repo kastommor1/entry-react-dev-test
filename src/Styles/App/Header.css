@@ -60,9 +60,3 @@ header .header-icon {
     cursor: pointer;
     transition: all 0.3s ease 0s;
 }
-
-header button:hover {    
-    background-color: #EEEEEE;   
-    transition: all 0.2s ease 0s;
-    /* color: white; */
-}
