@@ -3,6 +3,7 @@ import '../../styles/product-card/Product-card-in-cart.css'
 import Attributes from "./Attributes";
 import CountPicker from "./Count-picker";
 import Gallery from "./Gallery";
+import Price from "./Price";
 
 
 class ProductCardInCart extends React.Component {
@@ -16,8 +17,7 @@ class ProductCardInCart extends React.Component {
 
                 <div className="parameters">              
                     <h3 className="name" > {brand} <br /> {name}</h3>
-                    <p><b>{prices[0].currency.symbol}{prices[0].amount}</b></p>
-
+                    <Price prices={prices} />
                     <Attributes attributes={attributes}/>                  
                 </div>
 
