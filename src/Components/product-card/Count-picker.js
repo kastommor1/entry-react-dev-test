@@ -2,12 +2,14 @@ import React from "react";
 import "../../styles/product-card/Count-picker.css"
 
 class CountPicker extends React.Component {
+    
     render() {
+        const {id, quantity, onQuantityChange} = this.props;       
         return (
             <div className="count-picker">
-                <button>+</button>
-                <p>{this.props.quantity}</p>
-                <button>-</button>
+                <button onClick={()=>{onQuantityChange(id, true)}}>+</button>
+                <p>{quantity}</p>
+                <button onClick={()=>{onQuantityChange(id)}}>-</button>
             </div>
         )
     }

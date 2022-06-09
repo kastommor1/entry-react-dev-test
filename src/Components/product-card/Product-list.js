@@ -17,7 +17,7 @@ class ProductList extends React.Component {
                         <ProductCard
                             key={product.id}
                             product={filteredProduct}
-                            onAddToCart={this.props.onAddToCart}
+                            onAddToCart={this.props.onAddToCart}                            
                         />
                     )
                 })}

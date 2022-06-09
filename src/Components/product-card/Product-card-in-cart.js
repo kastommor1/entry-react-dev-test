@@ -21,7 +21,11 @@ class ProductCardInCart extends React.Component {
                     <Attributes attributes={attributes}/>                  
                 </div>
 
-                <CountPicker quantity={quantity}/>
+                <CountPicker 
+                id={id}
+                quantity={quantity} 
+                onQuantityChange={this.props.onQuantityChange}
+                />
                 <Gallery gallery={gallery} name={name} />            
             </div>
         )

@@ -26,7 +26,10 @@ class Header extends React.Component {
 
                 <div className="header-icons">
                     <button className="header-icon">$</button>
-                    <Cart cart={this.props.cart} />
+                    <Cart 
+                    cart={this.props.cart} 
+                    onQuantityChange={this.props.onQuantityChange} 
+                    />
                 </div>
 
 

@@ -20,52 +20,78 @@ import './App.css'
 
 
 class App extends React.Component {
-    constructor(props){
-      super(props)
-      this.state = {
-        categoriesName: [],
-        cart: [],  
-      }
-      this.handleAddToCart = this.handleAddToCart.bind(this);
-      this.hendleDelliteFromCart = this.hendleDelliteFromCart.bind(this);
-
+  constructor(props) {
+    super(props)
+    this.state = {
+      categoriesName: [],
+      cart: [],
     }
+    this.handleAddToCart = this.handleAddToCart.bind(this);
+    this.hendleDelliteFromCart = this.hendleDelliteFromCart.bind(this);
+    this.hendleQuantityChange = this.hendleQuantityChange.bind(this);
 
-  handleAddToCart(product, withAttributes){
-    const {id, attributes} = product;
+  }
+
+  handleAddToCart(product, withAttributes) {
+    const { id, attributes } = product;
     let selectedProduct = structuredClone(product);
     selectedProduct.quantity = 1;
-    
-    if(!withAttributes){  
+
+    if (!withAttributes) {
       //set default attributes
-      for (let i = 0; i < attributes.length; i++) {   
-        selectedProduct.attributes[i].items[0].selected = true;                 
+      for (let i = 0; i < attributes.length; i++) {
+        selectedProduct.attributes[i].items[0].selected = true;
       }
-    }    
-    
-    if(this.state.cart.filter(product=>product.id == id ).length > 0){
+    }
+
+    if (this.state.cart.filter(product => product.id == id).length > 0) {
       this.hendleDelliteFromCart(id)
-    } else{
-      this.setState({cart: [...this.state.cart, selectedProduct]});
+    } else {
+      this.setState({ cart: [...this.state.cart, selectedProduct] });
     }
   }
 
-  hendleDelliteFromCart(id){
-    let filteredCard = this.state.cart.filter((product)=>product.id != id);
-    this.setState({cart: filteredCard});    
+  hendleDelliteFromCart(id) {
+    let filteredCard = this.state.cart.filter((product) => product.id != id);
+    this.setState({ cart: filteredCard });
   }
 
-  componentDidMount(){
-    this.setState({cart: JSON.parse(localStorage.getItem('cart'))});
+  hendleQuantityChange(id, increase) {
+    let dellProduct = false;
+
+    let filteredCard = this.state.cart.map(product=>{
+      if(product.id === id){
+        let selectedProduct = structuredClone(product);
+        
+        if(!increase && selectedProduct.quantity === 1) {
+          dellProduct = true;
+          return selectedProduct
+        };
+
+        increase ? selectedProduct.quantity++ : selectedProduct.quantity-- ;          
+        return selectedProduct;
+
+      }        
+      return product;
+    });
+    
+    this.setState({ cart: filteredCard });
+    if (dellProduct) this.hendleDelliteFromCart(id);  
   }
 
-  componentDidUpdate(){
+
+
+  componentDidMount() {
+    this.setState({ cart: JSON.parse(localStorage.getItem('cart')) });
+  }
+
+  componentDidUpdate() {
     localStorage.setItem('cart', JSON.stringify(this.state.cart));
   }
 
-  
 
-  render() {    
+
+  render() {
     // console.log(this.state.cart[0] && this.state.cart[0].attributes);
     // console.log(this.state.cart);
     const { loading, error, data } = this.props.query;
@@ -77,16 +103,23 @@ class App extends React.Component {
       // this.setState({categoriesName: data.categories}); //state in state, endless cycle
       // if(this.state.categoriesName.length === 0) this.setState({categoriesName: data.categories}); //state in state     
 
-      if (data.categories.length === 0) return <WarningMessage><p>No categories</p></WarningMessage>;      
+      if (data.categories.length === 0) return <WarningMessage><p>No categories</p></WarningMessage>;
 
       return (
         <>
-          <Header categoriesName={data.categories} cart={this.state.cart} />
+          <Header
+            categoriesName={data.categories}
+            cart={this.state.cart}
+            onQuantityChange={this.hendleQuantityChange}
+          />
           <main>
             <Routes>
               <Route path='*'>
                 <Route path='categories/:categoryName' element={
-                  <CategoryHOC categoriesName = {data.categories} onAddToCart = {this.handleAddToCart} cart={this.state.cart}/>} />
+                  <CategoryHOC
+                    categoriesName={data.categories}
+                    onAddToCart={this.handleAddToCart}
+                    cart={this.state.cart} />} />
 
                 <Route path='' element={<Navigate to={'/categories/' + data.categories[0].name} />} />
 

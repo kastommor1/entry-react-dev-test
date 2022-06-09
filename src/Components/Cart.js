@@ -29,7 +29,12 @@ class Cart extends React.Component{
                 >
                     <h2><b>My Bag,</b> {this.props.cart.length} items</h2>
 
-                    {this.props.cart.map(product=><ProductCardInCart key={product.id} product={product}/>)}
+                    {this.props.cart.map(product=>(
+                        <ProductCardInCart 
+                        key={product.id} 
+                        product={product} 
+                        onQuantityChange={this.props.onQuantityChange}/>
+                    ))}
 
                 </div>
                 
