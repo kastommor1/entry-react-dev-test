@@ -1,5 +1,5 @@
 import React from "react";
-import  '../../styles/Cart/Attributes.css'
+import  '../../styles/product-card/Attributes.css'
 
 class Attributes extends React.Component {
 

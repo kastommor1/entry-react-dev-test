@@ -1,7 +1,7 @@
 import React from "react";
-import cart from "../../data/Empty-Cart.svg";
-import "../../styles/Cart/Cart.css"
-import ProductCardInCart from "./Product-card-in-cart";
+import cart from "../data/Empty-Cart.svg";
+import "../styles/Cart.css"
+import ProductCardInCart from "./product-card/Product-card-in-cart";
 
 class Cart extends React.Component{
     constructor(props){

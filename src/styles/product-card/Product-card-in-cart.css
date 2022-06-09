@@ -30,31 +30,15 @@ section{
     width: 130px; 
     display: flex;
     flex-direction: column;
-    justify-content: space-between;   
+    justify-content: space-between;  
 }
-
-
 
 /* attributes */
 
 /* count-picker */
 
+/* gallery */
 
 
-
-.product-card-in-cart 
-.gallery{
-    width: 120px;    
-    max-height: 230px;
-    overflow: hidden;
-    align-self: center; 
-
-}
-
-.product-card-in-cart 
-.gallery img{
-    width: 100%;
-    vertical-align: middle;    
-}
 
 

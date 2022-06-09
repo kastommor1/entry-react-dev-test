@@ -1,0 +1,14 @@
+.product-card-in-cart 
+.gallery{
+    width: 120px;    
+    max-height: 230px;
+    overflow: hidden;
+    align-self: center; 
+
+}
+
+.product-card-in-cart 
+.gallery img{
+    width: 100%;
+    vertical-align: middle;    
+}

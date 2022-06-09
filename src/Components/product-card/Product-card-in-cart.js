@@ -1,7 +1,8 @@
 import React from "react";
-import '../../styles/Cart/Product-card-in-cart.css'
+import '../../styles/product-card/Product-card-in-cart.css'
 import Attributes from "./Attributes";
 import CountPicker from "./Count-picker";
+import Gallery from "./Gallery";
 
 
 class ProductCardInCart extends React.Component {
@@ -21,11 +22,7 @@ class ProductCardInCart extends React.Component {
                 </div>
 
                 <CountPicker quantity={quantity}/>
-
-                <div className="gallery">
-                    <img src={gallery[0]} alt={name} />
-                </div> 
-
+                <Gallery gallery={gallery} name={name} />            
             </div>
         )
     }

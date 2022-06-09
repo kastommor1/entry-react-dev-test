@@ -1,5 +1,5 @@
 import React from "react";
-import '../../styles/Category/Product-card.css'
+import '../../styles/product-card/Product-card.css'
 import cart from "../../data/Empty-Cart-White.svg";
 
 class ProductCard extends React.Component {

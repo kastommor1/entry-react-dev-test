@@ -1,12 +1,12 @@
 import React from "react";
-import { widthQueryByParams } from "../HOCs/HOCs"
+import { widthQueryByParams } from "../HOCs/HOCs";
 import { GET_CATEGORY } from "../apollo-client/queries";
 import WarningMessage from "../components/Warning-message";
 import { element } from "prop-types";
-import ProductCard from "../components/Category/Product-card";
+import ProductCard from "../components/product-card/Product-card";
 
-import '../styles/Category/Caregory.css'
-import ProductList from "../components/Category/Product-list";
+import '../styles/Caregory.css';
+import ProductList from "../components/product-card/Product-list";
 
 
 class Category extends React.Component {

@@ -1,6 +1,6 @@
 import React from "react";
 import ProductCard from "./Product-card";
-import "../../styles/Category/Product-list.css";
+import "../../styles/product-card/Product-list.css";
 import WarningMessage from "../Warning-message";
 
 class ProductList extends React.Component {

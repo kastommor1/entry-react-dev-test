@@ -12,7 +12,7 @@ import { widthQuery } from "./HOCs/HOCs"
 import PropTypes from "prop-types";
 
 //components
-import Header from "./components/App/Header";
+import Header from "./components/Header";
 import WarningMessage from "./components/Warning-message";
 
 //css
