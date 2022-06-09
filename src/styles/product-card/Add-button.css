@@ -1,0 +1,31 @@
+.product-card 
+.add-dell {
+    display: none;
+    position: absolute;
+    bottom: 78px;
+    right: 45px;
+    border: none;
+
+    background-color: #5ECE7B;    
+    height: 52px;
+    width: 52px;    
+    border-radius: 50%;   
+   
+}
+
+.product-card 
+.add-dell img {
+    position: relative;
+    top: 3px;
+    left: -1px;
+}
+
+.product-card:hover 
+.add-dell {
+    display: block;        
+}
+
+.product-card 
+.dell-btn{
+    background-color: #e6e6e6;
+}
