@@ -17,10 +17,10 @@ class Attributes extends React.Component {
                         <div key={attribute.id}>
                             <p>{attribute.name}:</p>
                             <div>
-                                {attribute.items.map(item => {
-                                    const selectedClass = item.selected ? ' selected' : '';
-                                    const selectedColorClass = item.selected ? ' selected-color' : '';
+                                {attribute.items.map(item => {                                    
+                                    
                                     if (attribute.id === 'Color') {
+                                        const selectedColorClass = item.selected ? ' selected-color' : '';
                                         const whiteClass = item.displayValue.toLocaleLowerCase() === 'white'
                                             ? ' white-square' : '';
                                         return <button
@@ -31,6 +31,7 @@ class Attributes extends React.Component {
                                         </button>
                                     }
 
+                                    const selectedClass = item.selected ? ' selected' : '';
                                     return <button
                                         key={item.id}
                                         className={selectedClass}>

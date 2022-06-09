@@ -1,6 +1,7 @@
 import React from "react";
 import '../../styles/Cart/Product-card-in-cart.css'
 import Attributes from "./Attributes";
+import CountPicker from "./Count-picker";
 
 
 class ProductCardInCart extends React.Component {
@@ -12,24 +13,18 @@ class ProductCardInCart extends React.Component {
         return (
             <div className="product-card-in-cart">
 
-                <section className="parameters">
-                    {/* <p className="brand" ></p> */}
+                <div className="parameters">              
                     <h3 className="name" > {brand} <br /> {name}</h3>
                     <p><b>{prices[0].currency.symbol}{prices[0].amount}</b></p>
 
-                    <Attributes attributes={attributes}/>                   
+                    <Attributes attributes={attributes}/>                  
+                </div>
 
-                </section>
+                <CountPicker quantity={quantity}/>
 
-                <section className="count-picker">
-                    <button>+</button>
-                    <p>{quantity}</p>
-                    <button>-</button>
-                </section>
-
-                <section className="gallery">
+                <div className="gallery">
                     <img src={gallery[0]} alt={name} />
-                </section>     
+                </div> 
 
             </div>
         )
