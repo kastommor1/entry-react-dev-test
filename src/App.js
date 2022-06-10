@@ -8,7 +8,7 @@ import CategoryHOC from "./routes/Category";
 import { GET_CATEGORIES_NAME } from "./apollo-client/queries";
 
 //data
-import { widthQuery } from "./HOCs/HOCs"
+import { widthQuery } from "./service-functions/HOCs"
 import PropTypes from "prop-types";
 
 //components
@@ -81,8 +81,7 @@ class App extends React.Component {
   }
 
   handleAttributeChange(productId, attributeId, itemId) {
-    let filteredCart =JSON.parse(JSON.stringify(this.state.cart));
-
+    let filteredCart = JSON.parse(JSON.stringify(this.state.cart));
 
     for (const product of filteredCart) {
       if(product.id === productId){

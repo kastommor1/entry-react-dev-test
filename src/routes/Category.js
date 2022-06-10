@@ -1,5 +1,5 @@
 import React from "react";
-import { widthQueryByParams } from "../HOCs/HOCs";
+import { widthQueryByParams } from "../service-functions/HOCs";
 import { GET_CATEGORY } from "../apollo-client/queries";
 import WarningMessage from "../components/Warning-message";
 import { element } from "prop-types";
