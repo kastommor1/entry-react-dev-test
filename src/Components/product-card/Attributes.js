@@ -4,9 +4,10 @@ import  '../../styles/product-card/Attributes.css'
 class Attributes extends React.Component {
 
     render() {
+        const {productId, attributes, onAttributeChange} = this.props;
         return (
             <div className="attributes">
-                {this.props.attributes.map((attribute, index) => {
+                {attributes.map((attribute, index) => {
                     // if (index >2){
                     //     return ;
                     // } else if (index === 2) {
@@ -23,9 +24,10 @@ class Attributes extends React.Component {
                                         const selectedColorClass = item.selected ? ' selected-color' : '';
                                         const whiteClass = item.displayValue.toLocaleLowerCase() === 'white'
                                             ? ' white-square' : '';
-                                        return <button
+                                        return <button                                            
                                             className={"color-button" + selectedColorClass + whiteClass}
                                             key={item.id}
+                                            onClick={()=>{onAttributeChange(productId, attribute.id, item.id)}}
                                         >
                                             <div className="colored-square" style={{ backgroundColor: item.value }}></div>
                                         </button>
@@ -34,7 +36,9 @@ class Attributes extends React.Component {
                                     const selectedClass = item.selected ? ' selected' : '';
                                     return <button
                                         key={item.id}
-                                        className={selectedClass}>
+                                        className={selectedClass}
+                                        onClick={()=>{onAttributeChange(productId, attribute.id, item.id)}}                                        
+                                        >
                                         {item.displayValue}</button>
                                 })}
                             </div>

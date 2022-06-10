@@ -29,6 +29,7 @@ class Header extends React.Component {
                     <Cart 
                     cart={this.props.cart} 
                     onQuantityChange={this.props.onQuantityChange} 
+                    onAttributeChange={this.props.onAttributeChange} 
                     />
                 </div>
 

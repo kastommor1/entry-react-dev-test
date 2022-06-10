@@ -18,7 +18,11 @@ class ProductCardInCart extends React.Component {
                 <div className="parameters">              
                     <h3 className="name" > {brand} <br /> {name}</h3>
                     <Price prices={prices} />
-                    <Attributes attributes={attributes}/>                  
+                    <Attributes 
+                    productId = {product.id}
+                    attributes={attributes}
+                    onAttributeChange={this.props.onAttributeChange}                    
+                    />                  
                 </div>
 
                 <CountPicker 

@@ -27,8 +27,9 @@ class App extends React.Component {
       cart: [],
     }
     this.handleAddToCart = this.handleAddToCart.bind(this);
-    this.hendleDelliteFromCart = this.hendleDelliteFromCart.bind(this);
-    this.hendleQuantityChange = this.hendleQuantityChange.bind(this);
+    this.handleDelliteFromCart = this.handleDelliteFromCart.bind(this);
+    this.handleQuantityChange = this.handleQuantityChange.bind(this);
+    this.handleAttributeChange = this.handleAttributeChange.bind(this);
 
   }
 
@@ -45,21 +46,21 @@ class App extends React.Component {
     }
 
     if (this.state.cart.filter(product => product.id == id).length > 0) {
-      this.hendleDelliteFromCart(id)
+      this.handleDelliteFromCart(id)
     } else {
       this.setState({ cart: [...this.state.cart, selectedProduct] });
     }
   }
 
-  hendleDelliteFromCart(id) {
-    let filteredCard = this.state.cart.filter((product) => product.id != id);
-    this.setState({ cart: filteredCard });
+  handleDelliteFromCart(id) {
+    let filteredCart = this.state.cart.filter((product) => product.id != id);
+    this.setState({ cart: filteredCart });
   }
 
-  hendleQuantityChange(id, increase) {
+  handleQuantityChange(id, increase) {
     let dellProduct = false;
 
-    let filteredCard = this.state.cart.map(product=>{
+    let filteredCart = this.state.cart.map(product=>{
       if(product.id === id){
         let selectedProduct = structuredClone(product);
         
@@ -75,34 +76,60 @@ class App extends React.Component {
       return product;
     });
     
-    this.setState({ cart: filteredCard });
-    if (dellProduct) this.hendleDelliteFromCart(id);  
+    this.setState({ cart: filteredCart });
+    if (dellProduct) this.handleDelliteFromCart(id);  
+  }
+
+  handleAttributeChange(productId, attributeId, itemId) {
+    // console.log(productId, attributeId, itemId);
+    // console.log(this.state.cart);
+
+    // let filteredCart =structuredClone(this.state.cart) ;
+
+    // for (const product of filteredCart) {
+    //   if(product.id === productId){
+
+    //     for (const attribute of product.attributes) {
+    //       if(attribute.id = attributeId){
+            
+    //         for (const item of attribute.items) {
+    //           if(item.id = itemId){
+    //             item.selected = true;
+    //           }else if(item.selected){
+    //             delete item.selected
+    //           }              
+    //         }
+
+    //         break
+    //       }                              
+    //     }
+
+    //     break
+    //   }      
+    // }
+
+    // this.setState({ cart: filteredCart });
   }
 
 
 
   componentDidMount() {
-    this.setState({ cart: JSON.parse(localStorage.getItem('cart')) });
+    if(JSON.parse(localStorage.getItem('cart'))){      
+      this.setState({ cart: JSON.parse(localStorage.getItem('cart')) });
+    }   
   }
 
   componentDidUpdate() {
     localStorage.setItem('cart', JSON.stringify(this.state.cart));
   }
 
-
-
   render() {
-    // console.log(this.state.cart[0] && this.state.cart[0].attributes);
-    // console.log(this.state.cart);
     const { loading, error, data } = this.props.query;
 
     if (loading) return <p>Loading...</p>
     if (error) return <p>Error {error.message}</p>
 
-    if (data && data.categories) {
-      // this.setState({categoriesName: data.categories}); //state in state, endless cycle
-      // if(this.state.categoriesName.length === 0) this.setState({categoriesName: data.categories}); //state in state     
-
+    if (data && data.categories) {       
       if (data.categories.length === 0) return <WarningMessage><p>No categories</p></WarningMessage>;
 
       return (
@@ -110,16 +137,18 @@ class App extends React.Component {
           <Header
             categoriesName={data.categories}
             cart={this.state.cart}
-            onQuantityChange={this.hendleQuantityChange}
+            onQuantityChange={this.handleQuantityChange}
+            onAttributeChange={this.handleAttributeChange}
           />
           <main>
             <Routes>
               <Route path='*'>
                 <Route path='categories/:categoryName' element={
                   <CategoryHOC
-                    categoriesName={data.categories}
+                    categoriesName={data.categories}                    
+                    cart={this.state.cart}
                     onAddToCart={this.handleAddToCart}
-                    cart={this.state.cart} />} />
+                    />} />
 
                 <Route path='' element={<Navigate to={'/categories/' + data.categories[0].name} />} />
 

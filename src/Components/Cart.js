@@ -33,7 +33,9 @@ class Cart extends React.Component{
                         <ProductCardInCart 
                         key={product.id} 
                         product={product} 
-                        onQuantityChange={this.props.onQuantityChange}/>
+                        onQuantityChange={this.props.onQuantityChange}
+                        onAttributeChange={this.props.onAttributeChange}                        
+                        />
                     ))}
 
                 </div>
