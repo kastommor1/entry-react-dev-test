@@ -81,34 +81,33 @@ class App extends React.Component {
   }
 
   handleAttributeChange(productId, attributeId, itemId) {
-    // console.log(productId, attributeId, itemId);
-    // console.log(this.state.cart);
+    let filteredCart =JSON.parse(JSON.stringify(this.state.cart));
 
-    // let filteredCart =structuredClone(this.state.cart) ;
 
-    // for (const product of filteredCart) {
-    //   if(product.id === productId){
+    for (const product of filteredCart) {
+      if(product.id === productId){
 
-    //     for (const attribute of product.attributes) {
-    //       if(attribute.id = attributeId){
-            
-    //         for (const item of attribute.items) {
-    //           if(item.id = itemId){
-    //             item.selected = true;
-    //           }else if(item.selected){
-    //             delete item.selected
-    //           }              
-    //         }
+        for (const attribute of product.attributes) {
+          if(attribute.id === attributeId){          
 
-    //         break
-    //       }                              
-    //     }
+            for (const item of attribute.items) {                           
+              if(item.id === itemId){
+                item.selected = true;                
+              }
+              else if(item.selected){
+                delete item.selected                
+              }       
+            }
 
-    //     break
-    //   }      
-    // }
+            break
+          }                              
+        }
 
-    // this.setState({ cart: filteredCart });
+        break
+      }      
+    }
+
+    this.setState({ cart: filteredCart });
   }
 
 
