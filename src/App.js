@@ -28,48 +28,72 @@ class App extends React.Component {
       cart: [],
     }
     this.handleAddToCart = this.handleAddToCart.bind(this);
-    this.handleDelliteFromCart = this.handleDelliteFromCart.bind(this);
+    this.handleDeleteFromCart = this.handleDeleteFromCart.bind(this);
     this.handleQuantityChange = this.handleQuantityChange.bind(this);
     this.handleAttributeChange = this.handleAttributeChange.bind(this);
     this.localStorageUpdated = this.localStorageUpdated.bind(this);
 
   }
 
-  handleAddToCart(product, withAttributes) {
-    const { id, attributes } = product;
-    let selectedProduct = structuredClone(product);
-    selectedProduct.quantity = 1;
+  handleAddToCart(product, preview) {
+    const { id, attributes } = product; //
+    
+    //for old product
+    if (this.state.cart.filter(product => product.id == id && product.quantity === 0).length > 0) {
+      this.handleQuantityChange(id, true);
+      return;
+    }
+    
+    //for new product  
+    let selectedProduct = structuredClone(product); //
+    //set default attributes
+    for (let i = 0; i < attributes.length; i++) {
+      selectedProduct.attributes[i].items[0].selected = true;
+    }
 
-    if (!withAttributes) {
-      //set default attributes
-      for (let i = 0; i < attributes.length; i++) {
-        selectedProduct.attributes[i].items[0].selected = true;
-      }
+    if (!preview) {
+      selectedProduct.quantity = 1;
     }
 
     if (this.state.cart.filter(product => product.id == id).length > 0) {
-      this.handleDelliteFromCart(id)
+      this.handleDeleteFromCart(id)
     } else {
       this.setState({ cart: [...this.state.cart, selectedProduct] });
       localStorage.setItem('cart', JSON.stringify([...this.state.cart, selectedProduct]));
     }
+
+    
   }
 
-  handleDelliteFromCart(id) {
-    let filteredCart = this.state.cart.filter((product) => product.id != id);
+  handleDeleteFromCart(id) {
+    //Delete product
+    // let filteredCart = this.state.cart.filter((product) => product.id != id); 
+    // this.setState({ cart: filteredCart });
+    // localStorage.setItem('cart', JSON.stringify(filteredCart));
+
+    //Delete quantity
+    let filteredCart = JSON.parse(JSON.stringify(this.state.cart));
+    
+    for (let product of filteredCart) {
+      if (product.id === id) {
+        product.quantity = 0;
+        break
+      }      
+    }   
+
     this.setState({ cart: filteredCart });
     localStorage.setItem('cart', JSON.stringify(filteredCart));
   }
 
   handleQuantityChange(id, increase) {
-    let dellProduct = false;
+    let deleteProduct = false;
 
     let filteredCart = this.state.cart.map(product => {
       if (product.id === id) {
         let selectedProduct = structuredClone(product);
 
-        if (!increase && selectedProduct.quantity === 1) {
-          dellProduct = true;
+        if (!increase && selectedProduct.quantity < 1) {
+          deleteProduct = true;
           return selectedProduct
         };
 
@@ -82,7 +106,7 @@ class App extends React.Component {
 
     this.setState({ cart: filteredCart });
     localStorage.setItem('cart', JSON.stringify(filteredCart));
-    if (dellProduct) this.handleDelliteFromCart(id);
+    if (deleteProduct) this.handleDeleteFromCart(id);
   }
 
   handleAttributeChange(productId, attributeId, itemId) {
@@ -106,7 +130,7 @@ class App extends React.Component {
             break
           }
         }
-        
+
         break
       }
     }
@@ -115,10 +139,10 @@ class App extends React.Component {
     localStorage.setItem('cart', JSON.stringify(filteredCart));
   }
 
-  localStorageUpdated(event) {  
-    if(event.key === 'cart'){
-      this.setState({ cart: JSON.parse(localStorage.getItem('cart')) });    
-    }    
+  localStorageUpdated(event) {
+    if (event.key === 'cart') {
+      this.setState({ cart: JSON.parse(localStorage.getItem('cart')) });
+    }
   }
 
   componentDidMount() {
@@ -126,8 +150,8 @@ class App extends React.Component {
       if (JSON.parse(localStorage.getItem('cart'))) {
         this.setState({ cart: JSON.parse(localStorage.getItem('cart')) });
       }
-      window.addEventListener('storage', this.localStorageUpdated);      
-    }    
+      window.addEventListener('storage', this.localStorageUpdated);
+    }
   }
 
   componentWillUnmount() {
