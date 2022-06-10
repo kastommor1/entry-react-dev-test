@@ -17,6 +17,7 @@ import WarningMessage from "./components/Warning-message";
 
 //css
 import './App.css'
+import { productWithAttributes } from "./service-functions/data-processing";
 
 
 class App extends React.Component {
@@ -30,6 +31,7 @@ class App extends React.Component {
     this.handleDelliteFromCart = this.handleDelliteFromCart.bind(this);
     this.handleQuantityChange = this.handleQuantityChange.bind(this);
     this.handleAttributeChange = this.handleAttributeChange.bind(this);
+    this.localStorageUpdated = this.localStorageUpdated.bind(this);
 
   }
 
@@ -49,76 +51,89 @@ class App extends React.Component {
       this.handleDelliteFromCart(id)
     } else {
       this.setState({ cart: [...this.state.cart, selectedProduct] });
+      localStorage.setItem('cart', JSON.stringify([...this.state.cart, selectedProduct]));
     }
   }
 
   handleDelliteFromCart(id) {
     let filteredCart = this.state.cart.filter((product) => product.id != id);
     this.setState({ cart: filteredCart });
+    localStorage.setItem('cart', JSON.stringify(filteredCart));
   }
 
   handleQuantityChange(id, increase) {
     let dellProduct = false;
 
-    let filteredCart = this.state.cart.map(product=>{
-      if(product.id === id){
+    let filteredCart = this.state.cart.map(product => {
+      if (product.id === id) {
         let selectedProduct = structuredClone(product);
-        
-        if(!increase && selectedProduct.quantity === 1) {
+
+        if (!increase && selectedProduct.quantity === 1) {
           dellProduct = true;
           return selectedProduct
         };
 
-        increase ? selectedProduct.quantity++ : selectedProduct.quantity-- ;          
+        increase ? selectedProduct.quantity++ : selectedProduct.quantity--;
         return selectedProduct;
 
-      }        
+      }
       return product;
     });
-    
+
     this.setState({ cart: filteredCart });
-    if (dellProduct) this.handleDelliteFromCart(id);  
+    localStorage.setItem('cart', JSON.stringify(filteredCart));
+    if (dellProduct) this.handleDelliteFromCart(id);
   }
 
   handleAttributeChange(productId, attributeId, itemId) {
     let filteredCart = JSON.parse(JSON.stringify(this.state.cart));
 
-    for (const product of filteredCart) {
-      if(product.id === productId){
+    for (let product of filteredCart) {
+      if (product.id === productId) {
 
         for (const attribute of product.attributes) {
-          if(attribute.id === attributeId){          
+          if (attribute.id === attributeId) {
 
-            for (const item of attribute.items) {                           
-              if(item.id === itemId){
-                item.selected = true;                
+            for (const item of attribute.items) {
+              if (item.id === itemId) {
+                item.selected = true;
               }
-              else if(item.selected){
-                delete item.selected                
-              }       
+              else if (item.selected) {
+                delete item.selected
+              }
             }
 
             break
-          }                              
+          }
         }
-
+        
         break
-      }      
+      }
     }
 
     this.setState({ cart: filteredCart });
+    localStorage.setItem('cart', JSON.stringify(filteredCart));
   }
 
-
+  localStorageUpdated(event) {  
+    if(event.key === 'cart'){
+      this.setState({ cart: JSON.parse(localStorage.getItem('cart')) });    
+    }    
+  }
 
   componentDidMount() {
-    if(JSON.parse(localStorage.getItem('cart'))){      
-      this.setState({ cart: JSON.parse(localStorage.getItem('cart')) });
-    }   
+    if (typeof window !== 'undefined') {
+      if (JSON.parse(localStorage.getItem('cart'))) {
+        this.setState({ cart: JSON.parse(localStorage.getItem('cart')) });
+      }
+      window.addEventListener('storage', this.localStorageUpdated);      
+    }    
   }
 
-  componentDidUpdate() {
-    localStorage.setItem('cart', JSON.stringify(this.state.cart));
+  componentWillUnmount() {
+    if (typeof window !== 'undefined') {
+      window.removeEventListener('storage', this.localStorageUpdated);
+    }
   }
 
   render() {
@@ -127,7 +142,7 @@ class App extends React.Component {
     if (loading) return <p>Loading...</p>
     if (error) return <p>Error {error.message}</p>
 
-    if (data && data.categories) {       
+    if (data && data.categories) {
       if (data.categories.length === 0) return <WarningMessage><p>No categories</p></WarningMessage>;
 
       return (
@@ -143,10 +158,10 @@ class App extends React.Component {
               <Route path='*'>
                 <Route path='categories/:categoryName' element={
                   <CategoryHOC
-                    categoriesName={data.categories}                    
+                    categoriesName={data.categories}
                     cart={this.state.cart}
                     onAddToCart={this.handleAddToCart}
-                    />} />
+                  />} />
 
                 <Route path='' element={<Navigate to={'/categories/' + data.categories[0].name} />} />
 
