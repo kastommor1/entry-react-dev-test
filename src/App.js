@@ -40,13 +40,13 @@ class App extends React.Component {
     const { id, attributes } = product; //
 
     //for old product
-    if (this.state.cart.filter(product => product.id == id && product.quantity === 0).length > 0) {
-      this.handleQuantityChange(id, true);
-      return;
-    }
+    // if (this.state.cart.filter(product => product.id == id && product.quantity === 0).length > 0) {
+    //   this.handleQuantityChange(id, true);
+    //   return;
+    // }
 
     //for new product  
-    let selectedProduct = structuredClone(product); //
+    let selectedProduct = JSON.parse(JSON.stringify(product)); //
     //set default attributes
     for (let i = 0; i < attributes.length; i++) {
       selectedProduct.attributes[i].items[0].selected = true;
@@ -71,7 +71,7 @@ class App extends React.Component {
   handleDeleteFromCart(id) {
     //Delete product
     let filteredCart = this.state.cart.filter((product) => product.id != id);
-    this.setState({ cart: filteredCart });
+    this.setState({ cart: filteredCart });   
     localStorage.setItem('cart', JSON.stringify(filteredCart));
 
     //Delete quantity
@@ -93,9 +93,9 @@ class App extends React.Component {
 
     let filteredCart = this.state.cart.map(product => {
       if (product.id === id) {
-        let selectedProduct = structuredClone(product);
+        let selectedProduct = JSON.parse(JSON.stringify(product));        
 
-        if (!increase && selectedProduct.quantity < 1) {
+        if (!increase && selectedProduct.quantity === 1) {
           deleteProduct = true;
           return selectedProduct
         };
