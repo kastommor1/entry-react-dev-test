@@ -8,8 +8,10 @@ import { widthProductQueryByParams } from "../service-functions/HOCs"
 import WarningMessage from "../components/Warning-message";
 import Price from "../components/product-card/Price";
 import Attributes from "../components/product-card/Attributes";
-import CountPicker from "../components/product-card/Count-picker";
 import Gallery from "../components/product-card/Gallery";
+
+//style
+import '../styles/product-card/Product.css'
 
 class Product extends React.Component {
     render() {
@@ -29,22 +31,21 @@ class Product extends React.Component {
         return (
             <div className="product">
 
+                <Gallery gallery={gallery} name={name} />
+
                 <div className="parameters">
-                    <h3 className="name" > {brand} <br /> {name}</h3>
-                    <Price prices={prices} />
+                    <h3 className="brand" ><b>{brand}</b></h3>
+                    <p className="name" >{name}</p>
                     <Attributes
                         productId={product.id}
                         attributes={attributes}
                         onAttributeChange={this.props.onAttributeChange}
                     />
+                    <p className="price">Price:</p>
+                    <Price prices={prices} />
                 </div>
 
-                <CountPicker
-                    id={id}
-                    quantity={quantity}
-                    onQuantityChange={this.props.onQuantityChange}
-                />
-                <Gallery gallery={gallery} name={name} />
+
             </div>
         )
 

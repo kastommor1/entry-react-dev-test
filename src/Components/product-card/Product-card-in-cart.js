@@ -1,5 +1,5 @@
 import React from "react";
-import '../../styles/product-card/Product-card-in-cart.css'
+import '../../styles/product-card/Product.css'
 import Attributes from "./Attributes";
 import CountPicker from "./Count-picker";
 import Gallery from "./Gallery";

@@ -17,7 +17,7 @@ class Attributes extends React.Component {
                     return (
                         <div key={attribute.id}>
                             <p>{attribute.name}:</p>
-                            <div>
+                            <div className="attribute">
                                 {attribute.items.map(item => {                                    
                                     
                                     if (attribute.id === 'Color') {
@@ -39,7 +39,7 @@ class Attributes extends React.Component {
                                         className={selectedClass}
                                         onClick={()=>{onAttributeChange(productId, attribute.id, item.id)}}                                        
                                         >
-                                        {item.displayValue}</button>
+                                        {item.value}</button>
                                 })}
                             </div>
                         </div>

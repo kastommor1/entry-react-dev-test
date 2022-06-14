@@ -25,7 +25,6 @@ class ProductCard extends React.Component {
 
                 </NavLink>
 
-
                 <AddButton
                     inStock={inStock}
                     quantity={quantity}

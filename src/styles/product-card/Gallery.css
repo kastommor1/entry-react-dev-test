@@ -12,3 +12,20 @@
     width: 100%;
     vertical-align: middle;    
 }
+
+.product
+.gallery{
+    width: 100%;
+    height: 80vh;
+    overflow: hidden;
+    /* margin-left: 40px; */
+}
+
+.product
+.gallery img{
+    width: 100%;
+    vertical-align: middle;
+    object-fit: cover;
+    /* object-position: 100% 0; */
+       
+}
