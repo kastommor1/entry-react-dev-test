@@ -192,7 +192,7 @@ class App extends React.Component {
 
                 <Route path='' element={<Navigate to={'/categories/' + data.categories[0].name} />} />
 
-                <Route path='product/:productId' element={
+                <Route path='categories/:categoryName/product/:productId' element={
                   <ProductHOC
                     cart={this.state.cart}
                     onAddToCart={this.handleAddToCart}
