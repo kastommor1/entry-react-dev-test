@@ -4,6 +4,7 @@ import '../../styles/product-card/Product-card.css'
 import Price from "./Price";
 import GalleryStock from "./Gallery-stock";
 import AddButton from "./Add-button";
+import { NavLink } from "react-router-dom";
 
 class ProductCard extends React.Component {
 
@@ -14,17 +15,23 @@ class ProductCard extends React.Component {
         return (
             <div className="product-card">
 
-                <GalleryStock inStock={inStock} gallery={gallery} name={name} />
-                
-                <p className="name" >{brand} {name}</p>
+                <NavLink to={'/product/' + id}>
 
-                <Price prices={prices} />
+                    <GalleryStock inStock={inStock} gallery={gallery} name={name} />
+
+                    <p className="name" >{brand} {name}</p>
+
+                    <Price prices={prices} />
+
+                </NavLink>
+
 
                 <AddButton
                     inStock={inStock}
                     quantity={quantity}
                     product={product}
-                    onAddToCart={onAddToCart} />
+                    onAddToCart={onAddToCart} 
+                />
             </div>
         )
     }
