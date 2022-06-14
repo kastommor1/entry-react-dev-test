@@ -15,22 +15,22 @@ class ProductCardInCart extends React.Component {
         return (
             <div className="product-card-in-cart">
 
-                <div className="parameters">              
+                <div className="parameters">
                     <h3 className="name" > {brand} <br /> {name}</h3>
                     <Price prices={prices} />
-                    <Attributes 
-                    productId = {product.id}
-                    attributes={attributes}
-                    onAttributeChange={this.props.onAttributeChange}                    
-                    />                  
+                    <Attributes
+                        productId={product.id}
+                        attributes={attributes}
+                        onAttributeChange={this.props.onAttributeChange}
+                    />
                 </div>
 
-                <CountPicker 
-                id={id}
-                quantity={quantity} 
-                onQuantityChange={this.props.onQuantityChange}
+                <CountPicker
+                    id={id}
+                    quantity={quantity}
+                    onQuantityChange={this.props.onQuantityChange}
                 />
-                <Gallery gallery={gallery} name={name} />            
+                <Gallery gallery={gallery} name={name} />
             </div>
         )
     }

@@ -3,6 +3,7 @@ import React from "react";
 //routes
 import { Routes, Route, Navigate } from "react-router-dom";
 import CategoryHOC from "./routes/Category";
+import ProductHOC from "./routes/Product";
 
 //apollo
 import { GET_CATEGORIES_NAME } from "./apollo-client/queries";
@@ -37,13 +38,13 @@ class App extends React.Component {
 
   handleAddToCart(product, preview) {
     const { id, attributes } = product; //
-    
+
     //for old product
     if (this.state.cart.filter(product => product.id == id && product.quantity === 0).length > 0) {
       this.handleQuantityChange(id, true);
       return;
     }
-    
+
     //for new product  
     let selectedProduct = structuredClone(product); //
     //set default attributes
@@ -51,9 +52,11 @@ class App extends React.Component {
       selectedProduct.attributes[i].items[0].selected = true;
     }
 
-    if (!preview) {
-      selectedProduct.quantity = 1;
-    }
+    // if (!preview) {
+    //   selectedProduct.quantity = 1;
+    // }
+
+    selectedProduct.quantity = preview ? 0 : 1;
 
     if (this.state.cart.filter(product => product.id == id).length > 0) {
       this.handleDeleteFromCart(id)
@@ -62,27 +65,27 @@ class App extends React.Component {
       localStorage.setItem('cart', JSON.stringify([...this.state.cart, selectedProduct]));
     }
 
-    
+
   }
 
   handleDeleteFromCart(id) {
     //Delete product
-    // let filteredCart = this.state.cart.filter((product) => product.id != id); 
-    // this.setState({ cart: filteredCart });
-    // localStorage.setItem('cart', JSON.stringify(filteredCart));
-
-    //Delete quantity
-    let filteredCart = JSON.parse(JSON.stringify(this.state.cart));
-    
-    for (let product of filteredCart) {
-      if (product.id === id) {
-        product.quantity = 0;
-        break
-      }      
-    }   
-
+    let filteredCart = this.state.cart.filter((product) => product.id != id);
     this.setState({ cart: filteredCart });
     localStorage.setItem('cart', JSON.stringify(filteredCart));
+
+    //Delete quantity
+    // let filteredCart = JSON.parse(JSON.stringify(this.state.cart));
+
+    // for (let product of filteredCart) {
+    //   if (product.id === id) {
+    //     product.quantity = 0;
+    //     break
+    //   }      
+    // }   
+
+    // this.setState({ cart: filteredCart });
+    // localStorage.setItem('cart', JSON.stringify(filteredCart));
   }
 
   handleQuantityChange(id, increase) {
@@ -188,6 +191,14 @@ class App extends React.Component {
                   />} />
 
                 <Route path='' element={<Navigate to={'/categories/' + data.categories[0].name} />} />
+
+                <Route path='product/:productId' element={
+                  <ProductHOC
+                    cart={this.state.cart}
+                    onAddToCart={this.handleAddToCart}
+                    onQuantityChange={this.handleQuantityChange}
+                    onAttributeChange={this.handleAttributeChange}
+                     />} />
 
                 <Route path='*' element={
                   <WarningMessage>

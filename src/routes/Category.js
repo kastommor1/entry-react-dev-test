@@ -1,5 +1,5 @@
 import React from "react";
-import { widthQueryByParams } from "../service-functions/HOCs";
+import { widthCategoryQueryByParams } from "../service-functions/HOCs";
 import { GET_CATEGORY } from "../apollo-client/queries";
 import WarningMessage from "../components/Warning-message";
 import { element } from "prop-types";
@@ -12,13 +12,16 @@ import ProductList from "../components/product-card/Product-list";
 class Category extends React.Component {
 
     render() {
-        if (this.props.categoriesName.filter(category => category.name == this.props.categoryName).length === 0) {
+        const {categoryName, categoriesName} = this.props;
+
+
+        if (categoriesName.filter(category => category.name == categoryName).length === 0) {
             return (
                 <WarningMessage>
                     <p>Sorry. There is no such category.</p>
                 </WarningMessage>)
         } else {
-            document.title = this.props.categoryName.toLowerCase().replace(/\b(\w)/g, s => s.toUpperCase());
+            document.title = categoryName.toLowerCase().replace(/\b(\w)/g, s => s.toUpperCase());
         }
 
 
@@ -26,7 +29,7 @@ class Category extends React.Component {
 
         return (
             <div className="category">
-                <h2>{this.props.categoryName.toLocaleUpperCase()}</h2>
+                <h2>{categoryName.toLocaleUpperCase()}</h2>
 
                 {loading && <p>Loading...</p>}
                 {error && <WarningMessage><p>Error {error.message}</p></WarningMessage>}
@@ -43,6 +46,6 @@ class Category extends React.Component {
     }
 }
 
-const CategoryHOC = widthQueryByParams(Category, GET_CATEGORY, 'categoryName');
+const CategoryHOC = widthCategoryQueryByParams(Category, GET_CATEGORY, 'categoryName');
 
 export default CategoryHOC;

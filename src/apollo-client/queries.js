@@ -40,14 +40,31 @@ export const GET_CATEGORY = gql`
     }
 `;
 
-const GET_PRODUCT = gql`
+export const GET_PRODUCT = gql`
     query GetProduct($id: String!) {
         product(id: $id) {
             id
             name
-            description
+            brand
             inStock
-            ordered @client
+            gallery
+            prices{
+                currency{
+                    label
+                    symbol
+                }
+                amount
+            }
+            attributes{
+                id
+                name
+                type
+                items{
+                    displayValue
+                    value
+                    id
+                }
+            }                
         }
     }
 `;

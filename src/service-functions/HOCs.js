@@ -2,11 +2,11 @@ import { useQuery } from "@apollo/client";
 import { useParams } from "react-router-dom";
 
 
-export function widthQuery (Coponent, queryName){
-    return function WidthQuery(props){
-        const query = useQuery(queryName);  
+export function widthQuery(Coponent, queryName) {
+    return function WidthQuery(props) {
+        const query = useQuery(queryName);
 
-        return <Coponent {...props} query = {query}/>
+        return <Coponent {...props} query={query} />
     }
 }
 
@@ -18,15 +18,31 @@ export function widthQuery (Coponent, queryName){
 //     }
 // }
 
-export function widthQueryByParams (Coponent, queryName, parameterName){
-    return function WidthQueryByParams(props){
+export function widthCategoryQueryByParams(Coponent, queryName, parameterName) {
+    return function WidthQueryByParams(props) {
         const params = useParams();
-        const categoryName = params[parameterName];     
+        const categoryName = params[parameterName];
 
-        const CategoryInput ={title: categoryName};        
+        const CategoryInput = { title: categoryName };
         const query = useQuery(queryName, {
-            variables: {input: CategoryInput}} );        
+            variables: { input: CategoryInput }
+        });
 
-        return <Coponent {...props} categoryName = {categoryName} query = {query}/>
+        return <Coponent {...props} categoryName={categoryName} query={query} />
+    }
+}
+
+export function widthProductQueryByParams(Coponent, queryName, parameterName) {
+    return function WidthQueryByParams(props) {
+        const params = useParams();
+        const productId = params[parameterName];
+        
+        const { loading, error, data } = useQuery(queryName, {
+            variables: { id: productId }
+        });
+
+
+
+        return <Coponent {...props} productId={productId}  loading={loading} error={error} data={data} />
     }
 }
