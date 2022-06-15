@@ -9,7 +9,8 @@
     height: 80px;
     margin-bottom: 40px;
     overflow: hidden;
-    object-fit: cover;    
+    object-fit: cover;
+    cursor: pointer;    
 }
 
 .product

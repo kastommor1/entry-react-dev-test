@@ -29,7 +29,7 @@ class SmallImagesBar extends React.Component {
 
 
     render() {
-        const { gallery, name } = this.props;
+        const { gallery, name, onSetCoverImage } = this.props;
         const start = this.state.start;
         const end = start + 3;
 
@@ -43,10 +43,14 @@ class SmallImagesBar extends React.Component {
                 </div>
 
                 <div>
-                    {gallery.slice(start, end).map((image, i) => {
+                    {gallery.slice(start, end).map((src, i) => {
                         return (
-                            <div className="small-image" key={i}>
-                                <img src={image} alt={'small image ' + i + ' ' + name} />
+                            <div 
+                            className="small-image" 
+                            key={i}
+                            onClick={()=>{onSetCoverImage(src)}}
+                            >
+                                <img src={src} alt={'small image ' + i + ' ' + name} />
                             </div>)
                     })}
                 </div>
