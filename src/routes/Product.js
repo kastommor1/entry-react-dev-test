@@ -13,6 +13,7 @@ import AddButtonBig from "../components/product-card/Add-button-big";
 
 //style
 import '../styles/product-card/Product.css'
+import GalleryWithIcons from "../components/product-card/Gallery-with-icons";
 
 
 class Product extends React.Component {
@@ -69,7 +70,8 @@ class Product extends React.Component {
         return (
             <div className="product">
 
-                <Gallery gallery={gallery} name={name} />
+                {/* <Gallery gallery={gallery} name={name} /> */}
+                <GalleryWithIcons gallery={gallery} name={name} />
 
                 <div className="wrapper">
                     <div className="parameters">
