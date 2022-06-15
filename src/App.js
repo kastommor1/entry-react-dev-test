@@ -40,10 +40,10 @@ class App extends React.Component {
     const { id, attributes } = product; //
 
     //for old product
-    // if (this.state.cart.filter(product => product.id == id && product.quantity === 0).length > 0) {
-    //   this.handleQuantityChange(id, true);
-    //   return;
-    // }
+    if (this.state.cart.filter(product => product.id == id && product.quantity === 0).length > 0) {
+      this.handleQuantityChange(id, true);
+      return;
+    }
 
     //for new product  
     let selectedProduct = JSON.parse(JSON.stringify(product)); //
@@ -164,8 +164,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { loading, error, data } = this.props.query;
-    // console.log('app');
+    const { loading, error, data } = this.props.query;   
 
     if (loading) return <p>Loading...</p>
     if (error) return <p>Error {error.message}</p>

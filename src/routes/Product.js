@@ -40,8 +40,7 @@ class Product extends React.Component {
     }
 
     render() {
-        const { productId, loading, error, data, cart } = this.props;
-        // console.log('product');
+        const { productId, loading, error, data, cart } = this.props;        
 
         const cartProduct = cart.find(product => product.id === productId);
 
