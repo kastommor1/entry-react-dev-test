@@ -36,29 +36,30 @@ class Product extends React.Component {
 
                 <Gallery gallery={gallery} name={name} />
 
-                <div className="parameters">
-                    <h3 className="brand" ><b>{brand}</b></h3>
-                    <p className="name" >{name}</p>
+                <div className="wrapper">
+                    <div className="parameters">
 
-                    <Attributes
-                        productId={product.id}
-                        attributes={attributes}
-                        onAttributeChange={this.props.onAttributeChange}
-                    />
+                        <h3 className="brand" ><b>{brand}</b></h3>
+                        <p className="name" >{name}</p>
 
-                    <p className="price-name">Price:</p>
-                    <Price prices={prices} />
+                        <Attributes
+                            productId={product.id}
+                            attributes={attributes}
+                            onAttributeChange={this.props.onAttributeChange}
+                        />
 
-                    <button className="add-button">Add to cart</button>
+                        <p className="price-name">Price:</p>
+                        <Price prices={prices} />
 
-                    <div
-                        dangerouslySetInnerHTML={{ __html: description }}
-                        className="description"
-                    />
+                        <button className="add-button">Add to cart</button>
 
+                        <div
+                            dangerouslySetInnerHTML={{ __html: description }}
+                            className="description"
+                        />
+
+                    </div>
                 </div>
-
-
             </div>
         )
 

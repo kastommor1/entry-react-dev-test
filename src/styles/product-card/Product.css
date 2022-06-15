@@ -70,9 +70,8 @@ h3, p{
 .product 
 .parameters{    
     display: flex;
-    flex-direction: column;
-    margin-left: 100px;
-    margin-right: 40px;      
+    flex-direction: column;   
+    width: 400px;      
 }
 
 .product 
@@ -118,7 +117,13 @@ h3, p{
     font-family: 'Roboto', sans-serif;  
 }
 
-@media screen and (max-width: 640px) {
+.product
+.wrapper{
+    margin-left: 100px;
+    margin-right: 40px;
+}
+
+@media screen and (max-width: 720px) {
     .product{
         flex-direction: column;           
     }
