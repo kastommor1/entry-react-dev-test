@@ -144,7 +144,9 @@ class App extends React.Component {
 
   localStorageUpdated(event) {
     if (event.key === 'cart') {
-      this.setState({ cart: JSON.parse(localStorage.getItem('cart')) });
+      if(JSON.parse(localStorage.getItem('cart'))){ //protection against manual cleaning of localStorage
+        this.setState({ cart: JSON.parse(localStorage.getItem('cart')) });
+      }    
     }
   }
 
@@ -156,6 +158,7 @@ class App extends React.Component {
       window.addEventListener('storage', this.localStorageUpdated);
     }
   }
+
 
   componentWillUnmount() {
     if (typeof window !== 'undefined') {
