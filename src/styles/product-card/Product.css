@@ -93,12 +93,43 @@ h3, p{
 }
 
 .product 
-.price{
+.price-name{
     font-size: 18px;
     text-transform: uppercase;
     font-weight: bold;
     font-family: 'Roboto Condensed', sans-serif;       
 }
+
+.product 
+.add-button{
+    border: none;
+    text-transform: uppercase;
+    padding: 16px 16px;
+    background-color: #5ECE7B;
+    margin-top: 20px;
+    color: #fff;
+    font-weight: 600;
+    font-family: 'Raleway', sans-serif;          
+}
+
+.product 
+.description{
+    margin-top: 20px;
+    font-family: 'Roboto', sans-serif;  
+}
+
+@media screen and (max-width: 640px) {
+    .product{
+        flex-direction: column;           
+    }
+
+    .product .gallery {
+        width: 100%;
+        height: auto;      
+    }
+
+       
+  }
 
 
 

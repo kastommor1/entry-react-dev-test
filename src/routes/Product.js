@@ -27,7 +27,10 @@ class Product extends React.Component {
 
 
         const product = data.product;
-        const { id, name, inStock, gallery, prices, brand, quantity, attributes } = product;
+        const { id, name, inStock, gallery, prices, brand, quantity, attributes, description } = product;
+
+        document.title = brand + ' ' + name;
+
         return (
             <div className="product">
 
@@ -36,13 +39,23 @@ class Product extends React.Component {
                 <div className="parameters">
                     <h3 className="brand" ><b>{brand}</b></h3>
                     <p className="name" >{name}</p>
+
                     <Attributes
                         productId={product.id}
                         attributes={attributes}
                         onAttributeChange={this.props.onAttributeChange}
                     />
-                    <p className="price">Price:</p>
+
+                    <p className="price-name">Price:</p>
                     <Price prices={prices} />
+
+                    <button className="add-button">Add to cart</button>
+
+                    <div
+                        dangerouslySetInnerHTML={{ __html: description }}
+                        className="description"
+                    />
+
                 </div>
 
 
