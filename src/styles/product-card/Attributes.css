@@ -12,6 +12,7 @@ button{
     margin-right: 8px;
     font-family: 'Source Sans Pro', sans-serif;    
     padding: 1px 4px;
+    min-width: 20px;
 }
 
 .product-card-in-cart 

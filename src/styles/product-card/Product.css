@@ -54,6 +54,11 @@ section{
 }
 
 .product
+button {    
+    cursor: pointer;
+}
+
+.product
 button:hover {    
     background-color: #EEEEEE;   
     transition: all 0.2s ease 0s;
@@ -97,18 +102,6 @@ h3, p{
     text-transform: uppercase;
     font-weight: bold;
     font-family: 'Roboto Condensed', sans-serif;       
-}
-
-.product 
-.add-button{
-    border: none;
-    text-transform: uppercase;
-    padding: 16px 16px;
-    background-color: #5ECE7B;
-    margin-top: 20px;
-    color: #fff;
-    font-weight: 600;
-    font-family: 'Raleway', sans-serif;          
 }
 
 .product 

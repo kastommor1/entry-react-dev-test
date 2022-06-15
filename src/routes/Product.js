@@ -9,9 +9,11 @@ import WarningMessage from "../components/Warning-message";
 import Price from "../components/product-card/Price";
 import Attributes from "../components/product-card/Attributes";
 import Gallery from "../components/product-card/Gallery";
+import AddButtonBig from "../components/product-card/Add-button-big";
 
 //style
 import '../styles/product-card/Product.css'
+
 
 class Product extends React.Component {
     constructor(props) {
@@ -30,7 +32,7 @@ class Product extends React.Component {
         }
     }
 
-    componentDidMount() {       
+    componentDidMount() {
         window.addEventListener("beforeunload", this.removePreviewProduct, false);
     }
 
@@ -40,7 +42,7 @@ class Product extends React.Component {
     }
 
     render() {
-        const { productId, loading, error, data, cart } = this.props;        
+        const { productId, loading, error, data, cart } = this.props;
 
         const cartProduct = cart.find(product => product.id === productId);
 
@@ -82,9 +84,14 @@ class Product extends React.Component {
                         />
 
                         <p className="price-name">Price:</p>
-                        <Price prices={prices} />
+                        <Price prices={prices} />                                                
 
-                        <button className="add-button" onClick={() => { this.props.onQuantityChange(id, true) }}>Add to cart</button>
+                        <AddButtonBig
+                            inStock={inStock}
+                            quantity={quantity}
+                            product={cartProduct}
+                            onAddToCart={this.props.onAddToCart}
+                        />
 
                         <div
                             dangerouslySetInnerHTML={{ __html: description }}

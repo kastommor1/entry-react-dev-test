@@ -29,3 +29,58 @@
 .dell-btn{
     background-color: #e6e6e6;
 }
+
+
+/* ----------------------------------------------- */
+
+.product
+.add-btn,
+.product
+.dell-btn,
+.product
+.stock-btn{
+    border: none;
+    text-transform: uppercase;
+    padding: 16px 16px;    
+    margin-top: 20px;    
+    font-weight: 600;
+    font-family: 'Raleway', sans-serif;   
+   
+}
+
+.product
+.add-btn {   
+    background-color: #5ECE7B;  
+    color: #fff;
+}
+
+.product
+.add-btn:hover {   
+    background-color: #5ECE7B;
+    opacity: 0.8; 
+}
+
+
+.product
+.dell-btn,
+.product
+.stock-btn{
+    background-color: #e6e6e6;
+    color: #000;
+}
+
+.product
+.dell-btn:hover {   
+    background-color: #e6e6e6;
+    opacity: 0.8; 
+}
+
+.product
+.stock-btn{
+    cursor: auto;
+}
+
+.product
+.stock-btn:hover {   
+    background-color: #e6e6e6;    
+}
