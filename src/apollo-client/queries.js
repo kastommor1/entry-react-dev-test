@@ -19,6 +19,7 @@ export const GET_CATEGORY = gql`
                 inStock
                 gallery
                 category
+                description
                 prices{
                     currency{
                         label

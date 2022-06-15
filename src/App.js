@@ -68,7 +68,7 @@ class App extends React.Component {
 
   }
 
-  handleDeleteFromCart(id) {
+  handleDeleteFromCart(id) {   
     //Delete product
     let filteredCart = this.state.cart.filter((product) => product.id != id);
     this.setState({ cart: filteredCart });   
@@ -165,6 +165,7 @@ class App extends React.Component {
 
   render() {
     const { loading, error, data } = this.props.query;
+    // console.log('app');
 
     if (loading) return <p>Loading...</p>
     if (error) return <p>Error {error.message}</p>
@@ -198,6 +199,7 @@ class App extends React.Component {
                     onAddToCart={this.handleAddToCart}
                     onQuantityChange={this.handleQuantityChange}
                     onAttributeChange={this.handleAttributeChange}
+                    onDeleteFromCart={this.handleDeleteFromCart}
                      />} />
 
                 <Route path='*' element={

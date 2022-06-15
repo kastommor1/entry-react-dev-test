@@ -14,20 +14,54 @@ import Gallery from "../components/product-card/Gallery";
 import '../styles/product-card/Product.css'
 
 class Product extends React.Component {
+    constructor(props) {
+        super(props);
+        this.removePreviewProduct = this.removePreviewProduct.bind(this);
+    }
+
+    removePreviewProduct() {
+        const id = this.props.productId;
+        const cart = this.props.cart;
+        const cartProduct = cart.find(product => product.id === id);
+        let filteredCart = cart.filter((product) => product.id != id);
+
+        if (cartProduct && cartProduct.quantity === 0) {
+            localStorage.setItem('cart', JSON.stringify(filteredCart));
+        }
+    }
+
+    componentDidMount() {       
+        window.addEventListener("beforeunload", this.removePreviewProduct, false);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener("beforeunload", this.removePreviewProduct, false);
+        this.removePreviewProduct();
+    }
+
     render() {
-        const { productId, loading, error, data } = this.props;
+        const { productId, loading, error, data, cart } = this.props;
+        // console.log('product');
 
-        if (loading) return (<p>Loading...</p>);
-        if (loading) return (<WarningMessage><p>Error {error.message}</p></WarningMessage>);
-        if (!data || !data.product) return (
-            <WarningMessage>
-                <h2>Sorry.</h2>
-                <p>This product does not exist.</p>
-            </WarningMessage>);
+        const cartProduct = cart.find(product => product.id === productId);
+
+        if (!cartProduct) { //check product in cart
+            if (loading) return (<p>Loading...</p>);
+            if (error) return (<WarningMessage><p>Error {error.message}</p></WarningMessage>);
+            if (!data || !data.product) return (
+                <WarningMessage>
+                    <h2>Sorry.</h2>
+                    <p>This product does not exist.</p>
+                </WarningMessage>);
 
 
-        const product = data.product;
-        const { id, name, inStock, gallery, prices, brand, quantity, attributes, description } = product;
+            const product = data.product;
+            this.props.onAddToCart(product, true) //add widh 0 quantity
+            return (<div></div>)
+        }
+
+        const { id, name, inStock, gallery, prices, brand, quantity, attributes, description } = cartProduct;
+
 
         document.title = brand + ' ' + name;
 
@@ -43,7 +77,7 @@ class Product extends React.Component {
                         <p className="name" >{name}</p>
 
                         <Attributes
-                            productId={product.id}
+                            productId={id}
                             attributes={attributes}
                             onAttributeChange={this.props.onAttributeChange}
                         />
@@ -51,7 +85,7 @@ class Product extends React.Component {
                         <p className="price-name">Price:</p>
                         <Price prices={prices} />
 
-                        <button className="add-button">Add to cart</button>
+                        <button className="add-button" onClick={() => { this.props.onQuantityChange(id, true) }}>Add to cart</button>
 
                         <div
                             dangerouslySetInnerHTML={{ __html: description }}
