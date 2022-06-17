@@ -6,7 +6,7 @@ import CategoryHOC from "./routes/Category";
 import ProductHOC from "./routes/Product";
 
 //apollo
-import { GET_CATEGORIES_NAME } from "./apollo-client/queries";
+import { GET_CATEGORIES_NAME_AND_CURRENCIES } from "./apollo-client/queries";
 
 //data
 import { widthQuery } from "./service-functions/HOCs"
@@ -18,15 +18,13 @@ import WarningMessage from "./components/Warning-message";
 
 //css
 import './App.css'
-import { productWithAttributes } from "./service-functions/data-processing";
 
 
 class App extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      categoriesName: [],
-      cart: [],
+    this.state = {      
+      cart: []
     }
     this.handleAddToCart = this.handleAddToCart.bind(this);
     this.handleDeleteFromCart = this.handleDeleteFromCart.bind(this);
@@ -51,7 +49,7 @@ class App extends React.Component {
     for (let i = 0; i < attributes.length; i++) {
       selectedProduct.attributes[i].items[0].selected = true;
     }
-    
+
     selectedProduct.quantity = preview ? 0 : 1;
 
     if (this.state.cart.filter(product => product.id == id).length > 0) {
@@ -64,11 +62,11 @@ class App extends React.Component {
 
   }
 
-  handleDeleteFromCart(id) {   
+  handleDeleteFromCart(id) {
     //Delete product
     let filteredCart = this.state.cart.filter((product) => product.id != id);
-    this.setState({ cart: filteredCart });   
-    localStorage.setItem('cart', JSON.stringify(filteredCart)); 
+    this.setState({ cart: filteredCart });
+    localStorage.setItem('cart', JSON.stringify(filteredCart));
   }
 
   handleQuantityChange(id, increase) {
@@ -76,7 +74,7 @@ class App extends React.Component {
 
     let filteredCart = this.state.cart.map(product => {
       if (product.id === id) {
-        let selectedProduct = JSON.parse(JSON.stringify(product));        
+        let selectedProduct = JSON.parse(JSON.stringify(product));
 
         if (!increase && selectedProduct.quantity === 1) {
           deleteProduct = true;
@@ -127,9 +125,9 @@ class App extends React.Component {
 
   localStorageUpdated(event) {
     if (event.key === 'cart') {
-      if(JSON.parse(localStorage.getItem('cart'))){ //protection against manual cleaning of localStorage
+      if (JSON.parse(localStorage.getItem('cart'))) { //protection against manual cleaning of localStorage
         this.setState({ cart: JSON.parse(localStorage.getItem('cart')) });
-      }    
+      }
     }
   }
 
@@ -150,58 +148,58 @@ class App extends React.Component {
   }
 
   render() {
-    const { loading, error, data } = this.props.query;   
+    const { loading, error, data } = this.props.query;
 
     if (loading) return <p>Loading...</p>
     if (error) return <p>Error {error.message}</p>
 
-    if (data && data.categories) {
-      if (data.categories.length === 0) return <WarningMessage><p>No categories</p></WarningMessage>;
+    if (!data && !data.categories && data.categories.length === 0) return <WarningMessage><p>No categories</p></WarningMessage>;
 
-      return (
-        <>
-          <Header
-            categoriesName={data.categories}
-            cart={this.state.cart}
-            onQuantityChange={this.handleQuantityChange}
-            onAttributeChange={this.handleAttributeChange}
-          />
-          <main>
-            <Routes>
-              <Route path='*'>
-                <Route path='categories/:categoryName' element={
-                  <CategoryHOC
-                    categoriesName={data.categories}
-                    cart={this.state.cart}
-                    onAddToCart={this.handleAddToCart}
-                  />} />
+    return (
+      <>
+        <Header
+          categoriesName={data.categories}
+          cart={this.state.cart}
+          onQuantityChange={this.handleQuantityChange}
+          onAttributeChange={this.handleAttributeChange}
+        />
+        <main>
+          <Routes>
+            <Route path='*'>
+              <Route path='categories/:categoryName' element={
+                <CategoryHOC
+                  categoriesName={data.categories}
+                  cart={this.state.cart}
+                  onAddToCart={this.handleAddToCart}
+                />} />
 
-                <Route path='' element={<Navigate to={'/categories/' + data.categories[0].name} />} />
+              <Route path='' element={<Navigate to={'/categories/' + data.categories[0].name} />} />
 
-                <Route path='categories/:categoryName/product/:productId' element={
-                  <ProductHOC
-                    cart={this.state.cart}
-                    onAddToCart={this.handleAddToCart}
-                    onQuantityChange={this.handleQuantityChange}
-                    onAttributeChange={this.handleAttributeChange}
-                    onDeleteFromCart={this.handleDeleteFromCart}
-                     />} />
+              <Route path='categories/:categoryName/product/:productId' element={
+                <ProductHOC
+                  cart={this.state.cart}
+                  onAddToCart={this.handleAddToCart}
+                  onQuantityChange={this.handleQuantityChange}
+                  onAttributeChange={this.handleAttributeChange}
+                  onDeleteFromCart={this.handleDeleteFromCart}
+                />} />
 
-                <Route path='*' element={
-                  <WarningMessage>
-                    <h2>404</h2>
-                    <p>Page not found</p>
-                  </WarningMessage>
-                } />
-              </Route>
-            </Routes>
-          </main>
-        </>
-      )
-    }
+              <Route path='*' element={
+                <WarningMessage>
+                  <h2>404</h2>
+                  <p>Page not found</p>
+                </WarningMessage>
+              } />
+            </Route>
+          </Routes>
+        </main>
+      </>
+    )
+
+
   }
 }
 
-const AppHOC = widthQuery(App, GET_CATEGORIES_NAME);
+const AppHOC = widthQuery(App, GET_CATEGORIES_NAME_AND_CURRENCIES);
 
 export default AppHOC;

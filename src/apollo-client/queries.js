@@ -8,6 +8,18 @@ export const GET_CATEGORIES_NAME = gql`
     }
 `;
 
+export const GET_CATEGORIES_NAME_AND_CURRENCIES = gql`
+    query GetCategoriesNameAndCurrencies{
+        categories{
+            name
+        }
+        currencies{
+            label
+            symbol
+        }
+    }
+`;
+
 export const GET_CATEGORY = gql`
     query GetCategory($input: CategoryInput){
         category(input: $input){
