@@ -1,0 +1,38 @@
+.currency{
+    color: #1D1F22;
+}
+
+.currency 
+.currency-icon{
+    position: relative;
+}
+
+
+.currency 
+.currency-list{   
+    position: absolute;
+    right: 45px;
+    top: 85px;
+    background: white;
+    
+    display: flex;
+    flex-direction: column;
+}
+
+.currency 
+.currency-list button{
+    border: none;
+    border: none;
+    padding: 8px 20px;
+    font-size: 18px;
+    transition: all 0.3s ease;    
+}
+
+.currency 
+.currency-list button:hover{
+    background-color: #EEEEEE;   
+}
+
+
+/* Modal */
+

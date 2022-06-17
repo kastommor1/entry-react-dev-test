@@ -25,7 +25,7 @@ class App extends React.Component {
     super(props)
     this.state = {      
       cart: [],
-      currentCurrency: 'S'
+      currentCurrency: ''
     }
     this.handleAddToCart = this.handleAddToCart.bind(this);
     this.handleDeleteFromCart = this.handleDeleteFromCart.bind(this);
@@ -126,15 +126,23 @@ class App extends React.Component {
   }
 
   localStorageUpdated(event) {
-    if (event.key === 'cart') {
-      if (JSON.parse(localStorage.getItem('cart'))) { //protection against manual cleaning of localStorage
-        this.setState({ cart: JSON.parse(localStorage.getItem('cart')) });
+    // if (event.key === 'cart') {
+    //   if (JSON.parse(localStorage.getItem('cart'))) { //protection against manual cleaning of localStorage
+    //     this.setState({ cart: JSON.parse(localStorage.getItem('cart')) });
+    //   }
+    // }
+
+    if (event.key === 'cart' || event.key === 'currentCurrency') {
+      if (JSON.parse(localStorage.getItem(event.key))) { //protection against manual cleaning of localStorage
+        this.setState({ [event.key]: JSON.parse(localStorage.getItem([event.key])) });
       }
     }
   }
 
   handleSetCurrentCurrency(label){
-    console.log(label);    
+    console.log(label);
+    this.setState({ currentCurrency: label });
+    localStorage.setItem('currentCurrency', JSON.stringify(label));    
   }
 
   componentDidMount() {
@@ -143,10 +151,9 @@ class App extends React.Component {
         this.setState({ cart: JSON.parse(localStorage.getItem('cart')) });
       }
 
-      // if (JSON.parse(localStorage.getItem('cart'))) {
-      //   this.setState({ cart: JSON.parse(localStorage.getItem('cart')) });
-      // }
-
+      if (JSON.parse(localStorage.getItem('currentCurrency'))) {
+        this.setState({ currentCurrency: JSON.parse(localStorage.getItem('currentCurrency')) });
+      }
 
       window.addEventListener('storage', this.localStorageUpdated);
     }
