@@ -140,7 +140,6 @@ class App extends React.Component {
   }
 
   handleSetCurrentCurrency(label){
-    console.log(label);
     this.setState({ currentCurrency: label });
     localStorage.setItem('currentCurrency', JSON.stringify(label));    
   }

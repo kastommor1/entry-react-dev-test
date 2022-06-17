@@ -3,12 +3,6 @@
 }
 
 .currency 
-.currency-icon{
-    position: relative;
-}
-
-
-.currency 
 .currency-list{   
     position: absolute;
     right: 45px;

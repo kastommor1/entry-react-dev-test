@@ -9,9 +9,15 @@ class Currency extends React.Component {
             showModal: false
         };
         this.handleToggleModal = this.handleToggleModal.bind(this);
+        this.selectCurrency = this.selectCurrency.bind(this);
     }
 
     handleToggleModal() {
+        this.setState({ showModal: !this.state.showModal });
+    }
+
+    selectCurrency(label) {
+        this.props.onSetCurrentCurrency(label);
         this.setState({ showModal: !this.state.showModal });
     }
 
@@ -19,9 +25,9 @@ class Currency extends React.Component {
 
     render() {
         const { currencies, currentCurrency, onSetCurrentCurrency } = this.props;
-        // console.log(currencies, currentCurrency);
+
         if (currentCurrency === '') {
-            onSetCurrentCurrency(currencies[0].label);
+            onSetCurrentCurrency(currencies[0].label); //default currency
         }
 
         const currentSymbol = currencies.find(currency => currency.label === currentCurrency).symbol
@@ -29,18 +35,12 @@ class Currency extends React.Component {
         return (
             <div className="currency">
 
-
-                <div onClick={this.handleToggleModal} className="currency-icon">
-                    <button
-                        className="header-icon"
-                        onClick={this.handleToggleModal}
-                    >
-                        {currentSymbol}
-                    </button>
-                </div>
-
-
-
+                <button
+                    className="header-icon"
+                    onClick={this.handleToggleModal}
+                >
+                    {currentSymbol}
+                </button>
 
                 <Modal
                     onToggleModal={this.handleToggleModal}
@@ -48,11 +48,12 @@ class Currency extends React.Component {
                 >
                     <div className="currency-list">
                         {currencies.map(currency => {
+                            if (currency.label === 'RUB') return;
+
                             return (
                                 <button
                                     key={currency.label}
-                                    className=""
-                                    
+                                    onClick={() => { this.selectCurrency(currency.label) }}
                                 >
                                     {currency.symbol} {currency.label}
                                 </button>
