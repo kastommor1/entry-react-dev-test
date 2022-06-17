@@ -51,11 +51,7 @@ class App extends React.Component {
     for (let i = 0; i < attributes.length; i++) {
       selectedProduct.attributes[i].items[0].selected = true;
     }
-
-    // if (!preview) {
-    //   selectedProduct.quantity = 1;
-    // }
-
+    
     selectedProduct.quantity = preview ? 0 : 1;
 
     if (this.state.cart.filter(product => product.id == id).length > 0) {
@@ -72,20 +68,7 @@ class App extends React.Component {
     //Delete product
     let filteredCart = this.state.cart.filter((product) => product.id != id);
     this.setState({ cart: filteredCart });   
-    localStorage.setItem('cart', JSON.stringify(filteredCart));
-
-    //Delete quantity
-    // let filteredCart = JSON.parse(JSON.stringify(this.state.cart));
-
-    // for (let product of filteredCart) {
-    //   if (product.id === id) {
-    //     product.quantity = 0;
-    //     break
-    //   }      
-    // }   
-
-    // this.setState({ cart: filteredCart });
-    // localStorage.setItem('cart', JSON.stringify(filteredCart));
+    localStorage.setItem('cart', JSON.stringify(filteredCart)); 
   }
 
   handleQuantityChange(id, increase) {
