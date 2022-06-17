@@ -27,7 +27,7 @@ class Cart extends React.Component {
                 </div>
 
                 <div
-                    className={"modal" + (this.state.showCart ? ' cart-show' : '')}
+                    className={"modal-hide" + (this.state.showCart ? ' modal-show' : '')}
                 >
 
                     <div 
@@ -38,7 +38,7 @@ class Cart extends React.Component {
                         <div className="main-eclipse"></div>                     
                     </div>
 
-                    <div className={"cart-list" + (this.state.showCart ? ' unfold' : '') }>
+                    <div className="cart-list">
                         <h2><b>My Bag,</b> {filteredCart.length} items</h2>
 
                         {filteredCart.map(product => (

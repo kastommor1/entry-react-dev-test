@@ -25,20 +25,20 @@ h2{
     padding: 16px;
     width: 325px;
     max-height: 60vh;
-    overflow: auto;
-
-    opacity: 0;  
-    transition: all 0.3s ease;    
+    overflow: auto;      
 }
 
 .cart-mini
-.modal{
-    display: none;
+.modal-hide{  
+    visibility: hidden;
+    opacity: 0;  
+    transition: all 0.3s ease;  
 }
 
 .cart-mini 
-.cart-show{    
-    display: block;  
+.modal-show{  
+    visibility: visible; 
+    opacity: 1;  
 }
 
 .cart-mini
@@ -62,14 +62,6 @@ h2{
     height: 100%;
     background-color: rgba(57, 55, 72, 0.22);  
 }
-
-.cart-mini
-.unfold{  
-    opacity: 1; 
-}
-
-
-
 
 
 
