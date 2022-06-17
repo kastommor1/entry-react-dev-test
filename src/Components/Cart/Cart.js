@@ -1,8 +1,8 @@
 import React from "react";
-import cartIcon from "../data/Empty-Cart.svg";
-import "../styles/Cart.css"
-import Modal from "./Modal";
-import ProductCardInCart from "./product-card/Product-card-in-cart";
+import cartIcon from "../../data/Empty-Cart.svg";
+import "../../styles/Cart/Cart.css"
+import Modal from "../Modal";
+import ProductCardInCart from "../product-card/Product-card-in-cart";
 
 class Cart extends React.Component {
     constructor(props) {
@@ -44,6 +44,8 @@ class Cart extends React.Component {
                                 currentCurrency= {this.props.currentCurrency}
                             />
                         ))}
+
+                        <p>Total: 200$</p>
 
                     </div>
 
