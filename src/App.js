@@ -24,13 +24,15 @@ class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {      
-      cart: []
+      cart: [],
+      currentCurrency: 'S'
     }
     this.handleAddToCart = this.handleAddToCart.bind(this);
     this.handleDeleteFromCart = this.handleDeleteFromCart.bind(this);
     this.handleQuantityChange = this.handleQuantityChange.bind(this);
     this.handleAttributeChange = this.handleAttributeChange.bind(this);
     this.localStorageUpdated = this.localStorageUpdated.bind(this);
+    this.handleSetCurrentCurrency = this.handleSetCurrentCurrency.bind(this);
 
   }
 
@@ -131,11 +133,21 @@ class App extends React.Component {
     }
   }
 
+  handleSetCurrentCurrency(label){
+    console.log(label);    
+  }
+
   componentDidMount() {
     if (typeof window !== 'undefined') {
       if (JSON.parse(localStorage.getItem('cart'))) {
         this.setState({ cart: JSON.parse(localStorage.getItem('cart')) });
       }
+
+      // if (JSON.parse(localStorage.getItem('cart'))) {
+      //   this.setState({ cart: JSON.parse(localStorage.getItem('cart')) });
+      // }
+
+
       window.addEventListener('storage', this.localStorageUpdated);
     }
   }
@@ -154,14 +166,22 @@ class App extends React.Component {
     if (error) return <p>Error {error.message}</p>
 
     if (!data && !data.categories && data.categories.length === 0) return <WarningMessage><p>No categories</p></WarningMessage>;
+    if (!data && !data.currencies && data.currencies.length === 0) return <WarningMessage><p>No currencies</p></WarningMessage>;
+
+
 
     return (
       <>
         <Header
           categoriesName={data.categories}
+
           cart={this.state.cart}
           onQuantityChange={this.handleQuantityChange}
           onAttributeChange={this.handleAttributeChange}
+
+          currencies={data.currencies}
+          currentCurrency={this.state.currentCurrency}
+          onSetCurrentCurrency={this.handleSetCurrentCurrency}
         />
         <main>
           <Routes>

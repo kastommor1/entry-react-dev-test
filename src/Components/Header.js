@@ -3,9 +3,10 @@ import { NavLink } from "react-router-dom"
 import "../styles/Header.css"
 import Cart from "./Cart";
 import logo from "../data/a-logo.svg";
+import Currency from "./Currency";
 
 class Header extends React.Component {
-    render() {
+    render() {        
         return (
             <header>
                 <nav>
@@ -25,11 +26,16 @@ class Header extends React.Component {
                 <img src={logo} alt="logo" className="logo" />
 
                 <div className="header-icons">
-                    <button className="header-icon">$</button>
-                    <Cart 
-                    cart={this.props.cart} 
-                    onQuantityChange={this.props.onQuantityChange} 
-                    onAttributeChange={this.props.onAttributeChange} 
+                    <Currency
+                        currencies={this.props.currencies}
+                        onSetCurrentCurrency={this.props.onSetCurrentCurrency}
+                        currentCurrency= {this.props.currentCurrency}
+                    />
+
+                    <Cart
+                        cart={this.props.cart}
+                        onQuantityChange={this.props.onQuantityChange}
+                        onAttributeChange={this.props.onAttributeChange}
                     />
                 </div>
 
