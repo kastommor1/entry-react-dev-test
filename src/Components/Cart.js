@@ -41,6 +41,7 @@ class Cart extends React.Component {
                                 product={product}
                                 onQuantityChange={this.props.onQuantityChange}
                                 onAttributeChange={this.props.onAttributeChange}
+                                currentCurrency= {this.props.currentCurrency}
                             />
                         ))}
 

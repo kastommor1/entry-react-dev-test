@@ -21,7 +21,7 @@ class ProductCard extends React.Component {
 
                     <p className="name" >{brand} {name}</p>
 
-                    <Price prices={prices} />
+                    <Price prices={prices} currentCurrency={this.props.currentCurrency} />
 
                 </NavLink>
 

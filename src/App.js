@@ -197,6 +197,8 @@ class App extends React.Component {
                   categoriesName={data.categories}
                   cart={this.state.cart}
                   onAddToCart={this.handleAddToCart}
+
+                  currentCurrency={this.state.currentCurrency}
                 />} />
 
               <Route path='' element={<Navigate to={'/categories/' + data.categories[0].name} />} />
@@ -208,6 +210,7 @@ class App extends React.Component {
                   onQuantityChange={this.handleQuantityChange}
                   onAttributeChange={this.handleAttributeChange}
                   onDeleteFromCart={this.handleDeleteFromCart}
+                  currentCurrency={this.state.currentCurrency}
                 />} />
 
               <Route path='*' element={

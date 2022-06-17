@@ -86,7 +86,7 @@ class Product extends React.Component {
                         />
 
                         <p className="price-name">Price:</p>
-                        <Price prices={prices} />                                                
+                        <Price prices={prices} currentCurrency={this.props.currentCurrency}/>                                                
 
                         <AddButtonBig
                             inStock={inStock}

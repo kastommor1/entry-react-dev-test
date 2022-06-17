@@ -39,6 +39,7 @@ class Category extends React.Component {
                         products={data.category.products}
                         cart={this.props.cart}
                         onAddToCart={this.props.onAddToCart}
+                        currentCurrency={this.props.currentCurrency}
                     />
                 }
             </div>
