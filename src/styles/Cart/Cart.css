@@ -11,7 +11,8 @@
 h2{
     font-weight: normal;
     margin: 0;
-    margin-bottom: 32px;
+    padding: 16px;
+    margin-bottom: 16px;
     line-height: 160%;
     font-size: 16px;   
 }
@@ -22,10 +23,11 @@ h2{
     right: 0;
     top: 85px;    
     background: white;    
-    padding: 16px;
     width: 325px;
-    max-height: 60vh;
-    overflow: auto;      
+    max-height: 70vh;
+    /* max-height: calc(100vh - 85px);; */  
+    display: flex;
+    flex-direction: column;  
 }
 
 .cart-mini 
@@ -40,6 +42,34 @@ h2{
     top: -8px;
     right: 5px;
     cursor: pointer;    
+}
+
+.cart-mini
+.list{
+    overflow: auto;
+    padding: 0 16px
+}
+
+.cart-mini 
+.list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.cart-mini 
+.list::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.cart-mini 
+.list::-webkit-scrollbar-thumb {
+    background: rgba(57, 55, 72, 0.22);
+    ;
+}
+
+.cart-mini 
+.list::-webkit-scrollbar-thumb:hover {
+    background: rgba(57, 55, 72, 0.3);
+    ;
 }
 
 /* Modal */
