@@ -18,12 +18,13 @@ import WarningMessage from "./components/Warning-message";
 
 //css
 import './App.css'
+import CartPage from "./routes/Cart-page";
 
 
 class App extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {      
+    this.state = {
       cart: [],
       currentCurrency: ''
     }
@@ -139,9 +140,9 @@ class App extends React.Component {
     }
   }
 
-  handleSetCurrentCurrency(label){
+  handleSetCurrentCurrency(label) {
     this.setState({ currentCurrency: label });
-    localStorage.setItem('currentCurrency', JSON.stringify(label));    
+    localStorage.setItem('currentCurrency', JSON.stringify(label));
   }
 
   componentDidMount() {
@@ -210,6 +211,16 @@ class App extends React.Component {
                   onQuantityChange={this.handleQuantityChange}
                   onAttributeChange={this.handleAttributeChange}
                   onDeleteFromCart={this.handleDeleteFromCart}
+                  currentCurrency={this.state.currentCurrency}
+                />} />
+
+              <Route path="cart" element={
+                <CartPage
+                  cart={this.state.cart}
+                  onQuantityChange={this.handleQuantityChange}
+                  onAttributeChange={this.handleAttributeChange}
+
+                  currencies={data.currencies}
                   currentCurrency={this.state.currentCurrency}
                 />} />
 

@@ -64,7 +64,7 @@ class Cart extends React.Component {
 
                         <div className="links-button">
                             <Link
-                                to={'/bag/'}
+                                to={'/cart/'}
                                 onClick={this.handleToggleModal}
                             >
                                 <button>View bag</button>

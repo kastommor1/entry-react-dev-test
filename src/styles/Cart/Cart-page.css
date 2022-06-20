@@ -1,0 +1,25 @@
+.cart-page{
+    color: #1D1F22;
+    margin: 0 auto;
+    max-width: 1440px; 
+    padding: 32px; 
+}
+
+.cart-page 
+h2 {
+    font-weight: bold;
+    font-size: 32px;    
+    text-transform: uppercase;
+    /* margin: 80px 0 55px 0; */
+    margin: 0;
+    margin-top: 80px;
+    margin-bottom: 55px;
+}
+
+
+
+
+
+
+
+

@@ -21,3 +21,11 @@ p{
     margin: auto 0;
     text-align: center;     
 }
+
+
+/* ---------------------------------------------------------------- */
+.cart-page 
+.count-picker {  
+    margin-left: auto;
+    margin-right: 15px;
+}
