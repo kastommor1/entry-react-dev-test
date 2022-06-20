@@ -1,9 +1,15 @@
 import React from "react";
+
+//style
 import cartIcon from "../../data/Empty-Cart.svg";
-import "../../styles/Cart/Cart.css"
+import "../../styles/Cart/Cart.css";
+
+//components
 import Modal from "../Modal";
 import ProductCardInCart from "../product-card/Product-card-in-cart";
 import TotalPrice from "./Total-price";
+
+import { Link } from "react-router-dom"
 
 class Cart extends React.Component {
     constructor(props) {
@@ -55,6 +61,22 @@ class Cart extends React.Component {
                             currentCurrency={this.props.currentCurrency}
                             currencies={this.props.currencies}
                         />
+
+                        <div className="links-button">
+                            <Link
+                                to={'/bag/'}
+                                onClick={this.handleToggleModal}
+                            >
+                                <button>View bag</button>
+                            </Link>
+                            <Link
+                                to={'/bag/'}
+                                onClick={this.handleToggleModal}
+                            >
+                                <button>Check out</button>
+                            </Link>
+
+                        </div>
 
                     </div>
 

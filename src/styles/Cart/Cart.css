@@ -44,6 +44,8 @@ h2{
     cursor: pointer;    
 }
 
+
+
 .cart-mini
 .list{
     overflow: auto;
@@ -71,6 +73,49 @@ h2{
     background: rgba(57, 55, 72, 0.3);
     ;
 }
+
+.cart-mini 
+.links-button{
+    display: grid;
+    padding: 16px;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 10px;
+    
+}
+
+.cart-mini 
+.links-button button{
+    width: 100%;
+    padding: 10px;
+    text-transform: uppercase;
+    border-width: 1px;
+
+    font-family: 'Raleway', sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.cart-mini 
+.links-button a:last-child button{
+    background-color: #5ECE7B;
+    color: #FFFFFF;
+    border: none;    
+}
+
+.cart-mini 
+.links-button button:hover{
+    background-color: #EEEEEE;
+    transition: all 0.2s ease 0s;    
+}
+
+.cart-mini 
+.links-button a:last-child button:hover{   
+    opacity: 0.7;
+    transition: all 0.2s ease 0s;    
+}
+
+
+
 
 /* Modal */
 
