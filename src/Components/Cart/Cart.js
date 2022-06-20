@@ -3,6 +3,7 @@ import cartIcon from "../../data/Empty-Cart.svg";
 import "../../styles/Cart/Cart.css"
 import Modal from "../Modal";
 import ProductCardInCart from "../product-card/Product-card-in-cart";
+import TotalPrice from "./Total-price";
 
 class Cart extends React.Component {
     constructor(props) {
@@ -35,21 +36,29 @@ class Cart extends React.Component {
                     <div className="cart-list">
                         <h2><b>My Bag,</b> {filteredCart.length} items</h2>
 
-                        {filteredCart.map(product => (
-                            <ProductCardInCart
-                                key={product.id}
-                                product={product}
-                                onQuantityChange={this.props.onQuantityChange}
-                                onAttributeChange={this.props.onAttributeChange}
-                                currentCurrency= {this.props.currentCurrency}
-                            />
-                        ))}
+                        <div className="list">
+                            {filteredCart.map(product => (
+                                <ProductCardInCart
+                                    key={product.id}
+                                    product={product}
+                                    onQuantityChange={this.props.onQuantityChange}
+                                    onAttributeChange={this.props.onAttributeChange}
+                                    currentCurrency={this.props.currentCurrency}
+                                />
+                            ))}
+                        </div>
 
-                        <p>Total: 200$</p>
+
+
+                        <TotalPrice
+                            products={filteredCart}
+                            currentCurrency={this.props.currentCurrency}
+                            currencies={this.props.currencies}
+                        />
 
                     </div>
 
-                </Modal>               
+                </Modal>
 
 
             </div>

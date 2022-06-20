@@ -70,7 +70,6 @@ class Product extends React.Component {
         return (
             <div className="product">
 
-                {/* <Gallery gallery={gallery} name={name} /> */}
                 <GalleryWithIcons gallery={gallery} name={name} />
 
                 <div className="wrapper">

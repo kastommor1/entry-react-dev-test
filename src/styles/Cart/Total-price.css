@@ -1,0 +1,11 @@
+.cart-mini 
+.total-price{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 16px;
+}
+
+.cart-mini 
+.total-price p{
+    font-weight: bold;
+}

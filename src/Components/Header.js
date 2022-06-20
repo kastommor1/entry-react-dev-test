@@ -37,6 +37,7 @@ class Header extends React.Component {
                         onQuantityChange={this.props.onQuantityChange}
                         onAttributeChange={this.props.onAttributeChange}
                         currentCurrency= {this.props.currentCurrency}
+                        currencies={this.props.currencies}
                     />
                 </div>
 
