@@ -16,7 +16,11 @@ class ProductCardInCart extends React.Component {
             <div className="product-card-in-cart">
 
                 <div className="parameters">
-                    <h3 className="name" > {brand} <br /> {name}</h3>
+                    <div>
+                        <h3 className="brand">{brand}</h3>
+                        <h3 className="name">{name}</h3>
+                    </div>
+                    
                     <Price prices={prices} currentCurrency={this.props.currentCurrency} />
                     <Attributes
                         productId={product.id}

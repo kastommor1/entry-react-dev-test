@@ -29,3 +29,24 @@ p{
     margin-left: auto;
     margin-right: 15px;
 }
+
+.cart-page
+.product-card-in-cart 
+.count-picker button {
+    margin: 0;
+    width: 45px;
+    height: 45px;
+    border: 1px solid #1D1F22;
+    border-radius: 0;
+    font-size: 30px;
+    font-family: inherit;
+}
+
+@media screen and (max-width: 700px) {
+    .cart-page .product-card-in-cart .count-picker button {
+        width: 24px;
+        height: 24px;
+        font-size: 16px;
+    }
+
+}
