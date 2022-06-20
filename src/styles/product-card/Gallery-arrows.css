@@ -1,0 +1,25 @@
+.gallery
+.arrows {
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+}
+
+.gallery 
+.arrows button {
+    width: 24px;
+    height: 24px;
+    background-color: rgba(0, 0, 0, 0.73);
+    color: #fff;
+    border: none;   
+}
+
+.gallery
+.arrows button:first-child {
+    margin-right: 8px;   
+}
+
+.gallery
+.arrows img {
+    width: auto; 
+}

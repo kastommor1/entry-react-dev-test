@@ -20,7 +20,7 @@ class ProductCardInCart extends React.Component {
                         <h3 className="brand">{brand}</h3>
                         <h3 className="name">{name}</h3>
                     </div>
-                    
+
                     <Price prices={prices} currentCurrency={this.props.currentCurrency} />
                     <Attributes
                         productId={product.id}
@@ -34,7 +34,12 @@ class ProductCardInCart extends React.Component {
                     quantity={quantity}
                     onQuantityChange={this.props.onQuantityChange}
                 />
-                <Gallery gallery={gallery} name={name} />
+
+                <Gallery
+                    gallery={gallery}
+                    name={name}
+                    showGalleryArrows={this.props.showGalleryArrows}
+                />
             </div>
         )
     }

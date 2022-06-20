@@ -1,11 +1,54 @@
 import React from "react";
 import "../../styles/product-card/Gallery.css"
 
+
+import GalleryArrows from "./Gallery-arrows";
+
 class Gallery extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            imgNumber: 0
+        }
+
+        this.handleNextImage = this.handleNextImage.bind(this);
+        this.handlePreviousImage = this.handlePreviousImage.bind(this);
+    }
+
+    handleNextImage() {
+        if(this.props.gallery.length-1 > this.state.imgNumber) {            
+            this.setState({
+                imgSrc: this.state.imgNumber++
+            })
+        }      
+    }
+
+    handlePreviousImage() {        
+        if(this.state.imgNumber > 0) {            
+            this.setState({
+                imgSrc: this.state.imgNumber--
+            })
+        }   
+    }
+
     render() {
+        const { gallery, name } = this.props;
+        const imgSrc = gallery[this.state.imgNumber];        
+
         return (
             <div className="gallery">
-                <img src={this.props.gallery[0]} alt={this.props.name} />
+                <img src={imgSrc} alt={this.props.name} />                
+
+                {this.props.showGalleryArrows &&
+
+                    <GalleryArrows
+                        name={name}
+                        gallery={gallery}
+                        imgSrc = {this.state.imgSrc}
+                        onNextImage={this.handleNextImage}
+                        onPreviousImage={this.handlePreviousImage}
+                    />
+                }
             </div>
         )
     }

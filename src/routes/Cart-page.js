@@ -7,6 +7,7 @@ import TotalPrice from "../components/Cart/Total-price";
 
 class CartPage extends React.Component {
     render() {
+        document.title = 'Cart';
         const filteredCart = this.props.cart.filter(product => product.quantity > 0);
 
         return (
@@ -20,6 +21,8 @@ class CartPage extends React.Component {
                         onQuantityChange={this.props.onQuantityChange}
                         onAttributeChange={this.props.onAttributeChange}
                         currentCurrency={this.props.currentCurrency}
+
+                        showGalleryArrows={true}
                     />
                 ))}
 
