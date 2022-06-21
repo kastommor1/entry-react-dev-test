@@ -4,6 +4,7 @@ import "../styles/Cart/Cart-page.css";
 
 import ProductCardInCart from "../components/product-card/Product-card-in-cart";
 import TotalPrice from "../components/Cart/Total-price";
+import Tax from "../components/Cart/Tax";
 
 class CartPage extends React.Component {
     render() {
@@ -26,11 +27,24 @@ class CartPage extends React.Component {
                     />
                 ))}
 
-                <TotalPrice
-                    products={filteredCart}
-                    currentCurrency={this.props.currentCurrency}
-                    currencies={this.props.currencies}
-                />
+                <div className="price-table">
+                    <Tax
+                        products={filteredCart}
+                        currentCurrency={this.props.currentCurrency}
+                        currencies={this.props.currencies}
+                        taxPercentage={21}
+                    />
+
+                    
+
+                    <TotalPrice
+                        products={filteredCart}
+                        currentCurrency={this.props.currentCurrency}
+                        currencies={this.props.currencies}
+                    />
+                </div>
+
+
 
             </div>
         )

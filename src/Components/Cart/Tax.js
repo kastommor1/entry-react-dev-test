@@ -1,9 +1,9 @@
 import React from "react";
-import "../../styles/Cart/Total-price.css"
+import "../../styles/Cart/Tax.css"
 
-class TotalPrice extends React.Component{
+class Tax extends React.Component{
     render(){        
-        const {products, currentCurrency, currencies} = this.props;
+        const {products, currentCurrency, currencies, taxPercentage } = this.props;
         const currentSymbol = currencies.find(currency => currency.label === currentCurrency).symbol             
 
         const totalPrice = products.reduce((sum, product)=>{
@@ -12,13 +12,15 @@ class TotalPrice extends React.Component{
             return sum + parseFloat(currenAmount);
         }, 0);
 
+        const taxAmount = totalPrice * taxPercentage /100;
+
         return(
-            <div className="total-price">
-                <p>Total: </p>
-                <p>{currentSymbol}{totalPrice.toFixed(2)}</p>
+            <div className="tax">
+                <p>Tex {taxPercentage}%: </p>
+                <p>{currentSymbol}{taxAmount.toFixed(2)}</p>
             </div>
         )
     }
 }
 
-export default TotalPrice;
+export default Tax;

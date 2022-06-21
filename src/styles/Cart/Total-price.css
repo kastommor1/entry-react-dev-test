@@ -9,3 +9,17 @@
 .total-price p{
     font-weight: bold;
 }
+
+/* -------------------------------------------- */
+
+.cart-page
+.total-price{
+    display: table-row;
+}
+
+.cart-page
+.total-price p{
+    display: table-cell;
+    padding: 3px 5px;
+    font-weight: bold;
+}
