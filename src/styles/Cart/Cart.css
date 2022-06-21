@@ -14,7 +14,7 @@ h2{
     padding: 16px;
     margin-bottom: 16px;
     line-height: 160%;
-    font-size: 16px;   
+    font-size: 16px;       
 }
 
 .cart-mini 
@@ -27,7 +27,8 @@ h2{
     max-height: 70vh;
     /* max-height: calc(100vh - 85px);; */  
     display: flex;
-    flex-direction: column;  
+    flex-direction: column;
+    z-index: 2;  
 }
 
 .cart-mini 
