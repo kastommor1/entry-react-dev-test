@@ -1,6 +1,9 @@
 import React from "react";
 import Modal from "./Modal";
+
 import "../styles/Currency.css"
+import arrowUpImg from "../data/arrow-up.svg";
+import arrowDownImg from "../data/arrow-down.svg";
 
 class Currency extends React.Component {
     constructor(props) {
@@ -40,6 +43,9 @@ class Currency extends React.Component {
                     onClick={this.handleToggleModal}
                 >
                     {currentSymbol}
+                    <img
+                        src={this.state.showModal ? arrowUpImg : arrowDownImg}
+                        alt={this.state.showModal ? 'arrow up' : 'arrow down'} />
                 </button>
 
                 <Modal

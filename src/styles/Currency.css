@@ -23,6 +23,12 @@
 }
 
 .currency 
+.header-icon img{
+    vertical-align: middle;
+    margin-left: 5px;
+}
+
+.currency 
 .currency-list button:hover{
     background-color: #EEEEEE;   
 }
