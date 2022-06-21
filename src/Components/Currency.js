@@ -54,6 +54,7 @@ class Currency extends React.Component {
                                 <button
                                     key={currency.label}
                                     onClick={() => { this.selectCurrency(currency.label) }}
+                                    className={currency.label === currentCurrency ? 'current-currency' : ''}
                                 >
                                     {currency.symbol} {currency.label}
                                 </button>
