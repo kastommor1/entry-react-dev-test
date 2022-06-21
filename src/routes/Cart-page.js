@@ -45,6 +45,8 @@ class CartPage extends React.Component {
                     />
                 </div>
 
+                <button className="order-button">Order</button>
+
 
 
             </div>
