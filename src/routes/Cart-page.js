@@ -1,7 +1,10 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
+//style
 import "../styles/Cart/Cart-page.css";
 
+//components
 import ProductCardInCart from "../components/product-card/Product-card-in-cart";
 import TotalPrice from "../components/Cart/Total-price";
 import Tax from "../components/Cart/Tax";
@@ -36,7 +39,7 @@ class CartPage extends React.Component {
                         taxPercentage={21}
                     />
 
-                    <Quantity products={filteredCart}/>                    
+                    <Quantity products={filteredCart} />
 
                     <TotalPrice
                         products={filteredCart}
@@ -45,7 +48,9 @@ class CartPage extends React.Component {
                     />
                 </div>
 
-                <button className="order-button">Order</button>
+                <Link to="/order">
+                    <button className="order-button">Order</button>
+                </Link>
 
 
 

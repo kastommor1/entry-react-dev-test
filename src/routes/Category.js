@@ -7,6 +7,7 @@ import ProductCard from "../components/product-card/Product-card";
 
 import '../styles/Caregory.css';
 import ProductList from "../components/product-card/Product-list";
+import Loading from "../components/Loading";
 
 
 class Category extends React.Component {
@@ -18,7 +19,8 @@ class Category extends React.Component {
         if (categoriesName.filter(category => category.name == categoryName).length === 0) {
             return (
                 <WarningMessage>
-                    <p>Sorry. There is no such category.</p>
+                    <h2>Ooops!</h2>
+                    <p>There is no such category. ):</p>
                 </WarningMessage>)
         } else {
             document.title = categoryName.toLowerCase().replace(/\b(\w)/g, s => s.toUpperCase());
@@ -31,8 +33,8 @@ class Category extends React.Component {
             <div className="category">
                 <h2>{categoryName.toLocaleUpperCase()}</h2>
 
-                {loading && <p>Loading...</p>}
-                {error && <WarningMessage><p>Error {error.message}</p></WarningMessage>}
+                {loading && <Loading/>}
+                {error && <WarningMessage><p>Error. {error.message}.</p></WarningMessage>}
 
                 {data && data.category && data.category.products &&
                     <ProductList

@@ -14,6 +14,7 @@ import AddButtonBig from "../components/product-card/Add-button-big";
 //style
 import '../styles/product-card/Product.css'
 import GalleryWithIcons from "../components/product-card/Gallery-with-icons";
+import Loading from "../components/Loading";
 
 
 class Product extends React.Component {
@@ -48,8 +49,8 @@ class Product extends React.Component {
         const cartProduct = cart.find(product => product.id === productId);
 
         if (!cartProduct) { //check product in cart
-            if (loading) return (<p>Loading...</p>);
-            if (error) return (<WarningMessage><p>Error {error.message}</p></WarningMessage>);
+            if (loading) return (<Loading/>);
+            if (error) return (<WarningMessage><p>Error. {error.message}</p></WarningMessage>);
             if (!data || !data.product) return (
                 <WarningMessage>
                     <h2>Sorry.</h2>

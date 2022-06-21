@@ -63,13 +63,13 @@ class Cart extends React.Component {
                         />
 
                         <div className="links-button">
-                            <Link to={'/cart/'}>
+                            <Link to={'/cart'}>
                                 <button onClick={this.handleToggleModal}>
                                     View bag
                                 </button>
                             </Link>
                             <Link
-                                to={'/bag/'}                              
+                                to={'/order'}                              
                             >                                
                                 <button onClick={this.handleToggleModal}>
                                 Check out
@@ -77,7 +77,6 @@ class Cart extends React.Component {
                             </Link>
 
                         </div>
-
                     </div>
 
                 </Modal>

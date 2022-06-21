@@ -4,6 +4,7 @@ import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import CategoryHOC from "./routes/Category";
 import ProductHOC from "./routes/Product";
+import CartPage from "./routes/Cart-page";
 
 //apollo
 import { GET_CATEGORIES_NAME_AND_CURRENCIES } from "./apollo-client/queries";
@@ -12,13 +13,18 @@ import { GET_CATEGORIES_NAME_AND_CURRENCIES } from "./apollo-client/queries";
 import { widthQuery } from "./service-functions/HOCs"
 import PropTypes from "prop-types";
 
+//css
+import './App.css'
+
 //components
 import Header from "./components/Header";
 import WarningMessage from "./components/Warning-message";
+import Order from "./routes/Order";
+import Loading from "./components/Loading";
 
-//css
-import './App.css'
-import CartPage from "./routes/Cart-page";
+
+
+
 
 
 class App extends React.Component {
@@ -169,8 +175,8 @@ class App extends React.Component {
   render() {
     const { loading, error, data } = this.props.query;
 
-    if (loading) return <p>Loading...</p>
-    if (error) return <p>Error {error.message}</p>
+    if (loading) return <Loading/>
+    if (error) return <WarningMessage><h2>Error</h2> <p>{error.message}</p></WarningMessage>
 
     if (!data && !data.categories && data.categories.length === 0) return <WarningMessage><p>No categories</p></WarningMessage>;
     if (!data && !data.currencies && data.currencies.length === 0) return <WarningMessage><p>No currencies</p></WarningMessage>;
@@ -224,10 +230,12 @@ class App extends React.Component {
                   currentCurrency={this.state.currentCurrency}
                 />} />
 
+              <Route path="order" element={<Order/>}/>
+
               <Route path='*' element={
                 <WarningMessage>
-                  <h2>404</h2>
-                  <p>Page not found</p>
+                  <h2>Error 404</h2>
+                  <p>Sorry. Page not found.</p>
                 </WarningMessage>
               } />
             </Route>

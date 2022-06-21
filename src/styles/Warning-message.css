@@ -1,0 +1,21 @@
+.warning-message{    
+    color: #1D1F22;
+    margin: 0 auto;
+    max-width: 1440px;
+    padding: 0 32px;
+}
+
+.warning-message h2 {
+    font-weight: bold;
+    font-size: 32px;    
+    text-transform: uppercase;    
+    margin: 0;
+    margin-top: 80px;
+    margin-bottom: 55px;
+}
+
+.warning-message p {
+    font-size: 18px;
+    margin-bottom: 0;
+    line-height: 28px;
+}
