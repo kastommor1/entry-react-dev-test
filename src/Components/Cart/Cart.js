@@ -18,10 +18,16 @@ class Cart extends React.Component {
             showModal: false
         };
         this.handleToggleModal = this.handleToggleModal.bind(this);
+        this.onOrder = this.onOrder.bind(this);
     }
 
     handleToggleModal() {
         this.setState({ showModal: !this.state.showModal });
+    }
+
+    onOrder() {
+        this.props.onOrder();
+        this.handleToggleModal();
     }
 
     render() {
@@ -62,21 +68,23 @@ class Cart extends React.Component {
                             currencies={this.props.currencies}
                         />
 
-                        <div className="links-button">
-                            <Link to={'/cart'}>
-                                <button onClick={this.handleToggleModal}>
-                                    View bag
-                                </button>
-                            </Link>
-                            <Link
-                                to={'/order'}                              
-                            >                                
-                                <button onClick={this.handleToggleModal}>
-                                Check out
-                                </button>
-                            </Link>
+                        {filteredCart.length > 0 &&
+                            <div className="links-button">
+                                <Link to={'/cart'}>
+                                    <button onClick={this.handleToggleModal}>
+                                        View bag
+                                    </button>
+                                </Link>
 
-                        </div>
+                                <Link
+                                    to={'/order'}
+                                >
+                                    <button onClick={this.onOrder}>
+                                        Check out
+                                    </button>
+                                </Link>
+                            </div>
+                        }
                     </div>
 
                 </Modal>

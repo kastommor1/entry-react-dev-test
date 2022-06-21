@@ -40,6 +40,7 @@ class App extends React.Component {
     this.handleAttributeChange = this.handleAttributeChange.bind(this);
     this.localStorageUpdated = this.localStorageUpdated.bind(this);
     this.handleSetCurrentCurrency = this.handleSetCurrentCurrency.bind(this);
+    this.handleOrder = this.handleOrder.bind(this);
 
   }
 
@@ -151,6 +152,11 @@ class App extends React.Component {
     localStorage.setItem('currentCurrency', JSON.stringify(label));
   }
 
+  handleOrder() {
+    this.setState({ cart: [] });
+    localStorage.setItem('cart', JSON.stringify([]));
+  }
+
   componentDidMount() {
     if (typeof window !== 'undefined') {
       if (JSON.parse(localStorage.getItem('cart'))) {
@@ -195,6 +201,8 @@ class App extends React.Component {
           currencies={data.currencies}
           currentCurrency={this.state.currentCurrency}
           onSetCurrentCurrency={this.handleSetCurrentCurrency}
+
+          onOrder={this.handleOrder}
         />
         <main>
           <Routes>
@@ -228,6 +236,8 @@ class App extends React.Component {
 
                   currencies={data.currencies}
                   currentCurrency={this.state.currentCurrency}
+
+                  onOrder={this.handleOrder}
                 />} />
 
               <Route path="order" element={<Order/>}/>

@@ -48,9 +48,18 @@ class CartPage extends React.Component {
                     />
                 </div>
 
-                <Link to="/order">
-                    <button className="order-button">Order</button>
-                </Link>
+                {filteredCart.length > 0 &&
+
+                    <Link to="/order">
+                        <button
+                            className="order-button"
+                            onClick={this.props.onOrder}
+                        >
+                            Order</button>
+                    </Link>
+                }
+
+
 
 
 

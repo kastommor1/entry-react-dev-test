@@ -38,6 +38,8 @@ class Header extends React.Component {
                         onAttributeChange={this.props.onAttributeChange}
                         currentCurrency= {this.props.currentCurrency}
                         currencies={this.props.currencies}
+
+                        onOrder={this.props.onOrder}
                     />
                 </div>
 
