@@ -1,5 +1,10 @@
 import React from "react";
+import {Link} from "react-router-dom";
+
+//style
 import '../../styles/product-card/Product.css'
+
+//component
 import Attributes from "./Attributes";
 import CountPicker from "./Count-picker";
 import Gallery from "./Gallery";
@@ -10,16 +15,16 @@ class ProductCardInCart extends React.Component {
 
     render() {
         const product = this.props.product;
-        const { id, name, inStock, gallery, prices, brand, quantity, attributes } = product;
+        const { id, name, inStock, gallery, prices, brand, quantity, attributes, category } = product;
 
         return (
             <div className="product-card-in-cart">
 
                 <div className="parameters">
-                    <div>
+                    <Link to={'/categories/' + category + '/product/' + id}  target="_blank">
                         <h3 className="brand">{brand}</h3>
                         <h3 className="name">{name}</h3>
-                    </div>
+                    </Link>
 
                     <Price prices={prices} currentCurrency={this.props.currentCurrency} />
                     <Attributes
