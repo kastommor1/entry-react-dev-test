@@ -1,15 +1,15 @@
 .cart-page
-.tax{
+.quantity{
     display: table-row;
 }
 
 .cart-page
-.tax p{
+.quantity p{
     display: table-cell;
     padding: 3px 5px;
 }
 
 .cart-page
-.tax p:last-child{
+.quantity p:last-child{
     font-weight: bold; 
 }

@@ -5,6 +5,7 @@ import "../styles/Cart/Cart-page.css";
 import ProductCardInCart from "../components/product-card/Product-card-in-cart";
 import TotalPrice from "../components/Cart/Total-price";
 import Tax from "../components/Cart/Tax";
+import Quantity from "../components/Cart/Quantity";
 
 class CartPage extends React.Component {
     render() {
@@ -35,7 +36,7 @@ class CartPage extends React.Component {
                         taxPercentage={21}
                     />
 
-                    
+                    <Quantity products={filteredCart}/>                    
 
                     <TotalPrice
                         products={filteredCart}
