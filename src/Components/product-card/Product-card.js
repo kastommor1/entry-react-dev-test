@@ -9,7 +9,7 @@ import { NavLink } from "react-router-dom";
 class ProductCard extends React.Component {
 
     render() {
-        const { product, onAddToCart } = this.props;
+        const { product, onAddToCart, onDeleteFromCart} = this.props;
         const { id, name, inStock, gallery, prices, brand, quantity, category } = product;
 
         return (
@@ -29,7 +29,8 @@ class ProductCard extends React.Component {
                     inStock={inStock}
                     quantity={quantity}
                     product={product}
-                    onAddToCart={onAddToCart} 
+                    onAddToCart={onAddToCart}
+                    onDeleteFromCart={onDeleteFromCart} 
                 />
             </div>
         )

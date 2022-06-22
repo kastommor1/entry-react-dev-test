@@ -62,17 +62,11 @@ class App extends React.Component {
 
     selectedProduct.quantity = preview ? 0 : 1;
 
-    if (this.state.cart.filter(product => product.id == id).length > 0) {
-      this.handleDeleteFromCart(id)
-    } else {
-      this.setState({ cart: [...this.state.cart, selectedProduct] });
-      localStorage.setItem('cart', JSON.stringify([...this.state.cart, selectedProduct]));
-    }
-
-
+    this.setState({ cart: [...this.state.cart, selectedProduct] });
+    localStorage.setItem('cart', JSON.stringify([...this.state.cart, selectedProduct]));
   }
 
-  handleDeleteFromCart(id) {
+  handleDeleteFromCart(id) {   
     //Delete product
     let filteredCart = this.state.cart.filter((product) => product.id != id);
     this.setState({ cart: filteredCart });
@@ -212,6 +206,7 @@ class App extends React.Component {
                   categoriesName={data.categories}
                   cart={this.state.cart}
                   onAddToCart={this.handleAddToCart}
+                  onDeleteFromCart={this.handleDeleteFromCart}
 
                   currentCurrency={this.state.currentCurrency}
                 />} />

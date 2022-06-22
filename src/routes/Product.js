@@ -94,6 +94,7 @@ class Product extends React.Component {
                             quantity={quantity}
                             product={cartProduct}
                             onAddToCart={this.props.onAddToCart}
+                            onDeleteFromCart={this.props.onDeleteFromCart}
                         />
 
                         <div

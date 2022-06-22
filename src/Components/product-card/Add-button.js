@@ -22,7 +22,7 @@ class AddButton extends React.Component {
             return (
                 <button
                     className="add-dell dell-btn"
-                    onClick={() => { this.props.onAddToCart(product) }}
+                    onClick={() => { this.props.onDeleteFromCart(product.id) }}
                 >
                     <img src={cart} alt="add-blocked" />
                 </button>

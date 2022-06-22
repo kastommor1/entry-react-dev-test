@@ -18,6 +18,8 @@ class ProductList extends React.Component {
                             key={product.id}
                             product={filteredProduct}
                             onAddToCart={this.props.onAddToCart}
+                            onDeleteFromCart={this.props.onDeleteFromCart}
+
                             currentCurrency={this.props.currentCurrency}                            
                         />
                     )
