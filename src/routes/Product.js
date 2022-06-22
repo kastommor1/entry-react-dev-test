@@ -27,7 +27,7 @@ class Product extends React.Component {
         const id = this.props.productId;
         const cart = this.props.cart;
         const cartProduct = cart.find(product => product.id === id);
-        let filteredCart = cart.filter((product) => product.id != id);
+        const filteredCart = cart.filter((product) => product.id != id);
 
         if (cartProduct && cartProduct.quantity === 0) {
             localStorage.setItem('cart', JSON.stringify(filteredCart));
@@ -44,7 +44,8 @@ class Product extends React.Component {
     }
 
     render() {
-        const { productId, loading, error, data, cart } = this.props;
+        const { query, cart, productId } = this.props;
+        const {loading, error, data} = query;       
 
         const cartProduct = cart.find(product => product.id === productId);
 

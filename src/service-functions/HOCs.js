@@ -37,12 +37,12 @@ export function widthProductQueryByParams(Coponent, queryName, parameterName) {
         const params = useParams();
         const productId = params[parameterName];
         
-        const { loading, error, data } = useQuery(queryName, {
+        const query = useQuery(queryName, {
             variables: { id: productId }
         });
 
 
 
-        return <Coponent {...props} productId={productId}  loading={loading} error={error} data={data} />
+        return <Coponent {...props} productId={productId}  query={query} />
     }
 }
