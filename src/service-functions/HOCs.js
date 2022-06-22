@@ -25,7 +25,8 @@ export function widthCategoryQueryByParams(Coponent, queryName, parameterName) {
 
         const CategoryInput = { title: categoryName };
         const query = useQuery(queryName, {
-            variables: { input: CategoryInput }
+            variables: { input: CategoryInput },
+            // fetchPolicy : 'network-only',
         });
 
         return <Coponent {...props} categoryName={categoryName} query={query} />
