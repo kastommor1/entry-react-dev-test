@@ -38,7 +38,18 @@ class Category extends React.Component {
     }
 
     componentDidMount() {
-        this.getCategoryQuery();
+        // this.getCategoryQuery();
+        let categoryName = this.props.params['categoryName'];
+        let CategoryInput = { title: categoryName };
+
+        client
+            .query({
+                query: GET_CATEGORY,
+                variables: { input: CategoryInput }
+            })
+            .then(result => { this.setState({ data: result.data }) })
+            .catch(error => { this.setState({ error: error }) })
+            .finally(() => { this.setState({ loading: false }) });
     }
 
     // componentDidUpdate() {
@@ -48,6 +59,22 @@ class Category extends React.Component {
     // componentDidUpdate(){
     //     console.log('update');
     // }
+
+    componentDidUpdate(){
+        let categoryName = this.props.params['categoryName'];
+        let CategoryInput = { title: categoryName };
+
+        client
+            .query({
+                query: GET_CATEGORY,
+                variables: { input: CategoryInput }
+            })
+            .then(result => { this.setState({ data: result.data }) })
+            .catch(error => { this.setState({ error: error }) })
+            .finally(() => { this.setState({ loading: false }) });
+    }
+
+
 
     render() {
         // const { categoryName, categoriesName } = this.props;
@@ -75,8 +102,8 @@ class Category extends React.Component {
         if (!data && !data.category && data.category.products.length === 0) return <WarningMessage><p>No products</p></WarningMessage>;
 
 
-        console.log(data.category.products[1].attributes[0].items);
-        console.log(categoryName);
+        // console.log(data.category.products[1].attributes[0].items);
+        // console.log(categoryName);
 
         return (
             <div className="category">

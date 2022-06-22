@@ -7,7 +7,7 @@ export default function Test (){
 
     if (loading) return <p>loading</p>
     if (error) return <p>error</p>
-    console.log(data.category.products);
+    // console.log(data.category.products);
 
 
     const some = 5+5;

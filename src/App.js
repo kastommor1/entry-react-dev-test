@@ -55,7 +55,6 @@ class App extends React.Component {
 
   handleAddToCart(product, preview) {
     const { id } = product; //
-    console.log(product);
 
     //for old product
     if (this.state.cart.filter(product => product.id === id && product.quantity === 0).length > 0) {
@@ -190,13 +189,7 @@ class App extends React.Component {
 
   render() {   
     // const { loading, error, data } = this.props.query;
-    const { loading, error, data } = this.state;
-
-    if(loading) console.log(this.state.loading);
-    if(error) console.log(this.state.error);
-    if(data) console.log(this.state.data);
-
-    
+    const { loading, error, data } = this.state;    
 
     if (loading) return <Loading />
     if (error) return <WarningMessage><h2>Error</h2> <p>{error.message}</p></WarningMessage>

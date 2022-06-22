@@ -43,11 +43,11 @@ class Product extends React.Component {
         this.removePreviewProduct();
     }
 
-    render() {
+    componentDidUpdate(){
         const { query, cart, productId } = this.props;
         const {loading, error, data} = query;       
 
-        const cartProduct = cart.find(product => product.id === productId);
+        const cartProduct = cart.find(product => product.id === productId);       
 
         if (!cartProduct) { //check product in cart
             if (loading) return (<Loading/>);
@@ -60,13 +60,17 @@ class Product extends React.Component {
 
 
             const product = data.product;
-            this.props.onAddToCart(product, true) //add widh 0 quantity
-            return (<div></div>)
+            this.props.onAddToCart(product, true) //add widh 0 quantity                      
         }
+    }
+
+    render() {
+        const { cart, productId } = this.props;           
+        const cartProduct = cart.find(product => product.id === productId);     
+
+        if (!cartProduct) {return(<div></div>)} 
 
         const { id, name, inStock, gallery, prices, brand, quantity, attributes, description } = cartProduct;
-
-
         document.title = brand + ' ' + name;
 
         return (
