@@ -1,18 +1,58 @@
 import React from "react";
-import { widthCategoryQueryByParams } from "../service-functions/HOCs";
+import { widthCategoryQueryByParams, widthParams } from "../service-functions/HOCs";
 import { GET_CATEGORY } from "../apollo-client/queries";
 import WarningMessage from "../components/Warning-message";
 import { element } from "prop-types";
 import ProductList from "../components/product-card/Product-list";
 import Loading from "../components/Loading";
+import { client } from "../apollo-client/cache";
 
 import '../styles/Caregory.css';
 
 
 class Category extends React.Component {
 
+    constructor(props) {
+        super(props)
+        this.state = {
+            loading: true,
+            error: false,
+            data: false
+        }
+
+        this.getCategoryQuery = this.getCategoryQuery.bind(this);
+    }
+
+    getCategoryQuery() {
+        let categoryName = this.props.params['categoryName'];
+        let CategoryInput = { title: categoryName };
+
+        client
+            .query({
+                query: GET_CATEGORY,
+                variables: { input: CategoryInput }
+            })
+            .then(result => { this.setState({ data: result.data }) })
+            .catch(error => { this.setState({ error: error }) })
+            .finally(() => { this.setState({ loading: false }) });
+    }
+
+    componentDidMount() {
+        this.getCategoryQuery();
+    }
+
+    // componentDidUpdate() {
+    //     this.getCategoryQuery();
+    // }
+
+    // componentDidUpdate(){
+    //     console.log('update');
+    // }
+
     render() {
-        const { categoryName, categoriesName } = this.props;
+        // const { categoryName, categoriesName } = this.props;
+        const { categoriesName, params } = this.props; //
+        const categoryName = params['categoryName']; //
 
 
         if (categoriesName.filter(category => category.name == categoryName).length === 0) {
@@ -26,14 +66,17 @@ class Category extends React.Component {
         }
 
 
-        const { loading, error, data } = this.props.query;
+        // const { loading, error, data } = this.props.query;
+        const { loading, error, data } = this.state;
+
 
         if (loading) return <Loading />;
         if (error) return <WarningMessage><p>Error. {error.message}.</p></WarningMessage>;
         if (!data && !data.category && data.category.products.length === 0) return <WarningMessage><p>No products</p></WarningMessage>;
 
 
-        if (data && data.category.products) { console.log(data.category.products[1].attributes[0].items); }
+        console.log(data.category.products[1].attributes[0].items);
+        console.log(categoryName);
 
         return (
             <div className="category">
@@ -51,6 +94,8 @@ class Category extends React.Component {
     }
 }
 
-const CategoryHOC = widthCategoryQueryByParams(Category, GET_CATEGORY, 'categoryName');
+// const CategoryHOC = widthCategoryQueryByParams(Category, GET_CATEGORY, 'categoryName');
+const CategoryHOC = widthParams(Category);
 
 export default CategoryHOC;
+

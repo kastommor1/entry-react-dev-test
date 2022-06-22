@@ -6,7 +6,7 @@ import logo from "../data/a-logo.svg";
 import Currency from "./Currency";
 
 class Header extends React.Component {
-    render() {        
+    render() {
         return (
             <header>
                 <nav>
@@ -20,6 +20,17 @@ class Header extends React.Component {
                                     </NavLink>
                                 </li>
                             ))}
+
+                        <li >
+                            <NavLink
+                                to={'/test/'}>
+                                test page
+                            </NavLink>
+                        </li>
+
+
+
+
                     </ul>
                 </nav>
 
@@ -29,14 +40,14 @@ class Header extends React.Component {
                     <Currency
                         currencies={this.props.currencies}
                         onSetCurrentCurrency={this.props.onSetCurrentCurrency}
-                        currentCurrency= {this.props.currentCurrency}
+                        currentCurrency={this.props.currentCurrency}
                     />
 
                     <Cart
                         cart={this.props.cart}
                         onQuantityChange={this.props.onQuantityChange}
                         onAttributeChange={this.props.onAttributeChange}
-                        currentCurrency= {this.props.currentCurrency}
+                        currentCurrency={this.props.currentCurrency}
                         currencies={this.props.currencies}
 
                         onOrder={this.props.onOrder}

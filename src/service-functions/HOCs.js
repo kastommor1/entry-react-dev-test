@@ -10,13 +10,13 @@ export function widthQuery(Coponent, queryName) {
     }
 }
 
-// export function widthParams (Coponent){
-//     return function WidthParams(props){
-//         const params = useParams();  
+export function widthParams (Coponent){
+    return function WidthParams(props){
+        const params = useParams();  
 
-//         return <Coponent {...props} params = {params}/>
-//     }
-// }
+        return <Coponent {...props} params = {params}/>
+    }
+}
 
 export function widthCategoryQueryByParams(Coponent, queryName, parameterName) {
     return function WidthQueryByParams(props) {
@@ -29,7 +29,7 @@ export function widthCategoryQueryByParams(Coponent, queryName, parameterName) {
             // fetchPolicy : 'network-only',
         });
 
-        return <Coponent {...props} categoryName={categoryName} query={query} />
+        return <Coponent {...props} categoryName={categoryName} query={query} params={params} />
     }
 }
 
