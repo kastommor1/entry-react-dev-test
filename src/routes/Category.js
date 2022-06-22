@@ -29,6 +29,8 @@ class Category extends React.Component {
 
         const { loading, error, data } = this.props.query;
 
+        if(data && data.category.products){console.log(data.category.products);}
+
         return (
             <div className="category">
                 <h2>{categoryName.toLocaleUpperCase()}</h2>

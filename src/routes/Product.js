@@ -18,10 +18,10 @@ import Loading from "../components/Loading";
 
 
 class Product extends React.Component {
-    constructor(props) {
-        super(props);
-        this.removePreviewProduct = this.removePreviewProduct.bind(this);
-    }
+    // constructor(props) {
+    //     super(props);
+    //     this.removePreviewProduct = this.removePreviewProduct.bind(this);
+    // }
 
     removePreviewProduct() {
         const id = this.props.productId;

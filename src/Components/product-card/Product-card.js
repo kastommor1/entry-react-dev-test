@@ -12,8 +12,13 @@ class ProductCard extends React.Component {
         const { product, onAddToCart, onDeleteFromCart} = this.props;
         const { id, name, inStock, gallery, prices, brand, quantity, category } = product;
 
+    
         return (
-            <div className="product-card">
+            <div className="product-card" 
+            onClick={()=>{
+                console.log(product.attributes[0].items);
+                console.log(this.props.clearProduct.attributes[0].items);       
+            }}>
 
                 <NavLink to={'/categories/' + category + '/product/' + id} >
 

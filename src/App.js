@@ -8,6 +8,8 @@ import CartPage from "./routes/Cart-page";
 
 //apollo
 import { GET_CATEGORIES_NAME_AND_CURRENCIES } from "./apollo-client/queries";
+import { client } from "./apollo-client/cache";
+
 
 //data
 import { widthQuery } from "./service-functions/HOCs"
@@ -31,6 +33,10 @@ class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      loading: true,
+      error: false,
+      data: false,
+
       cart: [],
       currentCurrency: ''
     }
@@ -42,13 +48,16 @@ class App extends React.Component {
     this.handleSetCurrentCurrency = this.handleSetCurrentCurrency.bind(this);
     this.handleOrder = this.handleOrder.bind(this);
 
+    this.getCategoriesQuery = this.getCategoriesQuery.bind(this);
+
   }
 
   handleAddToCart(product, preview) {
-    const { id, attributes } = product; //
+    const { id } = product; //
+    console.log(product);
 
     //for old product
-    if (this.state.cart.filter(product => product.id == id && product.quantity === 0).length > 0) {
+    if (this.state.cart.filter(product => product.id === id && product.quantity === 0).length > 0) {
       this.handleQuantityChange(id, true);
       return;
     }
@@ -56,7 +65,7 @@ class App extends React.Component {
     //for new product  
     let selectedProduct = JSON.parse(JSON.stringify(product)); //
     //set default attributes
-    for (let i = 0; i < attributes.length; i++) {
+    for (let i = 0; i < selectedProduct.attributes.length; i++) {
       selectedProduct.attributes[i].items[0].selected = true;
     }
 
@@ -66,7 +75,7 @@ class App extends React.Component {
     localStorage.setItem('cart', JSON.stringify([...this.state.cart, selectedProduct]));
   }
 
-  handleDeleteFromCart(id) {   
+  handleDeleteFromCart(id) {
     //Delete product
     let filteredCart = this.state.cart.filter((product) => product.id != id);
     this.setState({ cart: filteredCart });
@@ -128,12 +137,6 @@ class App extends React.Component {
   }
 
   localStorageUpdated(event) {
-    // if (event.key === 'cart') {
-    //   if (JSON.parse(localStorage.getItem('cart'))) { //protection against manual cleaning of localStorage
-    //     this.setState({ cart: JSON.parse(localStorage.getItem('cart')) });
-    //   }
-    // }
-
     if (event.key === 'cart' || event.key === 'currentCurrency') {
       if (JSON.parse(localStorage.getItem(event.key))) { //protection against manual cleaning of localStorage
         this.setState({ [event.key]: JSON.parse(localStorage.getItem([event.key])) });
@@ -152,6 +155,8 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    this.getCategoriesQuery();
+
     if (typeof window !== 'undefined') {
       if (JSON.parse(localStorage.getItem('cart'))) {
         this.setState({ cart: JSON.parse(localStorage.getItem('cart')) });
@@ -172,15 +177,31 @@ class App extends React.Component {
     }
   }
 
-  render() {
-    const { loading, error, data } = this.props.query;
+  getCategoriesQuery() {
+    client
+      .query({
+        query: GET_CATEGORIES_NAME_AND_CURRENCIES
+      })
+      .then(result => { this.setState({ data: result.data }) })
+      .catch(error => { this.setState({ error: error }) })
+      .finally(() => { this.setState({ loading: false }) });
+  }
 
-    if (loading) return <Loading/>
+  render() {   
+    // const { loading, error, data } = this.props.query;
+    const { loading, error, data } = this.state;
+
+    if(loading) console.log(this.state.loading);
+    if(error) console.log(this.state.error);
+    if(data) console.log(this.state.data);
+
+    
+
+    if (loading) return <Loading />
     if (error) return <WarningMessage><h2>Error</h2> <p>{error.message}</p></WarningMessage>
 
     if (!data && !data.categories && data.categories.length === 0) return <WarningMessage><p>No categories</p></WarningMessage>;
     if (!data && !data.currencies && data.currencies.length === 0) return <WarningMessage><p>No currencies</p></WarningMessage>;
-
 
 
     return (
@@ -235,7 +256,7 @@ class App extends React.Component {
                   onOrder={this.handleOrder}
                 />} />
 
-              <Route path="order" element={<Order/>}/>
+              <Route path="order" element={<Order />} />
 
               <Route path='*' element={
                 <WarningMessage>
@@ -253,6 +274,8 @@ class App extends React.Component {
   }
 }
 
-const AppHOC = widthQuery(App, GET_CATEGORIES_NAME_AND_CURRENCIES);
+// const AppHOC = widthQuery(App, GET_CATEGORIES_NAME_AND_CURRENCIES);
 
-export default AppHOC;
+// export default AppHOC;
+
+export default App;
