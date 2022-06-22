@@ -31,15 +31,16 @@ class Product extends React.Component {
 
         if (cartProduct && cartProduct.quantity === 0) {
             localStorage.setItem('cart', JSON.stringify(filteredCart));
+            this.props.onDeleteFromCart(id);            
         }
     }
 
     componentDidMount() {
-        window.addEventListener("beforeunload", this.removePreviewProduct, false);
+        window.addEventListener("beforeunload", this.removePreviewProduct);//Don work 
     }
 
     componentWillUnmount() {
-        window.removeEventListener("beforeunload", this.removePreviewProduct, false);
+        window.removeEventListener("beforeunload", this.removePreviewProduct);
         this.removePreviewProduct();
     }
 
