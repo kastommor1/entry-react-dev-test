@@ -1,8 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-// import AppHOC from './App';
-import App from './App';
+import AppHOC from './App';
 
 //apollo
 import { ApolloProvider } from "@apollo/client";
@@ -17,7 +16,7 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <ApolloProvider client={client}>
-        <App/>
+        <AppHOC/>
       </ApolloProvider>
     </BrowserRouter>
   </React.StrictMode>

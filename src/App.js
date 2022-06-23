@@ -8,11 +8,10 @@ import CartPage from "./routes/Cart-page";
 
 //apollo
 import { GET_CATEGORIES_NAME_AND_CURRENCIES } from "./apollo-client/queries";
-import { client } from "./apollo-client/cache";
 
 
 //data
-// import { widthQuery } from "./service-functions/HOCs"
+import { widthQuery } from "./service-functions/HOCs"
 
 //css
 import './App.css'
@@ -43,9 +42,7 @@ class App extends React.Component {
     this.handleAttributeChange = this.handleAttributeChange.bind(this);
     this.localStorageUpdated = this.localStorageUpdated.bind(this);
     this.handleSetCurrentCurrency = this.handleSetCurrentCurrency.bind(this);
-    this.handleOrder = this.handleOrder.bind(this);
-
-    this.getCategoriesQuery = this.getCategoriesQuery.bind(this);
+    this.handleOrder = this.handleOrder.bind(this);   
   }
 
   handleAddToCart(product, preview) {
@@ -149,9 +146,7 @@ class App extends React.Component {
     localStorage.setItem('cart', JSON.stringify([]));
   }
 
-  componentDidMount() {
-    this.getCategoriesQuery();
-
+  componentDidMount() { 
     if (typeof window !== 'undefined') {
       if (JSON.parse(localStorage.getItem('cart'))) {
         this.setState({ cart: JSON.parse(localStorage.getItem('cart')) });
@@ -171,20 +166,10 @@ class App extends React.Component {
       window.removeEventListener('storage', this.localStorageUpdated);
     }
   }
-
-  getCategoriesQuery() {
-    client
-      .query({
-        query: GET_CATEGORIES_NAME_AND_CURRENCIES
-      })
-      .then(result => { this.setState({ data: result.data }) })
-      .catch(error => { this.setState({ error: error }) })
-      .finally(() => { this.setState({ loading: false }) });
-  }
+  
 
   render() {   
-    // const { loading, error, data } = this.props.query;
-    const { loading, error, data } = this.state;    
+    const { loading, error, data } = this.props.query;      
 
     if (loading) return <Loading />
     if (error) return <WarningMessage><h2>Error</h2> <p>{error.message}</p></WarningMessage>
@@ -263,8 +248,6 @@ class App extends React.Component {
   }
 }
 
-// const AppHOC = widthQuery(App, GET_CATEGORIES_NAME_AND_CURRENCIES);
+const AppHOC = widthQuery(App, GET_CATEGORIES_NAME_AND_CURRENCIES);
 
-// export default AppHOC;
-
-export default App;
+export default AppHOC;

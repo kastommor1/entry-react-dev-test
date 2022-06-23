@@ -10,48 +10,9 @@ import { client } from "../apollo-client/cache";
 import '../styles/Caregory.css';
 
 
-class Category extends React.Component {
+class Category extends React.Component { 
 
-    constructor(props) {
-        super(props)
-        this.state = {
-            loading: true,
-            error: false,
-            data: false,
-            categoryName: ''
-        }
-
-        this.getCategoryQuery = this.getCategoryQuery.bind(this);
-    }
-
-    getCategoryQuery() {
-        const categoryName = this.props.params['categoryName'];
-        if (categoryName === this.state.categoryName){ return}
-
-        this.setState({categoryName: categoryName});
-        const CategoryInput = { title: categoryName };
-
-        client
-            .query({
-                query: GET_CATEGORY,
-                variables: { input: CategoryInput }
-            })
-            .then(result => { this.setState({ data: result.data }) })
-            .catch(error => { this.setState({ error: error }) })
-            .finally(() => { this.setState({ loading: false }) });
-    }
-
-    componentDidMount() {
-        this.getCategoryQuery();      
-    }
-
-    componentDidUpdate(){
-        this.getCategoryQuery();
-    }
-
-
-    render() {
-        // const { categoryName, categoriesName } = this.props;
+    render() {     
         const { categoriesName, params } = this.props; //
         const categoryName = params['categoryName']; //
 
@@ -66,9 +27,7 @@ class Category extends React.Component {
             document.title = categoryName.toLowerCase().replace(/\b(\w)/g, s => s.toUpperCase());
         }
 
-
-        // const { loading, error, data } = this.props.query;
-        const { loading, error, data } = this.state;
+        const { loading, error, data } = this.props.query;       
 
         if (loading) return <Loading />;
         if (error) return <WarningMessage><p>Error. {error.message}.</p></WarningMessage>;
@@ -90,8 +49,7 @@ class Category extends React.Component {
     }
 }
 
-// const CategoryHOC = widthCategoryQueryByParams(Category, GET_CATEGORY, 'categoryName');
-const CategoryHOC = widthParams(Category);
+const CategoryHOC = widthCategoryQueryByParams(Category, GET_CATEGORY, 'categoryName');
 
 export default CategoryHOC;
 
