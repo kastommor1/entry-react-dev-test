@@ -5,25 +5,12 @@
     margin-bottom: 40px;
 }
 
-.product-card-in-cart
-button:hover {    
-    background-color: #EEEEEE;   
-    transition: all 0.2s ease 0s;
-    /* color: white; */
-}
-
 .product-card-in-cart 
 h3, p{
     font-weight: normal;
     margin: 0;
     line-height: 160%;   
 }
-
-/* .product-card-in-cart 
-section{
-    border: 1px solid green;    
-} */
-
 
 .product-card-in-cart 
 .parameters{

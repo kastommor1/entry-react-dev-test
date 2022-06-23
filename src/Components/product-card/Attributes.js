@@ -4,7 +4,7 @@ import  '../../styles/product-card/Attributes.css'
 class Attributes extends React.Component {
 
     render() {
-        const {productId, attributes, onAttributeChange} = this.props;
+        const {productId, attributes, onAttributeChange, lockAttributeChange} = this.props;
         return (
             <div className="attributes">
                 {attributes.map((attribute, index) => {
@@ -27,7 +27,11 @@ class Attributes extends React.Component {
                                         return <button                                            
                                             className={"color-button" + selectedColorClass + whiteClass}
                                             key={item.id}
-                                            onClick={()=>{onAttributeChange(productId, attribute.id, item.id)}}
+                                            onClick={()=>{
+                                                if (!lockAttributeChange) {
+                                                    onAttributeChange(productId, attribute.id, item.id)                                                    
+                                                }
+                                            }}
                                         >
                                             <div className="colored-square" style={{ backgroundColor: item.value }}></div>
                                         </button>
@@ -37,7 +41,11 @@ class Attributes extends React.Component {
                                     return <button
                                         key={item.id}
                                         className={selectedClass}
-                                        onClick={()=>{onAttributeChange(productId, attribute.id, item.id)}}                                        
+                                        onClick={()=>{
+                                            if (!lockAttributeChange) {
+                                                onAttributeChange(productId, attribute.id, item.id)                                                    
+                                            }
+                                        }}                                      
                                         >
                                         {item.value}</button>
                                 })}

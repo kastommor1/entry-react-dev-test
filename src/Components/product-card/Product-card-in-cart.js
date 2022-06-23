@@ -31,6 +31,7 @@ class ProductCardInCart extends React.Component {
                         productId={product.id}
                         attributes={attributes}
                         onAttributeChange={this.props.onAttributeChange}
+                        lockAttributeChange = {true}
                     />
                 </div>
 

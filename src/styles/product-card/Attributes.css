@@ -13,7 +13,15 @@ button{
     font-family: 'Source Sans Pro', sans-serif;    
     padding: 1px 4px;
     min-width: 20px;
+
+    cursor: auto;
 }
+
+/* .product-card-in-cart
+button:hover {    
+    background-color: #EEEEEE;   
+    transition: all 0.2s ease 0s;    
+} */
 
 .product-card-in-cart 
 .attributes
