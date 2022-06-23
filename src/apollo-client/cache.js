@@ -13,31 +13,7 @@ const cache = new InMemoryCache({
                     },
                 },
             },
-        },
-
-        // AttributeSet: {
-        //     fields: {
-        //         items: {
-        //             merge(existing, incoming) {
-        //                 console.log('AttributeSet', existing, incoming);
-        //                 return { ...existing, ...incoming };
-        //                 // return incoming;
-        //             },
-        //         },
-        //     },
-        // },
-
-        // Attribute: {
-        //     fields: {
-        //         items: {
-        //             merge(existing, incoming) {
-        //                 console.log('Attribute', existing, incoming);
-        //                 return { ...existing, ...incoming };
-        //             },
-        //         },
-        //     },
-        // },
-
+        }
     },
 });
 

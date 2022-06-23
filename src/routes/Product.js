@@ -17,10 +17,26 @@ import Loading from "../components/Loading";
 
 
 class Product extends React.Component {
-    // constructor(props) {
-    //     super(props);
-    //     this.removePreviewProduct = this.removePreviewProduct.bind(this);
-    // }
+
+    getProductQuery() {
+        const { query, cart, productId } = this.props;
+        const cartProduct = cart.find(product => product.id === productId);
+
+        if (cartProduct) { return }//check product in cart     
+
+        const { loading, error, data } = query;
+
+        if (loading) return (<Loading />);
+        if (error) return (<WarningMessage><p>Error. {error.message}</p></WarningMessage>);
+        if (!data || !data.product) return (
+            <WarningMessage>
+                <h2>Sorry.</h2>
+                <p>This product does not exist.</p>
+            </WarningMessage>);
+
+        const product = data.product;
+        this.props.onAddToCart(product, true) //add widh 0 quantity                    
+    }
 
     removePreviewProduct() {
         const id = this.props.productId;
@@ -30,11 +46,12 @@ class Product extends React.Component {
 
         if (cartProduct && cartProduct.quantity === 0) {
             localStorage.setItem('cart', JSON.stringify(filteredCart));
-            this.props.onDeleteFromCart(id);            
+            this.props.onDeleteFromCart(id);
         }
     }
 
     componentDidMount() {
+        this.removePreviewProduct();
         window.addEventListener("beforeunload", this.removePreviewProduct);//Don work 
     }
 
@@ -43,32 +60,16 @@ class Product extends React.Component {
         this.removePreviewProduct();
     }
 
-    componentDidUpdate(){
-        const { query, cart, productId } = this.props;
-        const {loading, error, data} = query;       
-
-        const cartProduct = cart.find(product => product.id === productId);       
-
-        if (!cartProduct) { //check product in cart
-            if (loading) return (<Loading/>);
-            if (error) return (<WarningMessage><p>Error. {error.message}</p></WarningMessage>);
-            if (!data || !data.product) return (
-                <WarningMessage>
-                    <h2>Sorry.</h2>
-                    <p>This product does not exist.</p>
-                </WarningMessage>);
-
-
-            const product = data.product;
-            this.props.onAddToCart(product, true) //add widh 0 quantity                      
-        }
+    componentDidUpdate() {
+        this.getProductQuery();
     }
 
-    render() {
-        const { cart, productId } = this.props;           
-        const cartProduct = cart.find(product => product.id === productId);     
 
-        if (!cartProduct) {return(<div></div>)} 
+    render() {
+        const { cart, productId } = this.props;
+        const cartProduct = cart.find(product => product.id === productId);
+
+        if (!cartProduct) { return (<div></div>) }
 
         const { id, name, inStock, gallery, prices, brand, quantity, attributes, description } = cartProduct;
         document.title = brand + ' ' + name;
@@ -91,7 +92,7 @@ class Product extends React.Component {
                         />
 
                         <p className="price-name">Price:</p>
-                        <Price prices={prices} currentCurrency={this.props.currentCurrency}/>                                                
+                        <Price prices={prices} currentCurrency={this.props.currentCurrency} />
 
                         <AddButtonBig
                             inStock={inStock}

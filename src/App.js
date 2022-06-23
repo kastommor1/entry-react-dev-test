@@ -12,8 +12,7 @@ import { client } from "./apollo-client/cache";
 
 
 //data
-import { widthQuery } from "./service-functions/HOCs"
-import PropTypes from "prop-types";
+// import { widthQuery } from "./service-functions/HOCs"
 
 //css
 import './App.css'
@@ -23,9 +22,6 @@ import Header from "./components/Header";
 import WarningMessage from "./components/Warning-message";
 import Order from "./routes/Order";
 import Loading from "./components/Loading";
-import Test from "./routes/Test";
-
-
 
 
 
@@ -50,7 +46,6 @@ class App extends React.Component {
     this.handleOrder = this.handleOrder.bind(this);
 
     this.getCategoriesQuery = this.getCategoriesQuery.bind(this);
-
   }
 
   handleAddToCart(product, preview) {
@@ -249,9 +244,6 @@ class App extends React.Component {
 
                   onOrder={this.handleOrder}
                 />} />
-
-
-              <Route path="test" element={<Test/>}/>
 
               <Route path="order" element={<Order />} />
 

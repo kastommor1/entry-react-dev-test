@@ -20,17 +20,6 @@ class Header extends React.Component {
                                     </NavLink>
                                 </li>
                             ))}
-
-                        <li >
-                            <NavLink
-                                to={'/test/'}>
-                                test page
-                            </NavLink>
-                        </li>
-
-
-
-
                     </ul>
                 </nav>
 

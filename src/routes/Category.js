@@ -2,7 +2,7 @@ import React from "react";
 import { widthCategoryQueryByParams, widthParams } from "../service-functions/HOCs";
 import { GET_CATEGORY } from "../apollo-client/queries";
 import WarningMessage from "../components/Warning-message";
-import { element } from "prop-types";
+// import { element } from "prop-types";
 import ProductList from "../components/product-card/Product-list";
 import Loading from "../components/Loading";
 import { client } from "../apollo-client/cache";
@@ -48,7 +48,6 @@ class Category extends React.Component {
     componentDidUpdate(){
         this.getCategoryQuery();
     }
-
 
 
     render() {

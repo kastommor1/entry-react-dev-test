@@ -69,6 +69,7 @@ class Cart extends React.Component {
                         />
 
                         {filteredCart.length > 0 &&
+                        
                             <div className="links-button">
                                 <Link to={'/cart'}>
                                     <button onClick={this.handleToggleModal}>
