@@ -17,15 +17,19 @@ class Category extends React.Component {
         this.state = {
             loading: true,
             error: false,
-            data: false
+            data: false,
+            categoryName: ''
         }
 
         this.getCategoryQuery = this.getCategoryQuery.bind(this);
     }
 
     getCategoryQuery() {
-        let categoryName = this.props.params['categoryName'];
-        let CategoryInput = { title: categoryName };
+        const categoryName = this.props.params['categoryName'];
+        if (categoryName === this.state.categoryName){ return}
+
+        this.setState({categoryName: categoryName});
+        const CategoryInput = { title: categoryName };
 
         client
             .query({
@@ -38,40 +42,11 @@ class Category extends React.Component {
     }
 
     componentDidMount() {
-        // this.getCategoryQuery();
-        let categoryName = this.props.params['categoryName'];
-        let CategoryInput = { title: categoryName };
-
-        client
-            .query({
-                query: GET_CATEGORY,
-                variables: { input: CategoryInput }
-            })
-            .then(result => { this.setState({ data: result.data }) })
-            .catch(error => { this.setState({ error: error }) })
-            .finally(() => { this.setState({ loading: false }) });
+        this.getCategoryQuery();      
     }
 
-    // componentDidUpdate() {
-    //     this.getCategoryQuery();
-    // }
-
-    // componentDidUpdate(){
-    //     console.log('update');
-    // }
-
     componentDidUpdate(){
-        let categoryName = this.props.params['categoryName'];
-        let CategoryInput = { title: categoryName };
-
-        client
-            .query({
-                query: GET_CATEGORY,
-                variables: { input: CategoryInput }
-            })
-            .then(result => { this.setState({ data: result.data }) })
-            .catch(error => { this.setState({ error: error }) })
-            .finally(() => { this.setState({ loading: false }) });
+        this.getCategoryQuery();
     }
 
 
@@ -96,14 +71,9 @@ class Category extends React.Component {
         // const { loading, error, data } = this.props.query;
         const { loading, error, data } = this.state;
 
-
         if (loading) return <Loading />;
         if (error) return <WarningMessage><p>Error. {error.message}.</p></WarningMessage>;
         if (!data && !data.category && data.category.products.length === 0) return <WarningMessage><p>No products</p></WarningMessage>;
-
-
-        // console.log(data.category.products[1].attributes[0].items);
-        // console.log(categoryName);
 
         return (
             <div className="category">

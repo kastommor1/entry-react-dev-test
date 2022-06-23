@@ -8,7 +8,6 @@ import { widthProductQueryByParams } from "../service-functions/HOCs"
 import WarningMessage from "../components/Warning-message";
 import Price from "../components/product-card/Price";
 import Attributes from "../components/product-card/Attributes";
-import Gallery from "../components/product-card/Gallery";
 import AddButtonBig from "../components/product-card/Add-button-big";
 
 //style
@@ -27,7 +26,7 @@ class Product extends React.Component {
         const id = this.props.productId;
         const cart = this.props.cart;
         const cartProduct = cart.find(product => product.id === id);
-        const filteredCart = cart.filter((product) => product.id != id);
+        const filteredCart = cart.filter((product) => product.id !== id);
 
         if (cartProduct && cartProduct.quantity === 0) {
             localStorage.setItem('cart', JSON.stringify(filteredCart));
