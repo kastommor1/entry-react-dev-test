@@ -69,7 +69,7 @@ class App extends React.Component {
 
   handleDeleteFromCart(id) {
     //Delete product
-    let filteredCart = this.state.cart.filter((product) => product.id != id);
+    let filteredCart = this.state.cart.filter((product) => product.id !== id);
     this.setState({ cart: filteredCart });
     localStorage.setItem('cart', JSON.stringify(filteredCart));
   }

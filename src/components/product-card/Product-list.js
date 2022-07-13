@@ -25,8 +25,8 @@ class ProductList extends React.Component {
                         />
                     )
                 })}
-                {this.props.products.length == 2 &&  <div></div>}
-                {this.props.products.length == 1 &&  <><div></div><div></div></>}
+                {this.props.products.length === 2 &&  <div></div>}
+                {this.props.products.length === 1 &&  <><div></div><div></div></>}
             </div>
         )
     }

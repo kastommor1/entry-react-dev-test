@@ -15,7 +15,7 @@ class ProductCardInCart extends React.Component {
 
     render() {
         const product = this.props.product;
-        const { id, name, inStock, gallery, prices, brand, quantity, attributes, category } = product;
+        const { id, name, gallery, prices, brand, quantity, attributes, category } = product;
 
         return (
             <div className="product-card-in-cart">

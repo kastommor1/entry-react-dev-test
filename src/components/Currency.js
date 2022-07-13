@@ -54,7 +54,7 @@ class Currency extends React.Component {
                 >
                     <div className="currency-list">
                         {currencies.map(currency => {
-                            if (currency.label === 'RUB') return;
+                            if (currency.label === 'RUB') return undefined;
 
                             return (
                                 <button

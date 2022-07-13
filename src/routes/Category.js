@@ -1,11 +1,10 @@
 import React from "react";
-import { widthCategoryQueryByParams, widthParams } from "../service-functions/HOCs";
+import { widthCategoryQueryByParams} from "../service-functions/HOCs";
 import { GET_CATEGORY } from "../apollo-client/queries";
 import WarningMessage from "../components/Warning-message";
 // import { element } from "prop-types";
 import ProductList from "../components/product-card/Product-list";
 import Loading from "../components/Loading";
-import { client } from "../apollo-client/cache";
 
 import '../styles/Caregory.css';
 
@@ -17,7 +16,7 @@ class Category extends React.Component {
         const categoryName = params['categoryName']; //
 
 
-        if (categoriesName.filter(category => category.name == categoryName).length === 0) {
+        if (categoriesName.filter(category => category.name === categoryName).length === 0) {
             return (
                 <WarningMessage>
                     <h2>Ooops!</h2>

@@ -18,7 +18,7 @@ class Gallery extends React.Component {
     handleNextImage() {
         if (this.props.gallery.length - 1 > this.state.imgNumber) {
             this.setState({
-                imgSrc: this.state.imgNumber++
+                imgNumber: this.state.imgNumber + 1
             })
         }
     }
@@ -26,7 +26,7 @@ class Gallery extends React.Component {
     handlePreviousImage() {
         if (this.state.imgNumber > 0) {
             this.setState({
-                imgSrc: this.state.imgNumber--
+                imgNumber: this.state.imgNumber - 1
             })
         }
     }
