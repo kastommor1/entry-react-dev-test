@@ -28,7 +28,7 @@ class Gallery extends React.Component {
     }
 
     render() {
-        const { gallery, name } = this.props;
+        const { gallery } = this.props;
         const imgSrc = gallery[this.state.imgNumber];
 
         return (

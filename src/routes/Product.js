@@ -50,9 +50,20 @@ class Product extends React.Component {
         }
     }
 
+    setDescription() {
+        const { cart, productId } = this.props;
+        const cartProduct = cart.find(product => product.id === productId);
+        if (cartProduct) {
+            let descriptionDOM = document.querySelector('.description');
+            descriptionDOM.innerHTML = cartProduct.description;           
+        }
+    }
+
     componentDidMount() {
         this.removePreviewProduct();
         window.addEventListener("beforeunload", this.removePreviewProduct);//Don work 
+
+        this.setDescription(); //or use html-react-parser library
     }
 
     componentWillUnmount() {
@@ -62,6 +73,8 @@ class Product extends React.Component {
 
     componentDidUpdate() {
         this.getProductQuery();
+
+        this.setDescription(); //or use html-react-parser library
     }
 
 
@@ -71,8 +84,10 @@ class Product extends React.Component {
 
         if (!cartProduct) { return (<div></div>) }
 
-        const { id, name, inStock, gallery, prices, brand, quantity, attributes, description } = cartProduct;
+        const { id, name, inStock, gallery, prices, brand, quantity, attributes } = cartProduct;
         document.title = brand + ' ' + name;
+
+
 
         return (
             <div className="product">
@@ -102,10 +117,7 @@ class Product extends React.Component {
                             onDeleteFromCart={this.props.onDeleteFromCart}
                         />
 
-                        <div
-                            dangerouslySetInnerHTML={{ __html: description }}
-                            className="description"
-                        />
+                        <div className="description"></div>
 
                     </div>
                 </div>
