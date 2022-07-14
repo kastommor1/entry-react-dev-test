@@ -7,17 +7,34 @@ import arrowRightImg from "../../data/arrow-right.svg";
 class GalleryArrows extends React.Component {
 
     render() {
+        const { gallery, imgNumber, onPreviousImage, onNextImage } = this.props;
+
+        if (gallery.length < 2) return undefined;
+
         return (
             <div className="arrows">
-                <button
-                    onClick={() => {this.props.onPreviousImage()}}>
-                    <img src={arrowLeftImg} alt="arrow-left" />
-                </button>
+                <div className="arrow">
+                    {(imgNumber > 0) &&
+                        <button
+                            onClick={() => { onPreviousImage() }}>
+                            <img src={arrowLeftImg} alt="arrow-left" />
+                        </button>
+                    }
+                </div>
+                <div className="arrow">
+                    {(gallery.length - 1 > imgNumber) &&
+                        <button
+                            onClick={() => { onNextImage() }}>
+                            <img src={arrowRightImg} alt="arrow-right" />
+                        </button>
+                    }
+                </div>
 
-                <button
-                    onClick={() => {this.props.onNextImage()}}>
-                    <img src={arrowRightImg} alt="arrow-right" />
-                </button>
+
+
+
+
+
             </div>
         )
     }

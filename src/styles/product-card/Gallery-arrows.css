@@ -3,23 +3,30 @@
     position: absolute;
     bottom: 16px;
     right: 16px;
+    display: flex;
 }
 
 .gallery 
-.arrows button {
+.arrow {
     width: 24px;
-    height: 24px;
+    height: 24px;   
+}
+
+.gallery 
+.arrow button {
+    width: 100%;
+    height: 100%;  
     background-color: rgba(0, 0, 0, 0.73);
     color: #fff;
     border: none;   
 }
 
 .gallery
-.arrows button:first-child {
-    margin-right: 8px;   
+.arrow {
+    margin-left: 8px;   
 }
 
 .gallery
-.arrows img {
+.arrow img {
     width: auto; 
 }

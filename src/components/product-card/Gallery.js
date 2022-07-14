@@ -16,19 +16,15 @@ class Gallery extends React.Component {
     }
 
     handleNextImage() {
-        if (this.props.gallery.length - 1 > this.state.imgNumber) {
-            this.setState({
-                imgNumber: this.state.imgNumber + 1
-            })
-        }
+        this.setState({
+            imgNumber: this.state.imgNumber + 1
+        })    
     }
 
     handlePreviousImage() {
-        if (this.state.imgNumber > 0) {
-            this.setState({
-                imgNumber: this.state.imgNumber - 1
-            })
-        }
+        this.setState({
+            imgNumber: this.state.imgNumber - 1
+        })  
     }
 
     render() {
@@ -41,10 +37,9 @@ class Gallery extends React.Component {
 
                 {this.props.showGalleryArrows &&
 
-                    <GalleryArrows
-                        name={name}
+                    <GalleryArrows                        
                         gallery={gallery}
-                        imgSrc={this.state.imgSrc}
+                        imgNumber={this.state.imgNumber}
                         onNextImage={this.handleNextImage}
                         onPreviousImage={this.handlePreviousImage}
                     />
