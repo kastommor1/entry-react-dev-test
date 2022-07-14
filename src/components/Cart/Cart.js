@@ -31,13 +31,17 @@ class Cart extends React.Component {
     }
 
     render() {
-        const filteredCart = this.props.cart.filter(product => product.quantity > 0)
+        const filteredCart = this.props.cart.filter(product => product.quantity > 0);
+        const quantity = filteredCart.reduce((sum, product)=>{         
+            return sum + parseFloat(product.quantity);
+        }, 0);
+
 
         return (
             <div className="cart-mini">
                 <div onClick={this.handleToggleModal} className="cart-icon">
                     <button className="header-icon"> <img src={cartIcon} alt="fff" /></button>
-                    {filteredCart.length > 0 && <b className="count-icon">{filteredCart.length}</b>}
+                    {filteredCart.length > 0 && <b className="count-icon">{quantity}</b>}
                 </div>
 
 
@@ -46,7 +50,7 @@ class Cart extends React.Component {
                     showModal={this.state.showModal}
                 >
                     <div className="cart-list">
-                        <h2><b>My Bag,</b> {filteredCart.length} items</h2>
+                        <h2><b>My Bag,</b> {quantity} items</h2>
 
                         <div className="list">
                             {filteredCart.map(product => (
