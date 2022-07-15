@@ -6,13 +6,15 @@
     display: flex;
 }
 
-.gallery 
+.gallery
+.arrows 
 .arrow {
     width: 24px;
     height: 24px;   
 }
 
-.gallery 
+.gallery
+.arrows 
 .arrow button {
     width: 100%;
     height: 100%;  
@@ -22,11 +24,13 @@
 }
 
 .gallery
+.arrows
 .arrow {
     margin-left: 8px;   
 }
 
 .gallery
+.arrows
 .arrow img {
     width: auto; 
 }
