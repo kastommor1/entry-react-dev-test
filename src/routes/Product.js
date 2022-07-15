@@ -46,23 +46,23 @@ class Product extends React.Component {
                 console.log('from query');
                 const { loading, error, data } = query;
 
-                if (loading) this.setState({loading: true});
+                if (loading) this.setState({ loading: true });
                 if (error) this.setState({
                     loading: false,
                     error: error.message,
-                });                
-               
+                });
+
                 if (!data || !data.product) {
                     this.setState({
                         loading: false,
                         error: 'This product does not exist.',
                     });
-                } else{
+                } else {
                     this.setState({
                         loading: false,
-                        product: data.product 
+                        product: data.product
                     })
-                }                      
+                }
             }
         }
     }
@@ -79,14 +79,12 @@ class Product extends React.Component {
     //     }
     // }
 
-    // setDescription() {
-    //     const { cart, productId } = this.props;
-    //     const cartProduct = cart.find(product => product.id === productId);
-    //     if (cartProduct) {
-    //         let descriptionDOM = document.querySelector('.description');
-    //         descriptionDOM.innerHTML = cartProduct.description;           
-    //     }
-    // }
+    setDescription() {        
+        if (this.state.product) {
+            let descriptionDOM = document.querySelector('.description');
+            descriptionDOM.innerHTML = this.state.product.description;           
+        }
+    }
 
     componentDidMount() {
         // this.getProductQuery();
@@ -105,17 +103,11 @@ class Product extends React.Component {
 
     componentDidUpdate() {
         this.getProductQuery();
-
-        // this.setDescription(); //or use html-react-parser library
+        this.setDescription(); //or use html-react-parser library
     }
 
 
-    render() {
-
-        const { cart, productId } = this.props;
-
-        console.log(this.state.product);
-
+    render() {    
         if (this.state.loading) return (<Loading />);
         if (this.state.error) {
             return (
@@ -125,59 +117,46 @@ class Product extends React.Component {
                 </WarningMessage>);
         }
 
+        console.log(this.state.product);
 
-        return (<p>Product</p>)
+        if (!this.state.product) return (<div></div>);
 
+        const { id, name, inStock, gallery, prices, brand, quantity, attributes } = this.state.product;
+        document.title = brand + ' ' + name;
 
+        return (
+            <div className="product">
 
+                <GalleryWithIcons gallery={gallery} name={name} />
 
+                <div className="wrapper">
+                    <div className="parameters">
 
+                        <h3 className="brand" ><b>{brand}</b></h3>
+                        <p className="name" >{name}</p>
 
+                        <Attributes
+                            productId={id}
+                            attributes={attributes}
+                            onAttributeChange={this.props.onAttributeChange}
+                        />
 
+                        <p className="price-name">Price:</p>
+                        <Price prices={prices} currentCurrency={this.props.currentCurrency} />
 
+                        <AddButtonBig
+                            inStock={inStock}
+                            quantity={quantity}
+                            product={this.state.product}
+                            onAddToCart={this.props.onAddToCart}
+                            onDeleteFromCart={this.props.onDeleteFromCart}
+                        />
 
-
-        // if (!cartProduct) { return (<div></div>) }
-
-        // const { id, name, inStock, gallery, prices, brand, quantity, attributes } = cartProduct;
-        // document.title = brand + ' ' + name;
-
-
-
-        // return (
-        //     <div className="product">
-
-        //         <GalleryWithIcons gallery={gallery} name={name} />
-
-        //         <div className="wrapper">
-        //             <div className="parameters">
-
-        //                 <h3 className="brand" ><b>{brand}</b></h3>
-        //                 <p className="name" >{name}</p>
-
-        //                 <Attributes
-        //                     productId={id}
-        //                     attributes={attributes}
-        //                     onAttributeChange={this.props.onAttributeChange}
-        //                 />
-
-        //                 <p className="price-name">Price:</p>
-        //                 <Price prices={prices} currentCurrency={this.props.currentCurrency} />
-
-        //                 <AddButtonBig
-        //                     inStock={inStock}
-        //                     quantity={quantity}
-        //                     product={cartProduct}
-        //                     onAddToCart={this.props.onAddToCart}
-        //                     onDeleteFromCart={this.props.onDeleteFromCart}
-        //                 />
-
-        //                 <div className="description"></div>
-
-        //             </div>
-        //         </div>
-        //     </div>
-        // )
+                        <div className="description"></div>
+                    </div>
+                </div>
+            </div>
+        )
 
     }
 }
