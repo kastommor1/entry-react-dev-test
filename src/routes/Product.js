@@ -26,6 +26,10 @@ class Product extends React.Component {
             loading: false
         };
 
+        this.getProductQuery = this.getProductQuery.bind(this);
+        this.setDescription = this.setDescription.bind(this);
+        this.handleAttributeChange = this.handleAttributeChange.bind(this);
+
     }
 
     getProductQuery() {
@@ -57,7 +61,7 @@ class Product extends React.Component {
                         loading: false,
                         error: 'This product does not exist.',
                     });
-                } else {                    
+                } else {
                     this.setState({
                         loading: false,
                         product: setHashId(setDefaultAttributtes(data.product)),
@@ -65,7 +69,7 @@ class Product extends React.Component {
                 }
             }
         }
-    }  
+    }
 
     setDescription() {
         if (this.state.product) {
@@ -74,34 +78,26 @@ class Product extends React.Component {
         }
     }
 
-    handleAttributeChange(productId, attributeId, itemId) {
-        let filteredCart = JSON.parse(JSON.stringify(this.state.cart));
-    
-        for (let product of filteredCart) {
-          if (product.id === productId) {
-    
-            for (const attribute of product.attributes) {
-              if (attribute.id === attributeId) {
-    
+    handleAttributeChange(productId, attributeId, itemId) {       
+        let product = JSON.parse(JSON.stringify(this.state.product));
+
+        for (const attribute of product.attributes) {
+            if (attribute.id === attributeId) {
+
                 for (const item of attribute.items) {
-                  if (item.id === itemId) {
-                    item.selected = true;
-                  }
-                  else if (item.selected) {
-                    delete item.selected
-                  }
+                    if (item.id === itemId) {
+                        item.selected = true;
+                    }
+                    else if (item.selected) {
+                        delete item.selected
+                    }
                 }
-    
+
                 break
-              }
             }
-    
-            break
-          }
-        }
-    
-        this.setState({ cart: filteredCart });
-        localStorage.setItem('cart', JSON.stringify(filteredCart));
+        }        
+
+        this.setState({ product: product });
     }
 
 
@@ -142,7 +138,7 @@ class Product extends React.Component {
                         <Attributes
                             productId={id}
                             attributes={attributes}
-                            onAttributeChange={this.props.onAttributeChange}
+                            onAttributeChange={this.handleAttributeChange}
                         />
 
                         <p className="price-name">Price:</p>
@@ -190,9 +186,9 @@ function setHashId(product) {
 
         //set selected item id
         for (let i = 0; i < attribute.items.length; i++) {
-            if(attribute.items[i].selected){
-                selectedProduct.hashID = selectedProduct.hashID + attribute.items[i].id;               
-            }                                 
+            if (attribute.items[i].selected) {
+                selectedProduct.hashID = selectedProduct.hashID + attribute.items[i].id;
+            }
         }
     }
 
