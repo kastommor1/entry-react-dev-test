@@ -63,11 +63,11 @@ class App extends React.Component {
     localStorage.setItem('cart', JSON.stringify(filteredCart));
   }
 
-  handleQuantityChange(id, increase) {
+  handleQuantityChange(hashID, increase) {
     let deleteProduct = false;
 
     let filteredCart = this.state.cart.map(product => {
-      if (product.id === id) {
+      if (product.hashID === hashID) {
         let selectedProduct = JSON.parse(JSON.stringify(product));
 
         if (!increase && selectedProduct.quantity === 1) {
@@ -84,7 +84,7 @@ class App extends React.Component {
 
     this.setState({ cart: filteredCart });
     localStorage.setItem('cart', JSON.stringify(filteredCart));
-    if (deleteProduct) this.handleDeleteFromCart(id);
+    if (deleteProduct) this.handleDeleteFromCart(hashID);
   }
 
   handleAttributeChange(productId, attributeId, itemId) {

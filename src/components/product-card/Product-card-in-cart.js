@@ -15,7 +15,7 @@ class ProductCardInCart extends React.Component {
 
     render() {
         const product = this.props.product;
-        const { id, name, gallery, prices, brand, quantity, attributes, category } = product;
+        const { hashID, id, name, gallery, prices, brand, quantity, attributes, category } = product;
 
         return (
             <div className="product-card-in-cart">
@@ -35,7 +35,7 @@ class ProductCardInCart extends React.Component {
                 </div>
 
                 <CountPicker
-                    id={id}
+                    hashID={hashID}
                     quantity={quantity}
                     onQuantityChange={this.props.onQuantityChange}
                 />
