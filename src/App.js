@@ -42,29 +42,18 @@ class App extends React.Component {
     this.handleAttributeChange = this.handleAttributeChange.bind(this);
     this.localStorageUpdated = this.localStorageUpdated.bind(this);
     this.handleSetCurrentCurrency = this.handleSetCurrentCurrency.bind(this);
-    this.handleOrder = this.handleOrder.bind(this);   
+    this.handleOrder = this.handleOrder.bind(this);
   }
 
-  handleAddToCart(product, preview) {
-    const { id } = product; //
+  handleAddToCart(product) {
+    const cartProduct = this.state.cart.find(cartProduct => cartProduct.hashID === product.hashID);
 
-    //for old product
-    if (this.state.cart.filter(product => product.id === id && product.quantity === 0).length > 0) {
-      this.handleQuantityChange(id, true);
-      return;
-    }
-
-    //for new product  
-    let selectedProduct = JSON.parse(JSON.stringify(product)); //
-    //set default attributes
-    for (let i = 0; i < selectedProduct.attributes.length; i++) {
-      selectedProduct.attributes[i].items[0].selected = true;
-    }
-
-    selectedProduct.quantity = preview ? 0 : 1;
-
-    this.setState({ cart: [...this.state.cart, selectedProduct] });
-    localStorage.setItem('cart', JSON.stringify([...this.state.cart, selectedProduct]));
+    if (cartProduct) {
+      this.handleQuantityChange(product.id, true)
+    } else {
+      this.setState({ cart: [...this.state.cart, product] });
+      localStorage.setItem('cart', JSON.stringify([...this.state.cart, product]));
+    }    
   }
 
   handleDeleteFromCart(hashID) {
@@ -146,7 +135,7 @@ class App extends React.Component {
     localStorage.setItem('cart', JSON.stringify([]));
   }
 
-  componentDidMount() { 
+  componentDidMount() {
     if (typeof window !== 'undefined') {
       if (JSON.parse(localStorage.getItem('cart'))) {
         this.setState({ cart: JSON.parse(localStorage.getItem('cart')) });
@@ -166,10 +155,10 @@ class App extends React.Component {
       window.removeEventListener('storage', this.localStorageUpdated);
     }
   }
-  
 
-  render() {   
-    const { loading, error, data } = this.props.query;      
+
+  render() {
+    const { loading, error, data } = this.props.query;
 
     if (loading) return <Loading />
     if (error) return <WarningMessage><h2>Error</h2> <p>{error.message}</p></WarningMessage>

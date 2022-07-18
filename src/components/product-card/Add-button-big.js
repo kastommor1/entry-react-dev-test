@@ -6,7 +6,7 @@ class AddButtonBig extends React.Component {
 
     render() {
         const {cart, product, onAddToCart, onDeleteFromCart} = this.props;
-        let cartProduct = cart.find(cartProduct => cartProduct.hashID === product.hashID);     
+        const cartProduct = cart.find(cartProduct => cartProduct.hashID === product.hashID);     
         
         
 
