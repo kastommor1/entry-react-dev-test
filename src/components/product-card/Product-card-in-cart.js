@@ -27,8 +27,7 @@ class ProductCardInCart extends React.Component {
                     </Link>
 
                     <Price prices={prices} currentCurrency={this.props.currentCurrency} />
-                    <Attributes
-                        productId={product.id}
+                    <Attributes                       
                         attributes={attributes}
                         onAttributeChange={this.props.onAttributeChange}
                         lockAttributeChange = {true}

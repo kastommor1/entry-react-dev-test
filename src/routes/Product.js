@@ -78,7 +78,7 @@ class Product extends React.Component {
         }
     }
 
-    handleAttributeChange(productId, attributeId, itemId) {       
+    handleAttributeChange(attributeId, itemId) {       
         let product = JSON.parse(JSON.stringify(this.state.product));
 
         for (const attribute of product.attributes) {

@@ -4,7 +4,7 @@ import  '../../styles/product-card/Attributes.css'
 class Attributes extends React.Component {
 
     render() {
-        const {productId, attributes, onAttributeChange, lockAttributeChange} = this.props;
+        const {attributes, onAttributeChange, lockAttributeChange} = this.props;
         return (
             <div className="attributes">
                 {attributes.map((attribute, index) => {
@@ -29,7 +29,7 @@ class Attributes extends React.Component {
                                             key={item.id}
                                             onClick={()=>{
                                                 if (!lockAttributeChange) {
-                                                    onAttributeChange(productId, attribute.id, item.id)                                                    
+                                                    onAttributeChange(attribute.id, item.id)                                                    
                                                 }
                                             }}
                                         >
@@ -43,7 +43,7 @@ class Attributes extends React.Component {
                                         className={selectedClass}
                                         onClick={()=>{
                                             if (!lockAttributeChange) {
-                                                onAttributeChange(productId, attribute.id, item.id)                                                    
+                                                onAttributeChange(attribute.id, item.id)                                                    
                                             }
                                         }}                                      
                                         >
