@@ -31,7 +31,7 @@ class AddButtonBig extends React.Component {
             return (
                 <button
                     className="dell-btn"
-                    onClick={() => { onDeleteFromCart(product.id) }}
+                    onClick={() => { onDeleteFromCart(product.hashID) }}
                 >
                     Remove from cart
                 </button>

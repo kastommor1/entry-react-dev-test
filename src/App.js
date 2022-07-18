@@ -67,9 +67,9 @@ class App extends React.Component {
     localStorage.setItem('cart', JSON.stringify([...this.state.cart, selectedProduct]));
   }
 
-  handleDeleteFromCart(id) {
+  handleDeleteFromCart(hashID) {
     //Delete product
-    let filteredCart = this.state.cart.filter((product) => product.id !== id);
+    let filteredCart = this.state.cart.filter((product) => product.hashID !== hashID);
     this.setState({ cart: filteredCart });
     localStorage.setItem('cart', JSON.stringify(filteredCart));
   }
