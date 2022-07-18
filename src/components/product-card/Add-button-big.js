@@ -5,9 +5,12 @@ class AddButtonBig extends React.Component {
 
 
     render() {
-        const {inStock, quantity, product} = this.props;        
+        const {cart, product, onAddToCart, onDeleteFromCart} = this.props;
+        let cartProduct = cart.find(cartProduct => cartProduct.hashID === product.hashID);     
+        
+        
 
-        if (!inStock) {
+        if (!product.inStock) {
             return (
                 <button className="stock-btn">
                     Out of stock
@@ -15,11 +18,11 @@ class AddButtonBig extends React.Component {
             )
         }
         
-        if (!quantity) {
+        if (!cartProduct) {
             return (
                 <button
                     className="add-btn"
-                    onClick={() => { this.props.onAddToCart(product) }}
+                    onClick={() => { onAddToCart(product) }}
                 >
                     Add to cart
                 </button>
@@ -28,7 +31,7 @@ class AddButtonBig extends React.Component {
             return (
                 <button
                     className="dell-btn"
-                    onClick={() => { this.props.onDeleteFromCart(product.id) }}
+                    onClick={() => { onDeleteFromCart(product.id) }}
                 >
                     Remove from cart
                 </button>

@@ -97,7 +97,7 @@ class Product extends React.Component {
             }
         }        
 
-        this.setState({ product: product });
+        this.setState({ product: setHashId(product) });
     }
 
 
@@ -119,9 +119,9 @@ class Product extends React.Component {
 
         // console.log(this.state.product);
 
-        if (!this.state.product) return (<div></div>);
+        if (!this.state.product) return (<div></div>);       
 
-        const { id, name, inStock, gallery, prices, brand, quantity, attributes } = this.state.product;
+        const { id, name, inStock, gallery, prices, brand,  attributes } = this.state.product;
         document.title = brand + ' ' + name;
 
         return (
@@ -144,9 +144,8 @@ class Product extends React.Component {
                         <p className="price-name">Price:</p>
                         <Price prices={prices} currentCurrency={this.props.currentCurrency} />
 
-                        <AddButtonBig
-                            inStock={inStock}
-                            quantity={quantity}
+                        <AddButtonBig                           
+                            cart = {this.props.cart}                          
                             product={this.state.product}
                             onAddToCart={this.props.onAddToCart}
                             onDeleteFromCart={this.props.onDeleteFromCart}
@@ -169,6 +168,9 @@ function setDefaultAttributtes(product) {
     for (let i = 0; i < selectedProduct.attributes.length; i++) {
         selectedProduct.attributes[i].items[0].selected = true;
     }
+
+    selectedProduct.quantity =  1;
+
     return selectedProduct;
 }
 
@@ -196,7 +198,7 @@ function setHashId(product) {
 }
 
 
-
+//-----------------------------------------------------------------
 
 
 class Product1 extends React.Component {
