@@ -31,9 +31,9 @@ class Product extends React.Component {
     getProductQuery() {
         const { query, cart, productId } = this.props;
 
-        //-Get start product from Qery or Cart        
+        //Get start product from Qery or Cart        
         if (!this.state.product) {
-            //--Check product in cart            
+            //Check product in cart            
             const cartProduct = cart.find(product => product.id === productId);
 
             //Get start product from Cart 
@@ -41,7 +41,7 @@ class Product extends React.Component {
                 console.log('from cart');
                 this.setState({ product: cartProduct })
             }
-            //--Get start product from Qery            
+            //Get start product from Qery            
             else {
                 console.log('from query');
                 const { loading, error, data } = query;
@@ -57,49 +57,53 @@ class Product extends React.Component {
                         loading: false,
                         error: 'This product does not exist.',
                     });
-                } else {
+                } else {                    
                     this.setState({
                         loading: false,
-                        product: data.product
+                        product: setHashId(setDefaultAttributtes(data.product)),
                     })
                 }
             }
         }
-    }
+    }  
 
-    // removePreviewProduct() {
-    //     const id = this.props.productId;
-    //     const cart = this.props.cart;
-    //     const cartProduct = cart.find(product => product.id === id);
-    //     const filteredCart = cart.filter((product) => product.id !== id);
-
-    //     if (cartProduct && cartProduct.quantity === 0) {
-    //         localStorage.setItem('cart', JSON.stringify(filteredCart));
-    //         this.props.onDeleteFromCart(id);
-    //     }
-    // }
-
-    setDescription() {        
+    setDescription() {
         if (this.state.product) {
             let descriptionDOM = document.querySelector('.description');
-            descriptionDOM.innerHTML = this.state.product.description;           
+            descriptionDOM.innerHTML = this.state.product.description;
         }
     }
 
-    componentDidMount() {
-        // this.getProductQuery();
-
-        // this.removePreviewProduct();
-        // window.addEventListener("beforeunload", this.removePreviewProduct);//Don work 
-
-        // this.setDescription(); //or use html-react-parser library
-
+    handleAttributeChange(productId, attributeId, itemId) {
+        let filteredCart = JSON.parse(JSON.stringify(this.state.cart));
+    
+        for (let product of filteredCart) {
+          if (product.id === productId) {
+    
+            for (const attribute of product.attributes) {
+              if (attribute.id === attributeId) {
+    
+                for (const item of attribute.items) {
+                  if (item.id === itemId) {
+                    item.selected = true;
+                  }
+                  else if (item.selected) {
+                    delete item.selected
+                  }
+                }
+    
+                break
+              }
+            }
+    
+            break
+          }
+        }
+    
+        this.setState({ cart: filteredCart });
+        localStorage.setItem('cart', JSON.stringify(filteredCart));
     }
 
-    // componentWillUnmount() {
-    //     window.removeEventListener("beforeunload", this.removePreviewProduct);
-    //     this.removePreviewProduct();
-    // }
 
     componentDidUpdate() {
         this.getProductQuery();
@@ -107,7 +111,7 @@ class Product extends React.Component {
     }
 
 
-    render() {    
+    render() {
         if (this.state.loading) return (<Loading />);
         if (this.state.error) {
             return (
@@ -117,7 +121,7 @@ class Product extends React.Component {
                 </WarningMessage>);
         }
 
-        console.log(this.state.product);
+        // console.log(this.state.product);
 
         if (!this.state.product) return (<div></div>);
 
@@ -160,6 +164,41 @@ class Product extends React.Component {
 
     }
 }
+
+
+function setDefaultAttributtes(product) {
+    //deep copy 
+    let selectedProduct = JSON.parse(JSON.stringify(product));
+    //set default attributes
+    for (let i = 0; i < selectedProduct.attributes.length; i++) {
+        selectedProduct.attributes[i].items[0].selected = true;
+    }
+    return selectedProduct;
+}
+
+function setHashId(product) {
+    //deep copy 
+    let selectedProduct = JSON.parse(JSON.stringify(product));
+
+    //set hash id
+    selectedProduct.hashID = 'id=' + selectedProduct.id + '/attributes';
+    for (let i = 0; i < selectedProduct.attributes.length; i++) {
+
+        //set attribute id
+        const attribute = selectedProduct.attributes[i];
+        selectedProduct.hashID = selectedProduct.hashID + '/' + attribute.id + '=';
+
+        //set selected item id
+        for (let i = 0; i < attribute.items.length; i++) {
+            if(attribute.items[i].selected){
+                selectedProduct.hashID = selectedProduct.hashID + attribute.items[i].id;               
+            }                                 
+        }
+    }
+
+    return selectedProduct;
+}
+
 
 
 
