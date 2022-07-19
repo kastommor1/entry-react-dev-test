@@ -148,8 +148,7 @@ class Product extends React.Component {
                         <AddButtonBig                           
                             cart = {this.props.cart}                          
                             product={this.state.product}
-                            onAddToCart={this.props.onAddToCart}
-                            onDeleteFromCart={this.props.onDeleteFromCart}
+                            onAddToCart={this.props.onAddToCart}                            
                         />
 
                         <div className="description"></div>

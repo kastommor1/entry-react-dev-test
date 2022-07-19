@@ -50,20 +50,22 @@
 }
 
 .product
-.add-btn {   
+.add-btn,
+.product
+.dell-btn
+{   
     background-color: #5ECE7B;  
     color: #fff;
 }
 
 .product
-.add-btn:hover {   
+.add-btn:hover,
+.product
+.dell-btn:hover {   
     background-color: #5ECE7B;
     opacity: 0.8; 
 }
 
-
-.product
-.dell-btn,
 .product
 .stock-btn{
     background-color: #e6e6e6;
@@ -71,9 +73,8 @@
 }
 
 .product
-.dell-btn:hover {   
-    background-color: #e6e6e6;
-    opacity: 0.8; 
+.dell-btn{
+    width: 100%;    
 }
 
 .product

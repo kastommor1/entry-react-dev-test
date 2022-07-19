@@ -1,14 +1,15 @@
 import React from "react";
 import "../../styles/product-card/Add-button.css";
+import { Link } from "react-router-dom"
 
 class AddButtonBig extends React.Component {
 
 
     render() {
-        const {cart, product, onAddToCart, onDeleteFromCart} = this.props;
-        const cartProduct = cart.find(cartProduct => cartProduct.hashID === product.hashID);     
-        
-        
+        const { cart, product, onAddToCart } = this.props;
+        const cartProduct = cart.find(cartProduct => cartProduct.hashID === product.hashID);
+
+
 
         if (!product.inStock) {
             return (
@@ -17,7 +18,7 @@ class AddButtonBig extends React.Component {
                 </button>
             )
         }
-        
+
         if (!cartProduct) {
             return (
                 <button
@@ -29,12 +30,12 @@ class AddButtonBig extends React.Component {
             )
         } else {
             return (
-                <button
-                    className="dell-btn"
-                    onClick={() => { onDeleteFromCart(product.hashID) }}
-                >
-                    Remove from cart
-                </button>
+                <Link to={'/cart'}>
+                    <button className="dell-btn">
+                        In the cart
+                    </button>
+                </Link>
+
             )
         }
     }
