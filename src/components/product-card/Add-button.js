@@ -1,30 +1,35 @@
 import React from "react";
-import cart from "../../data/Empty-Cart-White.svg";
+import cartImg from "../../data/Empty-Cart-White.svg";
 import "../../styles/product-card/Add-button.css";
+
+//func
+import {setDefaultAttributes, setHashId} from "../../service-functions/data-processing"
 
 class AddButton extends React.Component {
 
 
     render() {
-        const {inStock, quantity, product} = this.props;
-        if (!inStock) return ;
+        const {cart, product, onAddToCart} = this.props;
+        const cartProduct = cart.find(cartProduct => cartProduct.id === product.id);
+        const productWithDefaultAttributes = setHashId(setDefaultAttributes(product));        
+
+        if (!product.inStock) return ;       
         
-        if (!quantity) {
+        if (!cartProduct) {
             return (
                 <button
                     className="add-dell"
-                    onClick={() => { this.props.onAddToCart(product) }}
+                    onClick={() => {onAddToCart(productWithDefaultAttributes) }}
                 >
-                    <img src={cart} alt="add" />
+                    <img src={cartImg} alt="add" />
                 </button>
             )
         } else {
             return (
                 <button
-                    className="add-dell dell-btn"
-                    onClick={() => { this.props.onDeleteFromCart(product.id) }}
+                    className="add-dell dell-btn"                    
                 >
-                    <img src={cart} alt="add-blocked" />
+                    <img src={cartImg} alt="add-blocked" />
                 </button>
             )
         }

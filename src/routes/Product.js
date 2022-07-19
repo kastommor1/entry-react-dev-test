@@ -10,10 +10,15 @@ import Price from "../components/product-card/Price";
 import Attributes from "../components/product-card/Attributes";
 import AddButtonBig from "../components/product-card/Add-button-big";
 
+//func
+import {setDefaultAttributes, setHashId} from "../service-functions/data-processing"
+
 //style
 import '../styles/product-card/Product.css'
 import GalleryWithIcons from "../components/product-card/Gallery-with-icons";
 import Loading from "../components/Loading";
+
+
 
 
 class Product extends React.Component {
@@ -62,7 +67,7 @@ class Product extends React.Component {
                 } else {
                     this.setState({
                         loading: false,
-                        product: setHashId(setDefaultAttributtes(data.product)),
+                        product: setHashId(setDefaultAttributes(data.product)),
                     })
                 }
             }
@@ -155,44 +160,6 @@ class Product extends React.Component {
 
     }
 }
-
-
-function setDefaultAttributtes(product) {
-    //deep copy 
-    let selectedProduct = JSON.parse(JSON.stringify(product));
-    //set default attributes
-    for (let i = 0; i < selectedProduct.attributes.length; i++) {
-        selectedProduct.attributes[i].items[0].selected = true;
-    }
-
-    selectedProduct.quantity =  1;
-
-    return selectedProduct;
-}
-
-function setHashId(product) {
-    //deep copy 
-    let selectedProduct = JSON.parse(JSON.stringify(product));
-
-    //set hash id
-    selectedProduct.hashID = 'id=' + selectedProduct.id + '/attributes';
-    for (let i = 0; i < selectedProduct.attributes.length; i++) {
-
-        //set attribute id
-        const attribute = selectedProduct.attributes[i];
-        selectedProduct.hashID = selectedProduct.hashID + '/' + attribute.id + '=';
-
-        //set selected item id
-        for (let i = 0; i < attribute.items.length; i++) {
-            if (attribute.items[i].selected) {
-                selectedProduct.hashID = selectedProduct.hashID + attribute.items[i].id;
-            }
-        }
-    }
-
-    return selectedProduct;
-}
-
 
 const ProductHOC = widthProductQueryByParams(Product, GET_PRODUCT, 'productId');
 

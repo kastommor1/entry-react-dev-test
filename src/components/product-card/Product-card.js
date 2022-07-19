@@ -26,12 +26,10 @@ class ProductCard extends React.Component {
 
                 </NavLink>
 
-                <AddButton
-                    inStock={inStock}
-                    quantity={quantity}
+                <AddButton                    
+                    cart = {this.props.cart}                    
                     product={product}
-                    onAddToCart={onAddToCart}
-                    onDeleteFromCart={onDeleteFromCart} 
+                    onAddToCart={onAddToCart}                    
                 />
             </div>
         )

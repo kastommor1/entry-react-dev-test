@@ -9,14 +9,13 @@ class ProductList extends React.Component {
 
         return (
             <div className="product-list">
-                {this.props.products.map(product => {
-
-                    let filteredProduct = this.props.cart.find((selectProduct) => selectProduct.id === product.id) || product;
-
+                {this.props.products.map(product => {   
+                                    
                     return (
                         <ProductCard
                             key={product.id}
-                            product={filteredProduct}
+                            cart={this.props.cart}
+                            product={product}
                             onAddToCart={this.props.onAddToCart}
                             onDeleteFromCart={this.props.onDeleteFromCart}
 
