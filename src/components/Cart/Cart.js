@@ -30,8 +30,11 @@ class Cart extends React.Component {
         this.handleToggleModal();
     }
 
-    render() {        
-        const cart = this.props.cart;
+    render() {      
+        const {cart, onQuantityChange, onAttributeChange, currentCurrency, currencies} = this.props;
+
+
+
         const quantity = cart.reduce((sum, product)=>{         
             return sum + parseFloat(product.quantity);
         }, 0);
@@ -57,9 +60,9 @@ class Cart extends React.Component {
                                 <ProductCardInCart
                                     key={product.hashID}
                                     product={product}
-                                    onQuantityChange={this.props.onQuantityChange}
-                                    onAttributeChange={this.props.onAttributeChange}
-                                    currentCurrency={this.props.currentCurrency}
+                                    onQuantityChange={onQuantityChange}
+                                    onAttributeChange={onAttributeChange}
+                                    currentCurrency={currentCurrency}
                                 />
                             ))}
                         </div>
@@ -68,8 +71,8 @@ class Cart extends React.Component {
 
                         <TotalPrice
                             products={cart}
-                            currentCurrency={this.props.currentCurrency}
-                            currencies={this.props.currencies}
+                            currentCurrency={currentCurrency}
+                            currencies={currencies}
                         />
 
                         {cart.length > 0 &&

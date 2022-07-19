@@ -12,8 +12,9 @@ import Quantity from "../components/Cart/Quantity";
 
 class CartPage extends React.Component {
     render() {
-        document.title = 'Cart';
-        const cart = this.props.cart;
+        document.title = 'Cart';      
+
+        const {cart, onQuantityChange, onAttributeChange, currentCurrency, currencies, onOrder} = this.props;
 
         return (
             <div className="cart-page">
@@ -23,9 +24,9 @@ class CartPage extends React.Component {
                     <ProductCardInCart
                         key={product.hashID}
                         product={product}
-                        onQuantityChange={this.props.onQuantityChange}
-                        onAttributeChange={this.props.onAttributeChange}
-                        currentCurrency={this.props.currentCurrency}
+                        onQuantityChange={onQuantityChange}
+                        onAttributeChange={onAttributeChange}
+                        currentCurrency={currentCurrency}
 
                         showGalleryArrows={true}
                     />
@@ -34,8 +35,8 @@ class CartPage extends React.Component {
                 <div className="price-table">
                     <Tax
                         products={cart}
-                        currentCurrency={this.props.currentCurrency}
-                        currencies={this.props.currencies}
+                        currentCurrency={currentCurrency}
+                        currencies={currencies}
                         taxPercentage={21}
                     />
 
@@ -43,8 +44,8 @@ class CartPage extends React.Component {
 
                     <TotalPrice
                         products={cart}
-                        currentCurrency={this.props.currentCurrency}
-                        currencies={this.props.currencies}
+                        currentCurrency={currentCurrency}
+                        currencies={currencies}
                     />
                 </div>
 
@@ -53,7 +54,7 @@ class CartPage extends React.Component {
                     <Link to="/order">
                         <button
                             className="order-button"
-                            onClick={this.props.onOrder}
+                            onClick={onOrder}
                         >
                             Order</button>
                     </Link>
