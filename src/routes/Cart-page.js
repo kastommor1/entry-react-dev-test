@@ -13,15 +13,15 @@ import Quantity from "../components/Cart/Quantity";
 class CartPage extends React.Component {
     render() {
         document.title = 'Cart';
-        const filteredCart = this.props.cart.filter(product => product.quantity > 0);
+        const cart = this.props.cart;
 
         return (
             <div className="cart-page">
                 <h2>Cart</h2>
 
-                {filteredCart.map(product => (
+                {cart.map(product => (
                     <ProductCardInCart
-                        key={product.id}
+                        key={product.hashID}
                         product={product}
                         onQuantityChange={this.props.onQuantityChange}
                         onAttributeChange={this.props.onAttributeChange}
@@ -33,22 +33,22 @@ class CartPage extends React.Component {
 
                 <div className="price-table">
                     <Tax
-                        products={filteredCart}
+                        products={cart}
                         currentCurrency={this.props.currentCurrency}
                         currencies={this.props.currencies}
                         taxPercentage={21}
                     />
 
-                    <Quantity products={filteredCart} />
+                    <Quantity products={cart} />
 
                     <TotalPrice
-                        products={filteredCart}
+                        products={cart}
                         currentCurrency={this.props.currentCurrency}
                         currencies={this.props.currencies}
                     />
                 </div>
 
-                {filteredCart.length > 0 &&
+                {cart.length > 0 &&
 
                     <Link to="/order">
                         <button

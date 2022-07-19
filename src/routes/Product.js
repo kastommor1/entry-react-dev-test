@@ -41,13 +41,11 @@ class Product extends React.Component {
             const cartProduct = cart.find(product => product.id === productId);
 
             //Get start product from Cart 
-            if (cartProduct) {
-                console.log('from cart');
+            if (cartProduct) {                
                 this.setState({ product: cartProduct })
             }
             //Get start product from Qery            
-            else {
-                console.log('from query');
+            else {                
                 const { loading, error, data } = query;
 
                 if (loading) this.setState({ loading: true });
@@ -115,9 +113,7 @@ class Product extends React.Component {
                     <h2>Error.</h2>
                     <p>{this.state.error}</p>
                 </WarningMessage>);
-        }
-
-        // console.log(this.state.product);
+        }        
 
         if (!this.state.product) return (<div></div>);       
 

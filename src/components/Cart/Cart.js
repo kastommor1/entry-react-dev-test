@@ -31,12 +31,8 @@ class Cart extends React.Component {
     }
 
     render() {        
-        const sortedCart = this.props.cart.sort((a,b)=>{
-            if(a.id > b.id) return 1;
-            if(a.id < b.id) return -1;
-            return 0;
-        });
-        const quantity = sortedCart.reduce((sum, product)=>{         
+        const cart = this.props.cart;
+        const quantity = cart.reduce((sum, product)=>{         
             return sum + parseFloat(product.quantity);
         }, 0);
 
@@ -45,7 +41,7 @@ class Cart extends React.Component {
             <div className="cart-mini">
                 <div onClick={this.handleToggleModal} className="cart-icon">
                     <button className="header-icon"> <img src={cartIcon} alt="fff" /></button>
-                    {sortedCart.length > 0 && <b className="count-icon">{quantity}</b>}
+                    {cart.length > 0 && <b className="count-icon">{quantity}</b>}
                 </div>
 
 
@@ -57,7 +53,7 @@ class Cart extends React.Component {
                         <h2><b>My Bag,</b> {quantity} items</h2>
 
                         <div className="list">
-                            {sortedCart.map(product => (
+                            {cart.map(product => (
                                 <ProductCardInCart
                                     key={product.hashID}
                                     product={product}
@@ -71,12 +67,12 @@ class Cart extends React.Component {
 
 
                         <TotalPrice
-                            products={sortedCart}
+                            products={cart}
                             currentCurrency={this.props.currentCurrency}
                             currencies={this.props.currencies}
                         />
 
-                        {sortedCart.length > 0 &&
+                        {cart.length > 0 &&
                         
                             <div className="links-button">
                                 <Link to={'/cart'}>

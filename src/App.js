@@ -51,9 +51,15 @@ class App extends React.Component {
     if (cartProduct) {
       this.handleQuantityChange(product.id, true)
     } else {
-      this.setState({ cart: [...this.state.cart, product] });
-      localStorage.setItem('cart', JSON.stringify([...this.state.cart, product]));
-    }    
+      const sortedCart = [...this.state.cart, product].sort((a, b) => {
+        if (a.id > b.id) return 1;
+        if (a.id < b.id) return -1;
+        return 0;
+      });
+      
+      this.setState({ cart: sortedCart });
+      localStorage.setItem('cart', JSON.stringify(sortedCart));
+    }
   }
 
   handleDeleteFromCart(hashID) {
