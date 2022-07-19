@@ -30,9 +30,13 @@ class Cart extends React.Component {
         this.handleToggleModal();
     }
 
-    render() {
-        const filteredCart = this.props.cart.filter(product => product.quantity > 0);
-        const quantity = filteredCart.reduce((sum, product)=>{         
+    render() {        
+        const sortedCart = this.props.cart.sort((a,b)=>{
+            if(a.id > b.id) return 1;
+            if(a.id < b.id) return -1;
+            return 0;
+        });
+        const quantity = sortedCart.reduce((sum, product)=>{         
             return sum + parseFloat(product.quantity);
         }, 0);
 
@@ -41,7 +45,7 @@ class Cart extends React.Component {
             <div className="cart-mini">
                 <div onClick={this.handleToggleModal} className="cart-icon">
                     <button className="header-icon"> <img src={cartIcon} alt="fff" /></button>
-                    {filteredCart.length > 0 && <b className="count-icon">{quantity}</b>}
+                    {sortedCart.length > 0 && <b className="count-icon">{quantity}</b>}
                 </div>
 
 
@@ -53,9 +57,9 @@ class Cart extends React.Component {
                         <h2><b>My Bag,</b> {quantity} items</h2>
 
                         <div className="list">
-                            {filteredCart.map(product => (
+                            {sortedCart.map(product => (
                                 <ProductCardInCart
-                                    key={product.id}
+                                    key={product.hashID}
                                     product={product}
                                     onQuantityChange={this.props.onQuantityChange}
                                     onAttributeChange={this.props.onAttributeChange}
@@ -67,12 +71,12 @@ class Cart extends React.Component {
 
 
                         <TotalPrice
-                            products={filteredCart}
+                            products={sortedCart}
                             currentCurrency={this.props.currentCurrency}
                             currencies={this.props.currencies}
                         />
 
-                        {filteredCart.length > 0 &&
+                        {sortedCart.length > 0 &&
                         
                             <div className="links-button">
                                 <Link to={'/cart'}>
