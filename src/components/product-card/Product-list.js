@@ -6,11 +6,16 @@ import WarningMessage from "../Warning-message";
 class ProductList extends React.Component {
     render() {
         if (this.props.products === 0) return <WarningMessage>No categories</WarningMessage>
+        const sortedProducts = [...this.props.products].sort((a, b) => {
+            if (!a.inStock > !b.inStock) return 1;
+            if (!a.inStock < !b.inStock) return -1;
+            return 0;
+        });       
 
         return (
             <div className="product-list">
-                {this.props.products.map(product => {   
-                                    
+                {sortedProducts.map(product => {   
+
                     return (
                         <ProductCard
                             key={product.id}
