@@ -94,33 +94,35 @@ class App extends React.Component {
   }
 
   handleAttributeChange(productId, attributeId, itemId) {
-    let filteredCart = JSON.parse(JSON.stringify(this.state.cart));
+    //change if there is a task to add such a function
 
-    for (let product of filteredCart) {
-      if (product.id === productId) {
+    // let filteredCart = JSON.parse(JSON.stringify(this.state.cart));
 
-        for (const attribute of product.attributes) {
-          if (attribute.id === attributeId) {
+    // for (let product of filteredCart) {
+    //   if (product.id === productId) {
 
-            for (const item of attribute.items) {
-              if (item.id === itemId) {
-                item.selected = true;
-              }
-              else if (item.selected) {
-                delete item.selected
-              }
-            }
+    //     for (const attribute of product.attributes) {
+    //       if (attribute.id === attributeId) {
 
-            break
-          }
-        }
+    //         for (const item of attribute.items) {
+    //           if (item.id === itemId) {
+    //             item.selected = true;
+    //           }
+    //           else if (item.selected) {
+    //             delete item.selected
+    //           }
+    //         }
 
-        break
-      }
-    }
+    //         break
+    //       }
+    //     }
 
-    this.setState({ cart: filteredCart });
-    localStorage.setItem('cart', JSON.stringify(filteredCart));
+    //     break
+    //   }
+    // }
+
+    // this.setState({ cart: filteredCart });
+    // localStorage.setItem('cart', JSON.stringify(filteredCart));
   }
 
   localStorageUpdated(event) {
