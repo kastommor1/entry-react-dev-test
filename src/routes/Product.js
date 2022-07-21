@@ -9,6 +9,7 @@ import WarningMessage from "../components/Warning-message";
 import Price from "../components/product-card/Price";
 import Attributes from "../components/product-card/Attributes";
 import AddButtonBig from "../components/product-card/Add-button-big";
+import Description from "../components/product-card/Description";
 
 //func
 import {setDefaultAttributes, setHashId} from "../service-functions/data-processing"
@@ -17,10 +18,6 @@ import {setDefaultAttributes, setHashId} from "../service-functions/data-process
 import '../styles/product-card/Product.css'
 import GalleryWithIcons from "../components/product-card/Gallery-with-icons";
 import Loading from "../components/Loading";
-
-//
-import DOMPurify from 'dompurify';
-
 
 
 
@@ -34,8 +31,7 @@ class Product extends React.Component {
             loading: false
         };
 
-        this.getProductQuery = this.getProductQuery.bind(this);
-        // this.setDescription = this.setDescription.bind(this);
+        this.getProductQuery = this.getProductQuery.bind(this);       
         this.handleAttributeChange = this.handleAttributeChange.bind(this);
 
     }
@@ -77,13 +73,6 @@ class Product extends React.Component {
         }
     }
 
-    // setDescription() {
-    //     if (this.state.product) {
-    //         let descriptionDOM = document.querySelector('.description');
-    //         descriptionDOM.innerHTML = this.state.product.description;
-    //     }
-    // }
-
     handleAttributeChange(attributeId, itemId) {       
         let product = JSON.parse(JSON.stringify(this.state.product));
 
@@ -108,8 +97,7 @@ class Product extends React.Component {
 
 
     componentDidUpdate() {
-        this.getProductQuery();
-        // this.setDescription(); //or use html-react-parser library
+        this.getProductQuery();        
     }
 
 
@@ -154,13 +142,8 @@ class Product extends React.Component {
                             onAddToCart={this.props.onAddToCart}                            
                         />
 
-                        <div className="description">{description}</div>
-                        <div 
-                        className="description" 
-                        dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(description)}}
-                        />
+                        <Description description = {description} />
 
-                        
                     </div>
                 </div>
             </div>
