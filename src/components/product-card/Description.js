@@ -1,18 +1,18 @@
 import React from "react";
 
 import DOMPurify from 'dompurify';
+import parse from 'html-react-parser';
+
+//style
+import "../../styles/product-card/Description.css";
 
 
 class Description extends React.Component {
     render() {
+        const clearDescription = parse(DOMPurify.sanitize(this.props.description));        
+        
         return (
-            <div>
-                <div className="description">{this.props.description}</div>
-                <div
-                    className="description"
-                    dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(this.props.description) }}
-                />
-            </div>
+            <div className="description">{clearDescription}</div>
         )
     }
 }
