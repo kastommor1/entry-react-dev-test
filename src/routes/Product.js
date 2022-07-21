@@ -18,6 +18,9 @@ import '../styles/product-card/Product.css'
 import GalleryWithIcons from "../components/product-card/Gallery-with-icons";
 import Loading from "../components/Loading";
 
+//
+import DOMPurify from 'dompurify';
+
 
 
 
@@ -32,7 +35,7 @@ class Product extends React.Component {
         };
 
         this.getProductQuery = this.getProductQuery.bind(this);
-        this.setDescription = this.setDescription.bind(this);
+        // this.setDescription = this.setDescription.bind(this);
         this.handleAttributeChange = this.handleAttributeChange.bind(this);
 
     }
@@ -74,12 +77,12 @@ class Product extends React.Component {
         }
     }
 
-    setDescription() {
-        if (this.state.product) {
-            let descriptionDOM = document.querySelector('.description');
-            descriptionDOM.innerHTML = this.state.product.description;
-        }
-    }
+    // setDescription() {
+    //     if (this.state.product) {
+    //         let descriptionDOM = document.querySelector('.description');
+    //         descriptionDOM.innerHTML = this.state.product.description;
+    //     }
+    // }
 
     handleAttributeChange(attributeId, itemId) {       
         let product = JSON.parse(JSON.stringify(this.state.product));
@@ -106,7 +109,7 @@ class Product extends React.Component {
 
     componentDidUpdate() {
         this.getProductQuery();
-        this.setDescription(); //or use html-react-parser library
+        // this.setDescription(); //or use html-react-parser library
     }
 
 
@@ -122,7 +125,7 @@ class Product extends React.Component {
 
         if (!this.state.product) return (<div></div>);       
 
-        const { id, name, gallery, prices, brand,  attributes } = this.state.product;
+        const { id, name, gallery, prices, brand,  attributes, description } = this.state.product;
         document.title = brand + ' ' + name;
 
         return (
@@ -151,7 +154,13 @@ class Product extends React.Component {
                             onAddToCart={this.props.onAddToCart}                            
                         />
 
-                        <div className="description"></div>
+                        <div className="description">{description}</div>
+                        <div 
+                        className="description" 
+                        dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(description)}}
+                        />
+
+                        
                     </div>
                 </div>
             </div>
